@@ -6,9 +6,9 @@
 #define P4_ENTREGA_FINAL_DTESTADO_H
 
 enum DtEstado {
-    Administracion;
-    Limpieza;
-    Recepcion;
+    Administracion,
+    Limpieza,
+    Recepcion,
     Infraestructura
 };
 

@@ -12,9 +12,10 @@ private:
     int cantHuespedes;
 
 public:
-    DtGrupal(int, DtFecha*, DtFecha*, DtEstado, int, int);
-    ~DtGrupal(){};
+    DtGrupal(int, DtFecha*, DtFecha*, DtEstado*, int, int);
+    ~DtGrupal() override;
 
+    int getCosto() override;
     int getCantHuespedes();
 };
 

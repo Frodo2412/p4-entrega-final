@@ -16,9 +16,11 @@ private:
 
 public:
     DtHuesped(string, string, bool);
-    ~DtHuesped(){};
+    ~DtHuesped() override {};
 
     bool getEsFinger();
+
+    string getMail() override;
 };
 
 

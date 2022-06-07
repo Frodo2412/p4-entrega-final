@@ -11,6 +11,10 @@ DtEmpleado::DtEmpleado(string nom, string em, DtCargo* c){
 }
 
 
-Dtcargo* DtEmpleado::getCargo(){
+DtCargo* DtEmpleado::getCargo(){
     return cargo;
+}
+
+string DtEmpleado::getMail(){
+    return mail;
 }

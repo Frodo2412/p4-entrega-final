@@ -7,6 +7,3 @@
 string DtUsuario::getNombre(){
     return nombre;
 }
-string DtUsuario::getMail(){
-    return mail;
-}

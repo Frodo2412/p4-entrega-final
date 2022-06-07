@@ -9,9 +9,10 @@
 
 class DtIndividual: public DtReserva{
 public:
-    DtIndividual(int, DtFecha*, DtFecha*, DtEstado, int);
-    ~DtIndividual(){};
+    DtIndividual(int, DtFecha*, DtFecha*, DtEstado*, int);
+    ~DtIndividual() override;
 
+    int getCosto() override;
 };
 
 

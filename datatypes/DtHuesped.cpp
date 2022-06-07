@@ -12,5 +12,9 @@ DtHuesped::DtHuesped(string nom, string em, bool esF){
 
 
 bool DtHuesped::getEsFinger(){
-    return cargo;
+    return esFinger;
+}
+
+string DtHuesped::getMail(){
+    return mail;
 }

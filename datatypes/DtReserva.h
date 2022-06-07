@@ -9,7 +9,7 @@
 #include "DtEstado.h"
 
 class DtReserva{
-private:
+protected:
     int codigo;
     DtFecha* checkIn;
     DtFecha* checkOut;
@@ -17,14 +17,13 @@ private:
     int costo;
 
 public:
-    DtReserva() = 0;
-    ~DtReserva(){};
+    virtual ~DtReserva();
 
     int getCodigo();
     DtFecha* getCheckIn();
     DtFecha* getCheckOut();
     DtEstado* getEstado();
-    int getCosto();
+    virtual int getCosto() = 0;
 };
 
 

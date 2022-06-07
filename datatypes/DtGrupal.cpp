@@ -4,7 +4,7 @@
 
 #include "DtGrupal.h"
 
-DtGrupal::DtGrupal(int code, DtFecha* chIn, DtFecha* chOut, DtEstado state, int cost, int cant){
+DtGrupal::DtGrupal(int code, DtFecha* chIn, DtFecha* chOut, DtEstado* state, int cost, int cant){
     codigo = code;
     checkIn = chIn;
     checkOut = chOut;
@@ -15,4 +15,8 @@ DtGrupal::DtGrupal(int code, DtFecha* chIn, DtFecha* chOut, DtEstado state, int 
 
 int DtGrupal::getCantHuespedes(){
     return cantHuespedes;
+}
+
+int DtGrupal::getCosto(){
+    return costo;
 }

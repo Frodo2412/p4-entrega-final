@@ -10,16 +10,16 @@
 using std::string;
 
 class DtUsuario {
-private:
+protected:
     string nombre;
     string mail;
 
 public:
-    DtUsuario() = 0;
-    ~DtUsuario(){};
+    DtUsuario(){};
+    virtual ~DtUsuario();
 
     string getNombre();
-    string getMail();
+    virtual string getMail() = 0;
 };
 
 

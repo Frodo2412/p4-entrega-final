@@ -6,8 +6,8 @@
 #define P4_ENTREGA_FINAL_DTCARGO_H
 
 enum DtCargo {
-    Abierta;
-    Cerrada;
+    Abierta,
+    Cerrada,
     Cancelada
 };
 

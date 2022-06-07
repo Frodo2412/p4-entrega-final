@@ -17,10 +17,11 @@ private:
 
 public:
     DtEmpleado(string, string, DtCargo*);
-    ~DtEmpleado(){};
+    ~DtEmpleado() override {};
 
     DtCargo* getCargo();
 
+    string getMail() override;
 };
 
 

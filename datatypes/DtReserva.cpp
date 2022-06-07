@@ -4,22 +4,18 @@
 
 #include "DtReserva.h"
 
-int DtReserva:getCodigo(){
+int DtReserva::getCodigo(){
     return codigo;
 }
 
-DtFecha* DtReserva:getCheckIn(){
+DtFecha* DtReserva::getCheckIn(){
     return checkIn;
 }
 
-DtFecha* DtReserva:getCheckOut(){
+DtFecha* DtReserva::getCheckOut(){
     return checkOut;
 }
 
-DtEstado* DtReserva:getEstado(){
+DtEstado* DtReserva::getEstado(){
     return estado;
-}
-
-int DtReserva:getCosto(){
-    return costo;
 }
