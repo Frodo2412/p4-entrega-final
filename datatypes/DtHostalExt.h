@@ -6,29 +6,27 @@
 #define P4_ENTREGA_FINAL_DTHOSTALEXT_H
 
 #include "DtResenia.h"
-#include "DtComentario.h"
 
 #include <string>
 
 using std::string;
 
-class DtHostalExt {
+class DtHostalExt{
 private:
     string nombre;
     string direccion;
     int calificacionProm;
 
-    //Implementacion de coleccion de DTResenia como un ICollection
-
+    DtResenia** resenias;
 public:
-    DtHostalExt(string, string, int/*, coleccion DTResenia*/);
+    DtHostalExt(string, string, int, DtResenia**);
     ~DtHostalExt(){};
 
     string getNombre();
     string getDireccion();
     int getCalificacionProm();
 
-    //Ops vinculadas al uso del set(DTResenia)
+    DtResenia** getResenias();
 };
 
 
