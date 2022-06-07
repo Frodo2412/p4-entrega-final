@@ -9,7 +9,7 @@
 
 class DtComentario {
 private:
-    texto : std::string;
+    std::string texto;
 
 public:
     DtComentario(std::string);

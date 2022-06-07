@@ -7,7 +7,7 @@
 
 #include <string>
 
-class DtFecha {
+class DtFecha{
 private:
     int hora;
     int dia;
@@ -23,7 +23,7 @@ public:
     int getMes();
     int getAnio();
 
-    int operator-(DtFecha);
+    int operator-(DtFecha*);
 
     std::string format();
 };
