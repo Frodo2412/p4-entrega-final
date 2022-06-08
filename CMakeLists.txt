@@ -42,8 +42,10 @@ add_executable(p4_entrega_final
         datatypes/DtUsuario.cpp
         datatypes/DtUsuario.h
         include/hostal.h
-        include/Usuario.cpp
+        include/Reloj.h
+        include/Observer.h
         include/Usuario.h
-        src/hostal.cpp)
+        include/Usuario.cpp
+        src/Reloj.cpp
         src/hostal.cpp
         main.cpp)
