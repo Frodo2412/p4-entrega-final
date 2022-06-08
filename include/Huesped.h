@@ -11,19 +11,22 @@
 
 using namespace std;
 
+class Reserva;
+
 class Huesped : public Usuario {
 private:
     bool esFinger;
     list<Reserva *> reservas;
 public:
     Huesped(string nombre, string email, string password, bool esFinger);
+
     ~Huesped();
 
-    DtUsuario getDatos() override;
+    DtHuesped *getDatos() override;
 
     void agregarReserva(Reserva *reserva);
 
-    bool isMail(const string& mail);
+    bool isMail(const string &mail);
 
     void finalizarReservaActiva();
 };

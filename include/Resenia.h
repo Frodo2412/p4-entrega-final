@@ -10,6 +10,8 @@
 
 class Comentario;
 
+class Estadia;
+
 class Resenia {
 private:
     int calificacion;
@@ -38,7 +40,7 @@ public:
 
     void setEstadia(Estadia *estadia);
 
-    bool checkIfComentada();
+    bool isComentada();
 
 
 };

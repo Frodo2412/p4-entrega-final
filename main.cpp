@@ -12,6 +12,8 @@
 #include "DtReservaIndividual.h"
 #include "Comentario.h"
 #include "Huesped.h"
+#include "ReservaIndividual.h"
+#include "Habitacion.h"
 
 #include <iostream>
 
@@ -134,13 +136,23 @@ void test_resenia() {
     resenia.setComentario(comentario);
 }
 
+// TODO: Cuando se implemente la reserva volver a activar el test
 void test_usuario() {
-    cout << " - Huesped:" << endl;
-    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
-    cout << usuario.isMail("juan@gmail.com") << endl;
-    cout << usuario.isMail("") << endl;
-    auto *reserva = new Reserva();
-    usuario.agregarReserva(reserva);
+//    cout << " - Huesped:" << endl;
+//    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
+//    cout << usuario.isMail("juan@gmail.com") << endl;
+//    cout << usuario.isMail("") << endl;
+//    auto *reserva = new ReservaIndividual();
+//    usuario.agregarReserva(reserva);
+}
+
+// TODO: Cuando se implemente hostal y reserva testear la habitacion
+void test_habitacion() {
+//    cout << " - Habitacion:" << endl;
+//    Habitacion habitacion(1, 1, 1);
+//    Hostal hostal;
+//    habitacion.setHostal(&hostal);
+//    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
 }
 
 int main() {
@@ -148,5 +160,6 @@ int main() {
     test_comentario();
     test_resenia();
     test_usuario();
+    test_habitacion();
     return 0;
 }

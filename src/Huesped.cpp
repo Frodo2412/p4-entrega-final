@@ -10,15 +10,15 @@ Huesped::Huesped(string nombre, string email, string password, bool esFinger) : 
     this->reservas = list<Reserva *>();
 }
 
-DtUsuario Huesped::getDatos() {
-    return DtHuesped{nombre, mail, esFinger};
+DtHuesped *Huesped::getDatos() {
+    return new DtHuesped{nombre, mail, esFinger};
 }
 
 void Huesped::agregarReserva(Reserva *reserva) {
     this->reservas.push_back(reserva);
 }
 
-bool Huesped::isMail(const string& mail) {
+bool Huesped::isMail(const string &mail) {
     return this->mail == mail;
 }
 
