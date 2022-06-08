@@ -39,7 +39,7 @@ void Resenia::setEstadia(Estadia *estadia) {
     this->maybeEstadia = estadia;
 }
 
-bool Resenia::checkIfComentada() {
+bool Resenia::isComentada() {
     return maybeComentario == nullptr;
 }
 

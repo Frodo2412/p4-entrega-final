@@ -55,4 +55,4 @@ add_executable(p4_entrega_final
         src/Reserva.cpp
         include/Observer.h
 
-        main.cpp)
+        main.cpp src/Habitacion.cpp include/Habitacion.h src/ReservaGrupal.cpp include/ReservaGrupal.h include/ReservaIndividual.cpp include/ReservaIndividual.h)

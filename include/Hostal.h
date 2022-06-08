@@ -4,7 +4,8 @@
 
 
 class Hostal {
-
+public:
+    bool operator==(Hostal hostal);
 };
 
 
