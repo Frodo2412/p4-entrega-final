@@ -1,31 +1,35 @@
-//
-// Created by MontoroA on 6/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTFECHA_H
 #define P4_ENTREGA_FINAL_DTFECHA_H
 
 #include <string>
+#include <iostream>
 
-class DtFecha{
+using namespace std;
+
+class DtFecha {
 private:
     int hora;
     int dia;
     int mes;
     int anio;
-
 public:
-    DtFecha(int, int, int, int);
-    ~DtFecha(){};
+    DtFecha();
 
-    int getHora();
-    int getDia();
-    int getMes();
-    int getAnio();
+    DtFecha(int hora, int dia, int mes, int anio);
 
-    int operator-(DtFecha*);
+    int getHora() const;
 
-    std::string format();
+    int getDia() const;
+
+    int getMes() const;
+
+    int getAnio() const;
+
+    int operator-(DtFecha *) const;
+
+    friend ostream &operator<<(ostream &os, DtFecha fecha);
+
 };
 
 

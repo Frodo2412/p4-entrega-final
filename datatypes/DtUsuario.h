@@ -1,6 +1,3 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTUSUARIO_H
 #define P4_ENTREGA_FINAL_DTUSUARIO_H
@@ -15,11 +12,11 @@ protected:
     string mail;
 
 public:
-    DtUsuario(){};
-    virtual ~DtUsuario();
+    DtUsuario(string nombre, string email);
 
     string getNombre();
-    virtual string getMail() = 0;
+
+    string getEmail();
 };
 
 

@@ -1,38 +1,38 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #include "DtEstadia.h"
 
-DtEstadia::DtEstadia(string host, string huesp, int hab, DtFecha* ChIn, DtFecha* ChOut, string prom){
-    hostal = host;
-    huesped = huesp;
-    habitacion = hab;
-    checkIn = ChIn;
-    checkOut = ChOut;
-    promo = prom;
+#include <utility>
+
+DtEstadia::DtEstadia(string nombreHostal, string emailHuesped, int numeroHabitacion, DtFecha checkIn,
+                     DtFecha checkOut, string codigoPromo) {
+    this->nombreHostal = std::move(nombreHostal);
+    this->emailHuesped = std::move(emailHuesped);
+    this->numeroHabitacion = numeroHabitacion;
+    this->checkIn = checkIn;
+    this->checkOut = checkOut;
+    promo = std::move(codigoPromo);
 }
 
-string DtEstadia::getHostal(){
-    return hostal;
+string DtEstadia::getHostal() {
+    return nombreHostal;
 }
 
-string DtEstadia::getHuesped(){
-    return huesped;
+string DtEstadia::getHuesped() {
+    return emailHuesped;
 }
 
-int DtEstadia::getHabitacion(){
-    return habitacion;
+int DtEstadia::getHabitacion() const {
+    return numeroHabitacion;
 }
 
-DtFecha* DtEstadia::getCheckIn(){
+DtFecha DtEstadia::getCheckIn() {
     return checkIn;
 }
 
-DtFecha* DtEstadia::getCheckOut(){
+DtFecha DtEstadia::getCheckOut() {
     return checkOut;
 }
 
-string DtEstadia::getPromo(){
+string DtEstadia::getPromo() {
     return promo;
 }

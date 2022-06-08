@@ -1,6 +1,3 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTEMPLEADO_H
 #define P4_ENTREGA_FINAL_DTEMPLEADO_H
@@ -11,19 +8,16 @@
 
 using std::string;
 
-class DtEmpleado: public DtUsuario {
+class DtEmpleado : public DtUsuario {
 private:
-    DtCargo* cargo;
+    DtCargo cargo;
 
 public:
-    DtEmpleado(string, string, DtCargo*);
-    ~DtEmpleado() override {};
+    DtEmpleado(string nombre, string email, DtCargo cargo);
 
-    DtCargo* getCargo();
+    DtCargo getCargo();
 
-    string getMail() override;
 };
-
 
 
 #endif //P4_ENTREGA_FINAL_DTEMPLEADO_H

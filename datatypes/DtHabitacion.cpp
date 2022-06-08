@@ -1,23 +1,20 @@
-//
-// Created by User on 7/6/2022.
-//
 
 #include "DtHabitacion.h"
 
-DtHabitacion::DtHabitacion(int numero, int capacidad, int precio){
+DtHabitacion::DtHabitacion(int numero, int capacidad, int precio) {
     this->numero = numero;
     this->capacidad = capacidad;
     this->precio = precio;
 }
 
-int DtHabitacion::getNumero(){
+int DtHabitacion::getNumero() const {
     return numero;
 }
 
-int DtHabitacion::getCapacidad(){
+int DtHabitacion::getCapacidad() const {
     return capacidad;
 }
 
-int DtHabitacion::getPrecio(){
+int DtHabitacion::getPrecio() const {
     return precio;
 }

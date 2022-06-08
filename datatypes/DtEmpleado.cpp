@@ -1,20 +1,13 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #include "DtEmpleado.h"
 
-DtEmpleado::DtEmpleado(string nom, string em, DtCargo* c){
-    nombre = nom;
-    mail = em;
-    cargo = c;
+#include <utility>
+
+DtEmpleado::DtEmpleado(string nombre, string email, DtCargo cargo) : DtUsuario(std::move(nombre), std::move(email)) {
+    this->cargo = cargo;
 }
 
 
-DtCargo* DtEmpleado::getCargo(){
+DtCargo DtEmpleado::getCargo() {
     return cargo;
-}
-
-string DtEmpleado::getMail(){
-    return mail;
 }
