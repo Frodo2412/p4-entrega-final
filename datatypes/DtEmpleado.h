@@ -19,5 +19,4 @@ public:
 
 };
 
-
 #endif //P4_ENTREGA_FINAL_DTEMPLEADO_H

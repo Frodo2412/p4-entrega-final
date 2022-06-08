@@ -12,6 +12,7 @@
 #include "DtReservaIndividual.h"
 #include "Comentario.h"
 #include "Huesped.h"
+#include "Empleado.h"
 
 #include <iostream>
 
@@ -111,8 +112,7 @@ void test_dt() {
 
     cout << " - DtUsuario:" << endl;
     DtUsuario usuario("Juan", "juan@gmail.com");
-    cout << usuario.getNombre() << endl;
-    cout << usuario.getEmail() << endl;
+    cout << usuario << endl;
 }
 
 void test_comentario() {
