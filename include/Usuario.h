@@ -9,15 +9,15 @@
 #include "DtUsuario.h"
 
 class Usuario {
-private:
+protected:
     string nombre;
     string mail;
     string password;
 
 public:
     Usuario(string nombre, string mail, string password);
-    DtUsuario getDatos();
-    ~Usuario();
+
+    virtual DtUsuario getDatos() = 0;
 };
 
 

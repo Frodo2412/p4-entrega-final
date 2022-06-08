@@ -11,9 +11,9 @@
 #include "DtReservaGrupal.h"
 #include "DtReservaIndividual.h"
 #include "Comentario.h"
+#include "Huesped.h"
 
 #include <iostream>
-#include <cassert>
 
 using namespace std;
 
@@ -134,9 +134,19 @@ void test_resenia() {
     resenia.setComentario(comentario);
 }
 
+void test_usuario() {
+    cout << " - Huesped:" << endl;
+    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
+    cout << usuario.isMail("juan@gmail.com") << endl;
+    cout << usuario.isMail("") << endl;
+    auto *reserva = new Reserva();
+    usuario.agregarReserva(reserva);
+}
+
 int main() {
     test_dt();
     test_comentario();
     test_resenia();
+    test_usuario();
     return 0;
 }

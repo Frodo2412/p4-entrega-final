@@ -42,10 +42,17 @@ add_executable(p4_entrega_final
         include/Comentario.h
         src/Comentario.cpp
         include/Resenia.h
+        src/Resenia.cpp
         include/Reloj.h
-        include/Observer.h
+        src/Reloj.cpp
         include/Usuario.h
         src/Usuario.cpp
-        src/Reloj.cpp
-        src/Resenia.cpp
+        include/Huesped.h
+        src/Huesped.cpp
+        include/Estadia.h
+        src/Estadia.cpp
+        include/Reserva.h
+        src/Reserva.cpp
+        include/Observer.h
+
         main.cpp)

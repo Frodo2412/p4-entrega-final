@@ -4,7 +4,8 @@
 
 
 class Estadia {
-
+public:
+    void finalizarActiva();
 };
 
 
