@@ -1,6 +1,3 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTHUESPED_H
 #define P4_ENTREGA_FINAL_DTHUESPED_H
@@ -10,17 +7,15 @@
 
 using std::string;
 
-class DtHuesped: public DtUsuario{
+class DtHuesped : public DtUsuario {
 private:
     bool esFinger;
 
 public:
-    DtHuesped(string, string, bool);
-    ~DtHuesped() override {};
+    DtHuesped(string nombre, string email, bool esFinger);
 
-    bool getEsFinger();
+    bool getEsFinger() const;
 
-    string getMail() override;
 };
 
 

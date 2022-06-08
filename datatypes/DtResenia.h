@@ -1,6 +1,3 @@
-//
-// Created by User on 6/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTRESENIA_H
 #define P4_ENTREGA_FINAL_DTRESENIA_H
@@ -15,17 +12,18 @@ private:
     int calificacion;
     string resenia;
     string comentario;
-
-    DtFecha* fecha;
+    DtFecha fecha;
 
 public:
-    DtResenia(int, string, string, DtFecha*);
-    ~DtResenia(){};
+    DtResenia(int calificacion, string resenia, string comentario, DtFecha fecha);
 
-    int getCalificacion();
+    int getCalificacion() const;
+
     string getResenia();
+
     string getComentario();
-    DtFecha* getFecha();
+
+    DtFecha getFecha();
 };
 
 #endif //P4_ENTREGA_FINAL_DTRESENIA_H

@@ -1,23 +1,22 @@
-//
-// Created by User on 7/6/2022.
-//
 
 #include "DtHostal.h"
 
-DtHostal::DtHostal(string nom, string dir, int calif){
-    nombre = nom;
-    direccion = dir;
-    calificacionProm = calif;
+#include <utility>
+
+DtHostal::DtHostal(string nombre, string direccion, int calificacionPromedio) {
+    this->nombre = std::move(nombre);
+    this->direccion = std::move(direccion);
+    this->calificacionPromedio = calificacionPromedio;
 }
 
-string DtHostal::getNombre(){
+string DtHostal::getNombre() {
     return nombre;
 }
 
-string DtHostal::getDireccion(){
+string DtHostal::getDireccion() {
     return direccion;
 }
 
-int DtHostal::getCalificacionProm(){
-    return calificacionProm;
+int DtHostal::getCalificacionProm() const {
+    return calificacionPromedio;
 }

@@ -1,28 +1,27 @@
-//
-// Created by User on 6/6/2022.
-//
 
 #include "DtResenia.h"
 
-DtResenia::DtResenia(int calif, string rese, string coment, DtFecha* f){
-    calificacion = calif;
-    resenia = rese;
-    comentario = coment;
-    fecha = f;
+#include <utility>
+
+DtResenia::DtResenia(int calificacion, string resenia, string comentario, DtFecha fecha) {
+    this->calificacion = calificacion;
+    this->resenia = std::move(resenia);
+    this->comentario = std::move(comentario);
+    this->fecha = fecha;
 }
 
-int DtResenia::getCalificacion(){
+int DtResenia::getCalificacion() const {
     return calificacion;
 }
 
-string DtResenia::getResenia(){
+string DtResenia::getResenia() {
     return resenia;
 }
 
-string DtResenia::getComentario(){
+string DtResenia::getComentario() {
     return comentario;
 }
 
-DtFecha* DtResenia::getFecha(){
+DtFecha DtResenia::getFecha() {
     return fecha;
 }
