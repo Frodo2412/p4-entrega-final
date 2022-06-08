@@ -1,0 +1,25 @@
+//
+// Created by unzip on 07/06/22.
+//
+
+#include "Reloj.h"
+
+Reloj * Reloj::instancia = nullptr;
+
+Reloj::Reloj() = default;
+
+
+DtFecha Reloj::getFechaActual() {
+    return this->fechaActual;
+}
+
+void Reloj::modificarFechaDeSistema(int anio, int mes, int dia, int hora) {
+    this->fechaActual = DtFecha(anio, mes, dia, hora);
+}
+
+Reloj Reloj::getInstance() {
+    if (instancia == nullptr) {
+        instancia = new Reloj();
+    }
+    return *instancia;
+}
