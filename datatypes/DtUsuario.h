@@ -1,6 +1,3 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTUSUARIO_H
 #define P4_ENTREGA_FINAL_DTUSUARIO_H

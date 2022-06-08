@@ -19,6 +19,8 @@ add_executable(p4_entrega_final
         datatypes/DtFecha.h
         datatypes/DtGrupal.cpp
         datatypes/DtGrupal.h
+        datatypes/DtReservaGrupal.cpp
+        datatypes/DtReservaGrupal.h
         datatypes/DtHabitacion.cpp
         datatypes/DtHabitacion.h
         datatypes/DtHostal.cpp
@@ -29,6 +31,8 @@ add_executable(p4_entrega_final
         datatypes/DtHuesped.h
         datatypes/DtIndividual.cpp
         datatypes/DtIndividual.h
+        datatypes/DtReservaIndividual.cpp
+        datatypes/DtReservaIndividual.h
         datatypes/DtNotificacion.cpp
         datatypes/DtNotificacion.h
         datatypes/DtResenia.cpp
@@ -41,3 +45,5 @@ add_executable(p4_entrega_final
         include/Usuario.cpp
         include/Usuario.h
         src/hostal.cpp)
+        src/hostal.cpp
+        main.cpp)

@@ -1,10 +1,12 @@
-//
-// Created by User on 7/6/2022.
-//
 
 #include "DtUsuario.h"
 
-string DtUsuario::getNombre(){
+DtUsuario::DtUsuario(string nombre, string email) {
+    this->nombre = nombre;
+    this->mail = email;
+}
+
+string DtUsuario::getNombre() {
     return nombre;
 }
 

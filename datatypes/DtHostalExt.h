@@ -1,32 +1,22 @@
-//
-// Created by User on 7/6/2022.
-//
 
 #ifndef P4_ENTREGA_FINAL_DTHOSTALEXT_H
 #define P4_ENTREGA_FINAL_DTHOSTALEXT_H
 
 #include "DtResenia.h"
+#include "DtHostal.h"
 
 #include <string>
+#include <list>
 
 using std::string;
 
-class DtHostalExt{
+class DtHostalExt : public DtHostal {
 private:
-    string nombre;
-    string direccion;
-    int calificacionProm;
-
-    DtResenia** resenias;
+    list<DtResenia> resenias;
 public:
-    DtHostalExt(string, string, int, DtResenia**);
-    ~DtHostalExt(){};
+    DtHostalExt(string nombre, string direccion, int calificacionPromedio, list<DtResenia> resenias);
 
-    string getNombre();
-    string getDireccion();
-    int getCalificacionProm();
-
-    DtResenia** getResenias();
+    list<DtResenia> getResenias();
 };
 
 

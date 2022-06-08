@@ -1,13 +1,14 @@
-//
-// Created by MontoroA on 6/6/2022.
-//
 
 #include "DtComentario.h"
 
-DtComentario::DtComentario(std::string s){
-    texto = s;
+#include <utility>
+
+using namespace std;
+
+DtComentario::DtComentario(string texto) {
+    this->texto = std::move(texto);
 }
 
-std::string DtComentario::getTexto(){
+std::string DtComentario::getTexto() {
     return texto;
 }

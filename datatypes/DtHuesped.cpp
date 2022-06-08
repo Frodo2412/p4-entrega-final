@@ -1,20 +1,13 @@
-//
-// Created by MontoroA on 7/6/2022.
-//
 
 #include "DtHuesped.h"
 
-DtHuesped::DtHuesped(string nom, string em, bool esF){
-    nombre = nom;
-    mail = em;
-    esFinger = esF;
+#include <utility>
+
+DtHuesped::DtHuesped(string nombre, string email, bool esFinger) : DtUsuario(std::move(nombre), std::move(email)) {
+    this->esFinger = esFinger;
 }
 
 
-bool DtHuesped::getEsFinger(){
+bool DtHuesped::getEsFinger() const {
     return esFinger;
-}
-
-string DtHuesped::getMail(){
-    return mail;
 }
