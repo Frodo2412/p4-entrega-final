@@ -1,19 +1,11 @@
-//
-// Created by unzip on 08/06/22.
-//
 
 #include "Comentario.h"
 
-Comentario::Comentario(string txt) {
-    texto = txt;
-}
+#include <utility>
 
-DtComentario Comentario::getDatos() {
-    return DtComentario(texto);
-}
-
-void Comentario::setReseña(Resenia * nuevaResenia) {
-    resenia = nuevaResenia;
+Comentario::Comentario(string texto, Resenia *resenia) {
+    this->texto = std::move(texto);
+    this->resenia = resenia;
 }
 
 string Comentario::getTexto() {
@@ -23,3 +15,9 @@ string Comentario::getTexto() {
 Resenia *Comentario::getResenia() {
     return resenia;
 }
+
+DtComentario Comentario::getDatos() {
+    return DtComentario(texto);
+}
+
+Comentario::Comentario() = default;

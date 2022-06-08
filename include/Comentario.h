@@ -1,33 +1,30 @@
-//
-// Created by unzip on 08/06/22.
-//
 
 #ifndef P4_ENTREGA_FINAL_COMENTARIO_H
 #define P4_ENTREGA_FINAL_COMENTARIO_H
 
 
 #include <string>
-#include "DtComentario.h"
 #include "Resenia.h"
+#include "DtComentario.h"
 
 using namespace std;
+
+class Resenia;
 
 class Comentario {
 private:
     string texto;
     Resenia *resenia;
 public:
-    explicit Comentario(string);
+    Comentario();
 
-    DtComentario getDatos();
-
-    void setReseña(Resenia *);
+    Comentario(string texto, Resenia *resenia);
 
     string getTexto();
 
     Resenia *getResenia();
 
+    DtComentario getDatos();
 };
-
 
 #endif //P4_ENTREGA_FINAL_COMENTARIO_H
