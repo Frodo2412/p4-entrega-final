@@ -9,7 +9,6 @@ using namespace std;
 class DtComentario {
 private:
     string texto;
-
 public:
     explicit DtComentario(string texto);
 

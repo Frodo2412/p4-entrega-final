@@ -12,7 +12,7 @@ Resenia::Resenia(int calificacion, DtFecha fecha, string comentario) {
 }
 
 DtResenia Resenia::getDatos() {
-    DtResenia(calificacion, comentario, maybeComentario->getTexto(), fecha);
+    return DtResenia(calificacion, comentario, maybeComentario->getTexto(), fecha);
 }
 
 int Resenia::getCalificacion() const {
@@ -47,4 +47,5 @@ Resenia::~Resenia() {
     destruirAsociaciones();
 }
 
+Resenia::Resenia() = default;
 

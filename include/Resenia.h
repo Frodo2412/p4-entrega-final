@@ -8,6 +8,8 @@
 #include "DtResenia.h"
 #include "Comentario.h"
 
+class Comentario;
+
 class Resenia {
 private:
     int calificacion;
@@ -16,6 +18,8 @@ private:
     Comentario *maybeComentario;
     Estadia *maybeEstadia;
 public:
+    Resenia();
+
     Resenia(int calificacion, DtFecha fecha, string comentario);
 
     ~Resenia();

@@ -9,16 +9,20 @@
 
 using namespace std;
 
+class Resenia;
+
 class Comentario {
 private:
     string texto;
-    Resenia resenia;
+    Resenia *resenia;
 public:
-    Comentario(string texto, Resenia resenia);
+    Comentario();
+
+    Comentario(string texto, Resenia *resenia);
 
     string getTexto();
 
-    Resenia getResenia();
+    Resenia *getResenia();
 
     DtComentario getDatos();
 };
