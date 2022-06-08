@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.22)
+project(p4_entrega_final)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(datatypes)
+include_directories(include)
+
+add_executable(p4_entrega_final
+        datatypes/DtCargo.h
+        datatypes/DtComentario.cpp
+        datatypes/DtComentario.h
+        datatypes/DtEmpleado.cpp
+        datatypes/DtEmpleado.h
+        datatypes/DtEstadia.cpp
+        datatypes/DtEstadia.h
+        datatypes/DtEstado.h
+        datatypes/DtFecha.cpp
+        datatypes/DtFecha.h
+        datatypes/DtGrupal.cpp
+        datatypes/DtGrupal.h
+        datatypes/DtHabitacion.cpp
+        datatypes/DtHabitacion.h
+        datatypes/DtHostal.cpp
+        datatypes/DtHostal.h
+        datatypes/DtHostalExt.cpp
+        datatypes/DtHostalExt.h
+        datatypes/DtHuesped.cpp
+        datatypes/DtHuesped.h
+        datatypes/DtIndividual.cpp
+        datatypes/DtIndividual.h
+        datatypes/DtNotificacion.cpp
+        datatypes/DtNotificacion.h
+        datatypes/DtResenia.cpp
+        datatypes/DtResenia.h
+        datatypes/DtReserva.cpp
+        datatypes/DtReserva.h
+        datatypes/DtUsuario.cpp
+        datatypes/DtUsuario.h
+        include/hostal.h
+        include/Usuario.cpp
+        include/Usuario.h
+        src/hostal.cpp)

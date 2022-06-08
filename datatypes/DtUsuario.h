@@ -15,11 +15,12 @@ protected:
     string mail;
 
 public:
-    DtUsuario(){};
-    virtual ~DtUsuario();
+    DtUsuario(string nombre, string mail);
+    ~DtUsuario();
 
     string getNombre();
-    virtual string getMail() = 0;
+    string getMail();
+    string getDatos();
 };
 
 
