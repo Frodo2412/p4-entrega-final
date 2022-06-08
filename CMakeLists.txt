@@ -37,11 +37,15 @@ add_executable(p4_entrega_final
         datatypes/DtReserva.h
         datatypes/DtUsuario.cpp
         datatypes/DtUsuario.h
-        include/hostal.h
+        include/Hostal.h
+        src/Hostal.cpp
+        include/Comentario.h
+        src/Comentario.cpp
+        include/Resenia.h
         include/Reloj.h
         include/Observer.h
         include/Usuario.h
-        include/Usuario.cpp
+        src/Usuario.cpp
         src/Reloj.cpp
-        src/hostal.cpp
+        src/Resenia.cpp
         main.cpp)

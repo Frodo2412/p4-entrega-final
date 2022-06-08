@@ -10,13 +10,14 @@
 #include "DtReserva.h"
 #include "DtReservaGrupal.h"
 #include "DtReservaIndividual.h"
+#include "Comentario.h"
 
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
-int main() {
-
+void test_dt() {
     cout << " - DtFecha:" << endl;
     DtFecha fecha(1, 1, 1, 1901);
     cout << fecha << endl;
@@ -112,7 +113,30 @@ int main() {
     DtUsuario usuario("Juan", "juan@gmail.com");
     cout << usuario.getNombre() << endl;
     cout << usuario.getEmail() << endl;
+}
 
+void test_comentario() {
+    cout << " - Comentario:" << endl;
+    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
+    Comentario comentario("Hola", resenia);
+    cout << comentario.getTexto() << endl;
+    DtComentario comentarioDt = comentario.getDatos();
+    Resenia resenia1 = comentario.getResenia();
+}
 
+void test_resenia() {
+    cout << " - Resenia:" << endl;
+    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
+    cout << resenia.getCalificacion() << endl;
+    cout << resenia.getFecha() << endl;
+    cout << resenia.getComentario() << endl;
+    auto *comentario = new Comentario("Hola", resenia);
+    resenia.setComentario(comentario);
+}
+
+int main() {
+    test_dt();
+    test_comentario();
+    test_resenia();
     return 0;
 }
