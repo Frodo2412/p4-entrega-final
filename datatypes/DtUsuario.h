@@ -7,17 +7,15 @@
 using std::string;
 
 class DtUsuario {
-protected:
+private:
     string nombre;
     string mail;
 
 public:
     DtUsuario(string nombre, string mail);
-    ~DtUsuario();
 
     string getNombre();
-    string getMail();
-    string getDatos();
+    string getEmail();
 };
 
 

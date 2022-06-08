@@ -1,22 +1,15 @@
 
 #include "DtUsuario.h"
 
-DtUsuario::DtUsuario(string nombre, string email) {
-    this->nombre = nombre;
-    this->mail = email;
+DtUsuario::DtUsuario(string name, string email) {
+    nombre = name;
+    mail = email;
 }
 
 string DtUsuario::getNombre() {
     return nombre;
 }
 
-DtUsuario::DtUsuario(string nombre, string mail) {
-    this->nombre = nombre;
-    this->mail = mail;
+string DtUsuario::getEmail() {
+    return mail;
 }
-
-string DtUsuario::getMail() {
-    return this->mail;
-}
-
-DtUsuario::~DtUsuario() {}
