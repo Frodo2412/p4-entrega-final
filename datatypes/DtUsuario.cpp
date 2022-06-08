@@ -10,6 +10,13 @@ string DtUsuario::getNombre() {
     return nombre;
 }
 
-string DtUsuario::getEmail() {
-    return mail;
+DtUsuario::DtUsuario(string nombre, string mail) {
+    this->nombre = nombre;
+    this->mail = mail;
 }
+
+string DtUsuario::getMail() {
+    return this->mail;
+}
+
+DtUsuario::~DtUsuario() {}

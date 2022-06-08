@@ -12,11 +12,12 @@ protected:
     string mail;
 
 public:
-    DtUsuario(string nombre, string email);
+    DtUsuario(string nombre, string mail);
+    ~DtUsuario();
 
     string getNombre();
-
-    string getEmail();
+    string getMail();
+    string getDatos();
 };
 
 
