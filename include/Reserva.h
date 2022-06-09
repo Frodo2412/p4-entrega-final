@@ -9,7 +9,7 @@
 #include "Huesped.h"
 
 class Huesped;
-
+class Estadia;
 class Reserva {
 protected:
     Huesped *huespedReservante;
