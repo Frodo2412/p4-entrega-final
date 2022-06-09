@@ -120,10 +120,11 @@ void test_dt() {
 void test_comentario() {
     cout << " - Comentario:" << endl;
     Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
-    Comentario comentario("Hola", &resenia);
+    Comentario comentario("Hola");
+//    Comentario comentario("Hola", &resenia);
     cout << comentario.getTexto() << endl;
     DtComentario comentarioDt = comentario.getDatos();
-    Resenia *resenia1 = comentario.getResenia();
+//    Resenia *resenia1 = comentario.getResenia();
 }
 
 void test_resenia() {
@@ -132,7 +133,8 @@ void test_resenia() {
     cout << resenia.getCalificacion() << endl;
     cout << resenia.getFecha() << endl;
     cout << resenia.getComentario() << endl;
-    auto *comentario = new Comentario("Hola", &resenia);
+    auto *comentario = new Comentario("Hola");
+//    auto *comentario = new Comentario("Hola", &resenia);
     resenia.setComentario(comentario);
 }
 

@@ -8,7 +8,7 @@ Resenia::Resenia(int calificacion, DtFecha fecha, string comentario) {
     this->fecha = fecha;
     this->comentario = std::move(comentario);
     this->maybeComentario = nullptr;
-    this->maybeEstadia = nullptr;
+//    this->maybeEstadia = nullptr;
 }
 
 DtResenia Resenia::getDatos() {
@@ -35,9 +35,9 @@ void Resenia::setComentario(Comentario *respuesta) {
     this->maybeComentario = respuesta;
 }
 
-void Resenia::setEstadia(Estadia *estadia) {
-    this->maybeEstadia = estadia;
-}
+//void Resenia::setEstadia(Estadia *estadia) {
+//    this->maybeEstadia = estadia;
+//}
 
 bool Resenia::isComentada() {
     return maybeComentario == nullptr;

@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(datatypes)
 include_directories(include)
+include_directories(src)
 
 add_executable(p4_entrega_final
         datatypes/DtCargo.h
@@ -54,5 +55,4 @@ add_executable(p4_entrega_final
         include/Reserva.h
         src/Reserva.cpp
         include/Observer.h
-
-        main.cpp src/Habitacion.cpp include/Habitacion.h src/ReservaGrupal.cpp include/ReservaGrupal.h include/ReservaIndividual.cpp include/ReservaIndividual.h)
+        main.cpp src/Empleado.cpp include/Empleado.h src/Habitacion.cpp include/Habitacion.h src/ReservaGrupal.cpp include/ReservaGrupal.h src/ReservaIndividual.cpp include/ReservaIndividual.h)
