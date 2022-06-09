@@ -10,8 +10,8 @@ Huesped::Huesped(string nombre, string email, string password, bool esFinger) : 
     this->reservas = list<Reserva *>();
 }
 
-DtHuesped *Huesped::getDatos() {
-    return new DtHuesped{nombre, mail, esFinger};
+DtUsuario Huesped::getDatos() {
+    return DtHuesped{nombre, mail, esFinger};
 }
 
 void Huesped::agregarReserva(Reserva *reserva) {
