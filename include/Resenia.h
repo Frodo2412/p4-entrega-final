@@ -3,10 +3,13 @@
 #define P4_ENTREGA_FINAL_RESENIA_H
 
 
-#include "DtFecha.h"
-#include "Estadia.h"
-#include "DtResenia.h"
 #include "Comentario.h"
+#include "DtFecha.h"
+#include "DtResenia.h"
+//#include "Estadia.h" No lo usamos nunca creo
+#include "Huesped.h"
+
+//Deberia esta pronto los includes a menos del dt
 
 class Comentario;
 
@@ -18,7 +21,7 @@ private:
     DtFecha fecha;
     string comentario;
     Comentario *maybeComentario;
-    Estadia *maybeEstadia;
+//    Estadia *maybeEstadia;
 public:
     Resenia();
 
@@ -38,7 +41,7 @@ public:
 
     void setComentario(Comentario *respuesta);
 
-    void setEstadia(Estadia *estadia);
+//    void setEstadia(Estadia *estadia);
 
     bool isComentada();
 

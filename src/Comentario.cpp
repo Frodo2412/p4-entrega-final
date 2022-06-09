@@ -3,17 +3,12 @@
 
 #include <utility>
 
-Comentario::Comentario(string texto, Resenia *resenia) {
+Comentario::Comentario(string texto) {
     this->texto = std::move(texto);
-    this->resenia = resenia;
 }
 
 string Comentario::getTexto() {
     return texto;
-}
-
-Resenia *Comentario::getResenia() {
-    return resenia;
 }
 
 DtComentario Comentario::getDatos() {
