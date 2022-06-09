@@ -1,7 +1,3 @@
-//
-// Created by User on 8/6/2022.
-//
-
 #ifndef P4_ENTREGA_FINAL_HOSTAL_H
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
@@ -9,6 +5,7 @@
 #include "empleado.h"
 #include "../datatypes/DtHostal.h"
 #include "../datatypes/DtHostalExt.h"
+#include "../datatypes/DtHabitacion.h"
 
 //No hables con extranios??
 #include "../datatypes/DtReserva.h"
@@ -41,6 +38,19 @@ private:
     DtHostal getDatos();
 
     DtHostalExt getDatosExt();
+
+    setNombre(string nombre);
+
+    setMail(string mail);
+
+    setTelefono(int telefono);
+
+    getNombre(string nombre);
+
+    getMail(string mail);
+
+    getTelefono(int telefono);
+
 
     agregarHabitacionAHostal(habitacion* hab);
 
