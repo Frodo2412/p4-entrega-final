@@ -66,7 +66,7 @@ private:
 
     bool esEsteHostal(hostal h); //Boolean ¿? No me convence
 
-    list<DtResenia> getReseñasSinResponder();
+    list<DtResenia> getReseniasSinResponder();
 
     hostal* getHostalSiTrabaja(empleado emp);
 

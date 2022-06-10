@@ -35,7 +35,7 @@ DtHostalExt hostal::getDatosExt(){
     while(it != habitaciones.end()){
         n += getCantidadCalificaciones(*it);
         califs += getSumaCalificaciones(*it);
-        l.merge(getDatosResenias(*it)); //getDatosResenias debe retornar una lista con las resenias asociadas a todas las estadias de hab
+        l.merge((*it).getDatosResenias()); //getDatosResenias debe retornar una lista con las resenias asociadas a todas las estadias de hab
         ++it;
     }
 
@@ -90,7 +90,7 @@ list<DtReserva> hostal::getReservasNoCanceladas(string email){
     list<DtReserva> l;
     iterator it = habitaciones.begin();
     while(it != habitaciones.end()) {
-        l.merge(getReservasAsociadas(email));
+        l.merge((*it).getReservasAsociadas(email));
         ++it;
     }
     return l;
@@ -101,14 +101,32 @@ bool hostal::esEsteHostal(hostal h){ //Boolean ¿? No me convence
     return telefono == getTelefono(h);
 }
 
-list<DtResenia> hostal::getReseñasSinResponder(){
-
+//Al DC le falta decir que el resultado es la concatenacion de todos sdr de habitaciones
+list<DtResenia> hostal::getReseniasSinResponder(){
+    list<DtResenia> l;
+    iterator it = habitaciones.begin();
+    while(it != habitaciones.end()) {
+        l.merge((*it).getReseniasSinResponder());
+        ++it;
+    }
+    return l;
+}
 }
 
-hostal* hostal::getHostalSiTrabaja(empleado emp){
-
+//Esta op. pareceria no estar siendo usada en ningun DC
+hostal hostal::getHostalSiTrabaja(empleado emp){
+    return hostal h;
 }
+
 
 bool hostal::habitacionPerteneceAHostal(habitacion* hab){
+    if(!habitaciones.empty()){
+        iterator it = habitaciones.begin();
 
+        while(it != habitaciones.back() && getNumero(*it) != getNumero(hab))
+            ++it;
+
+        return it == habitaciones.back();
+    } else
+        return false;
 }
