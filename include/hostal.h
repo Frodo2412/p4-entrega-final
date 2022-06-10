@@ -1,6 +1,7 @@
 #ifndef P4_ENTREGA_FINAL_HOSTAL_H
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
+
 #include "habitacion.h"
 #include "empleado.h"
 #include "../datatypes/DtHostal.h"
@@ -24,7 +25,7 @@ class empleado;
 class hostal {
 private:
     string nombre;
-    string direcccion;
+    string direccion;
     int telefono;
 
    list<habitacion> habitaciones;
@@ -39,28 +40,29 @@ private:
 
     DtHostalExt getDatosExt();
 
-    setNombre(string nombre);
 
-    setMail(string mail);
+    void setNombre(string nombre);
 
-    setTelefono(int telefono);
+    void setDireccion(string direccion);
 
-    getNombre(string nombre);
+    void setTelefono(int telefono);
 
-    getMail(string mail);
+    string getNombre();
 
-    getTelefono(int telefono);
+    string getDireccion();
+
+    int getTelefono();
 
 
-    agregarHabitacionAHostal(habitacion* hab);
+    void agregarHabitacionAHostal(habitacion hab);
 
-    agregarEmpleadoAHostal(empleado* e);
+    void agregarEmpleadoAHostal(empleado e);
 
     bool trabajaEmpleadoEnHostal(empleado e);
 
-    list<habitacion> getInfoDeHabitaciones();
+    list<DtHabitacion> getInfoDeHabitaciones();
 
-    habitacion* getHabitacion(int codigo);
+    habitacion getHabitacion(int codigo);
 
     list<DtReserva> getReservasNoCanceladas(string email);
 
@@ -68,7 +70,7 @@ private:
 
     list<DtResenia> getReseniasSinResponder();
 
-    hostal* getHostalSiTrabaja(empleado emp);
+    hostal getHostalSiTrabaja(empleado emp);
 
     bool habitacionPerteneceAHostal(habitacion hab);
 };

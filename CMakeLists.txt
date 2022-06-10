@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 3.22)
-project(p4_entrega_final)
+cmake_minimum_required(VERSION 3.13)
+
+project(p4-entrega-final)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(datatypes)
-include_directories(include)
-
-add_executable(p4_entrega_final
+add_executable(cmake_testapp main.cpp
         datatypes/DtCargo.h
         datatypes/DtComentario.cpp
         datatypes/DtComentario.h
@@ -37,6 +35,4 @@ add_executable(p4_entrega_final
         datatypes/DtReserva.h
         datatypes/DtUsuario.cpp
         datatypes/DtUsuario.h
-        include/hostal.h
-        src/hostal.cpp
-        main.cpp)
+        include/Hostal.h)

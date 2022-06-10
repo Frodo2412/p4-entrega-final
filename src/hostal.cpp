@@ -1,9 +1,8 @@
-
 #include "../include/hostal.h"
 
 hostal::hostal(string nombre, string direccion, int telefono){
     this->nombre = nombre;
-    this->direcccion = direccion;
+    this->direccion = direccion;
     this->telefono = telefono;
 }
 
@@ -13,16 +12,16 @@ hostal::~hostal(){
 }
 
 //Como obtiene un hostal su calificacion promedio?? En el disenio no aparece. El siguiente codigo recorre cada habitacion
-DtHostal* hostal::getDatos(){
+DtHostal hostal::getDatos(){
     int n, califs = 0;
-    iter it = habitaciones.begin();
+    list<habitacion>::iterator it = habitaciones.begin();
 
     while(it != habitaciones.end()){
-        n += getCantidadCalificaciones(hab);    //Se explica sola
-        califs += getSumaCalificaciones(hab);   //Se explica sola
+        n += (*it).getCantidadCalificaciones();    //Se explica sola
+        califs += (*it).getSumaCalificaciones();   //Se explica sola
         ++it;
     }
-    int califProm = califs / n;
+
     return DtHostal(this->nombre, this->direcccion, califs/n);
 }
 
@@ -30,12 +29,12 @@ DtHostal* hostal::getDatos(){
 DtHostalExt hostal::getDatosExt(){
     int n, califs = 0;
     list<DtResenia> l;
-    iter it = habitaciones.begin();
+    list<habitacion>::iterator it = habitaciones.begin();
 
     while(it != habitaciones.end()){
-        n += getCantidadCalificaciones(*it);
-        califs += getSumaCalificaciones(*it);
-        l.merge((*it).getDatosResenias()); //getDatosResenias debe retornar una lista con las resenias asociadas a todas las estadias de hab
+        n += (*it).getCantidadCalificaciones();
+        califs += (*it).getSumaCalificaciones();
+        l.merge((*it).getDatosResenias()); //getDatosResenias debe retornar una lista con las resenias asociadas a todas las estadias de *it
         ++it;
     }
 
@@ -43,19 +42,46 @@ DtHostalExt hostal::getDatosExt(){
     return DtHostalExt(this->nombre, this->direcccion, califs/n, l);
 }
 
-hostal::agregarHabitacionAHostal(habitacion hab){
+
+void hostal::setNombre(string nombre){
+    this->nombre = nombre;
+}
+
+void hostal::setDireccion(string direccion){
+    this->direccion = direccion;
+}
+
+void hostal::setTelefono(int telefono){
+    this->telefono = telefono;
+}
+
+string hostal::getNombre(){
+    return nombre;
+}
+
+
+string hostal::getDireccion(){
+    return direccion;
+}
+
+int hostal::getTelefono(){
+    return telefono;
+}
+
+
+void hostal::agregarHabitacionAHostal(habitacion hab){
     habitaciones.push_front(hab);
 }
 
-hostal::agregarEmpleadoAHostal(empleado e){
+void hostal::agregarEmpleadoAHostal(empleado e){
     empleados.push_front(e);
 }
 
 bool hostal::trabajaEmpleadoEnHostal(empleado e){
     if(!empleados.empty()){
-        iterator it = empleados.begin();
+        list<empleado>::iterator it = empleados.begin();
 
-        while(it != empleados.back() && getMail(*it) != getMail(e))
+        while(it != empleados.back() && (*it).getMail() != e.getMail())
             ++it;
 
         return it == empleados.back();
@@ -67,28 +93,25 @@ bool hostal::trabajaEmpleadoEnHostal(empleado e){
 list<DtHabitacion> hostal::getInfoDeHabitaciones(){
     list<DtHabitacion> l;
     if(!habitaciones.empty()){
-        iterator it = habitaciones.begin();
+        list<habitacion>::iterator it;
 
-        while(it != habitaciones.back()) {
+        for(it = habitaciones.begin() ; it != habitaciones.back() ; ++it)
             l.push_back((*it).getDatos());
-            it++;
-        }
     }
     return l;
-    */
 }
 
 //Precond: codigo es el codigo de una hab del hostal
 habitacion hostal::getHabitacion(int codigo){
-    iterator it = habitaciones.begin();
-    while(it != habitaciones.end() && getCodigo(*it) != codigo)
+    list<habitacion>::iterator it = habitaciones.begin();
+    while(it != habitaciones.end() && (*it).getCodigo() != codigo)
         ++it;
     return *it;
 }
 
 list<DtReserva> hostal::getReservasNoCanceladas(string email){
     list<DtReserva> l;
-    iterator it = habitaciones.begin();
+    list<habitacion>::iterator it = habitaciones.begin();
     while(it != habitaciones.end()) {
         l.merge((*it).getReservasAsociadas(email));
         ++it;
@@ -98,32 +121,33 @@ list<DtReserva> hostal::getReservasNoCanceladas(string email){
 
 //Asumo que el telefono identifica a un hostal
 bool hostal::esEsteHostal(hostal h){ //Boolean ¿? No me convence
-    return telefono == getTelefono(h);
+    return telefono == h.getTelefono();
 }
 
 //Al DC le falta decir que el resultado es la concatenacion de todos sdr de habitaciones
 list<DtResenia> hostal::getReseniasSinResponder(){
     list<DtResenia> l;
-    iterator it = habitaciones.begin();
+    list<habitacion>::iterator it = habitaciones.begin();
     while(it != habitaciones.end()) {
         l.merge((*it).getReseniasSinResponder());
         ++it;
     }
     return l;
 }
-}
 
 //Esta op. pareceria no estar siendo usada en ningun DC
 hostal hostal::getHostalSiTrabaja(empleado emp){
-    return hostal h;
+    string nom = "";
+    string dir = "";
+    return hostal(nom, dir, 0);
 }
 
 
-bool hostal::habitacionPerteneceAHostal(habitacion* hab){
+bool hostal::habitacionPerteneceAHostal(habitacion hab){
     if(!habitaciones.empty()){
-        iterator it = habitaciones.begin();
+        list<habitacion>::iterator it = habitaciones.begin();
 
-        while(it != habitaciones.back() && getNumero(*it) != getNumero(hab))
+        while(it != habitaciones.back() && (*it).getNumero() != getNumero(hab))
             ++it;
 
         return it == habitaciones.back();
