@@ -55,4 +55,14 @@ add_executable(p4_entrega_final
         include/Reserva.h
         src/Reserva.cpp
         include/Observer.h
-        main.cpp src/Empleado.cpp include/Empleado.h src/Habitacion.cpp include/Habitacion.h src/ReservaGrupal.cpp include/ReservaGrupal.h src/ReservaIndividual.cpp include/ReservaIndividual.h)
+        src/Empleado.cpp
+        include/Empleado.h
+        src/Habitacion.cpp
+        include/Habitacion.h
+        src/ReservaGrupal.cpp
+        include/ReservaGrupal.h
+        src/ReservaIndividual.cpp
+        include/ReservaIndividual.h
+        src/ReservaController.cpp
+        include/ReservaController.h
+        main.cpp src/UsuarioController.cpp include/UsuarioController.h src/HostalController.cpp include/HostalController.h infrastructure/IReservaController.h infrastructure/IHostalController.h infrastructure/IUsuarioController.h src/NotificacionController.cpp include/NotificacionController.h infrastructure/INotificacionController.h src/ControllerFactory.cpp include/ControllerFactory.h)
