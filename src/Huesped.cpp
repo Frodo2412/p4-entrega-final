@@ -32,6 +32,10 @@ Huesped::~Huesped() {
         delete reserva;
 }
 
+DtHuesped Huesped::getDatosHuesped() {
+    return {this->nombre, this->mail, this->esFinger};
+}
+
 bool Huesped::isFinger() {
     return esFinger;
 }

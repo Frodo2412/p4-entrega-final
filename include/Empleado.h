@@ -12,6 +12,7 @@ public:
     Empleado(string nombre, string mail, string password, DtCargo cargo);
     void setCargo(DtCargo cargo);
     DtUsuario getDatos() override;
+    DtEmpleado getDatosEmpleado();
     DtCargo getCargo();
 };
 

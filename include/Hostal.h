@@ -30,7 +30,7 @@ public:
     Habitacion * getHabitacion(int codigo);
     void agregarHabitacionAHostal(Habitacion * habitacion);
     void agregarEmpleadoAHostal(Empleado * empleado);
-    void trabajaEmpleadoEnHostal(Empleado * empleado);
+    bool trabajaEmpleadoEnHostal(Empleado * empleado);
 //    Set(DtHabitacion) getInfoDeHabitaciones();
     bool esEsteHostal(Hostal* otroHostal);
 //    Set(DtReseña) getReseniasSinResponder();

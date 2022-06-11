@@ -7,26 +7,27 @@
 
 #include "../infrastructure/IUsuarioController.h"
 
-//TODO: Implementar
+#include <map>
+
+
 class UsuarioController : public IUsuarioController {
 private:
-    list<Usuario *> usuarios;
-    list<Empleado *> empleados;
-    list<Huesped *> huespedes;
+    map<string, Usuario *> usuarios;
+    map<string, Empleado *> empleados;
+    map<string, Huesped *> huespedes;
     Empleado *empleadoAux;
     Huesped *huespedAux;
-    DtCargo cargoAux;
+    DtCargo *cargoAux;
     string nombreAux;
     string emailAux;
     string passwordAux;
     bool esFingerAux;
-    UsuarioController *instancia;
+    static UsuarioController *instancia;
+    UsuarioController();
 
 public:
     Empleado *getEmpleado(string email);
-    DtEmpleado getDatos(Empleado *empleado);
-    Empleado *getEmpleado();
-    list<DtEmpleado> getEmpleados();
+    list<DtEmpleado> getEmpleadosDesemplados(Hostal * hostal);
     list<DtHuesped> getHuespedes();
     Huesped *findHuesped(string email);
     list<DtUsuario> mostrarUsuarios();
@@ -38,6 +39,7 @@ public:
     void confirmarAltaUsuario();
     void cancelarAltaUsuario();
     void ingresarEmail(string email);
+    ~UsuarioController();
     static UsuarioController *getInstance();
 };
 
