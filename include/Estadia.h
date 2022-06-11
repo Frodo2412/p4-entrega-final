@@ -5,11 +5,8 @@
 #include "Resenia.h"
 #include "Reserva.h"
 #include "Reloj.h"
-//En teoria no deberia haber mas include excepto los DtTypes necessarios
 
-class Resenia;
-
-#include "Resenia.h"
+#include <list>
 
 class Resenia;
 
@@ -21,6 +18,9 @@ public:
 
     Resenia *getResenia();
 
+    list<DtResenia> getReseniasSinResponder();
+
+    void destruirAsociaciones();
 };
 
 

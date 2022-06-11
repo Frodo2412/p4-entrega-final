@@ -4,10 +4,17 @@
 
 
 #include "Reserva.h"
+#include "DtReservaIndividual.h"
 
 class ReservaIndividual : public Reserva {
 public:
+    ReservaIndividual(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, Habitacion *habitacion);
+
+    DtReservaIndividual *getDatos() override;
+
     bool tieneHuespedAsociado(string email) override;
+
+    int getCosto() override;
 };
 
 

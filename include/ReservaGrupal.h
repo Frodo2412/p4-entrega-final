@@ -5,6 +5,7 @@
 
 #include "Reserva.h"
 #include "Huesped.h"
+#include "DtReservaGrupal.h"
 
 class ReservaGrupal : public Reserva {
 private:
@@ -12,6 +13,9 @@ private:
 public:
     bool tieneHuespedAsociado(string email) override;
 
+    DtReservaGrupal *getDatos() override;
+
+    int getCosto() override;
 };
 
 

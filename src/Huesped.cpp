@@ -31,3 +31,7 @@ Huesped::~Huesped() {
     for (auto reserva: this->reservas)
         delete reserva;
 }
+
+bool Huesped::isFinger() {
+    return esFinger;
+}
