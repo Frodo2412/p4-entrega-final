@@ -30,6 +30,8 @@ public:
     bool isMail(const string &mail);
 
     void finalizarReservaActiva();
+
+    bool isFinger();
 };
 
 

@@ -9,28 +9,60 @@
 #include "Habitacion.h"
 #include "Huesped.h"
 
-//En teoria no deberia haber mas include excepto los DtTypes necessarios
-
 class Estadia;
 
 class Huesped;
 
+class Habitacion;
+
+class Hostal;
+
+class Resenia;
+
 class Reserva {
 protected:
-    Huesped *huespedReservante;
+    int codigo;
+    DtFecha checkIn, checkOut;
     DtEstado estado;
+    Huesped *huespedReservante;
+    Habitacion *habitacion;
     Estadia *maybeEstadia;
 
+    void setCodigoGenerado();
+
 public:
-    virtual ~Reserva() = 0;
+    Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, Habitacion *habitacion);
 
     Estadia *getEstadia();
 
+    virtual int getCosto() = 0;
+
+    Huesped *getReservante();
+
+    void setEstado(DtEstado estado);
+
+    void setReservante(Huesped *huesped);
+
+    void configReserva(Huesped *huespedReservante);
+
+    virtual DtReserva *getDatos() = 0;
+
+    Estadia createEstadia(DtFecha fecha);
+
+    void finalizarReservaActiva();
+
+    list<DtResenia> getReseniasSinResponder();
+
+    Resenia *getResenia();
+
+    bool checkIfSameHostal(Hostal hostal);
+
+    Habitacion *getHabitacion();
+
     bool isReservaCancelada();
 
-    virtual DtReserva getDatos() = 0;
-
     virtual bool tieneHuespedAsociado(string basicString) = 0;
+
 };
 
 

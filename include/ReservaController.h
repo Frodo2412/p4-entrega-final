@@ -8,13 +8,15 @@
 #include "../infrastructure/IReservaController.h"
 
 #include <list>
+#include <map>
 //Deberian estar todos los include desde la interfaz
 
 //TODO: Implementar
 class ReservaController : public IReservaController {
 private:
-    list<Reserva*> reservas;
-    list<Estadia*> estadias;
+    // la lista de estadias se borra aca
+    map<int, Reserva *> reservas;
+    list<Estadia *> estadias;
     Habitacion *habitacionAux;
     Huesped *huespedAux;
     Huesped *huespedReservanteAux;
@@ -23,41 +25,76 @@ private:
     DtFecha checkInAux;
     DtFecha checkOutAux;
     Hostal *hostalAux;
-    ReservaController * instance;
+    ReservaController *instance;
+    int currentIdReserva = 0;
 public:
-    Habitacion* getHabitacion() override;
-    Huesped* getReservante() override;
-    list<Huesped*> getInvitados() override;
-    Estadia* getEstadia() override;
-    Resenia* getResenia(int idReserva) override;
+    Habitacion *getHabitacion() override;
+
+    Huesped *getReservante() override;
+
+    list<Huesped *> getInvitados() override;
+
+    Estadia *getEstadia() override;
+
+    Resenia *getResenia(int idReserva) override;
+
     DtFecha getCheckIn() override;
+
     DtFecha getCheckOut() override;
-    Hostal* getHostal() override;
+
+    Hostal *getHostal() override;
+
     void elegirHuesped(string email) override;
+
     void elegirHuespedReservante(string email) override;
+
     void elegirHabitacion(int numero) override;
+
     void elegirTipoReserva(string reserva) override;
+
     list<DtHuesped> mostrarHuespedes() override;
+
     list<DtEstadia> mostrarInformacionEstadia() override;
-    list<DtReserva> mostrarReservas() override;
+
+    list<DtReserva *> mostrarReservas() override;
+
     list<DtHabitacion> mostrarHabitaciones() override;
+
     void registrarEstadia(int idReserva) override;
-    list<DtReserva> mostrarReservasNoCanceladas(string email) override;
+
+    list<DtReserva *> mostrarReservasNoCanceladas(string email) override;
+
     void finalizarReservasActivasDeUsuario(string email) override;
+
     list<DtEstadia> mostrarEstadiasFinalizadas(string email) override;
+
     void cancelarReserva() override;
+
     list<DtEstadia> listarEstadias() override;
-    list<DtReserva> verCalificaciones() override;
-    DtReserva verReserva() override;
-    void especificarFechas(DtFecha chekIn, DtFecha chekOut) override;
+
+    list<DtReserva *> verCalificaciones() override;
+
+    DtReserva *verReserva() override;
+
+    void especificarFechas(DtFecha checkIn, DtFecha checkOut) override;
+
     void elegirHostal(string nombre) override;
+
     list<DtHostal> mostrarHostales() override;
-    list<DtReserva> informacionReservas() override;
+
+    list<DtReserva *> informacionReservas() override;
+
     void eliminarReserva(int codigoReserva) override;
+
     void cancelarBajaReserva() override;
+
     void confirmarBajaReserva() override;
-    Estadia* findEstadia(int idReserva) override;
-    static ReservaController* getInstance();
+
+    Estadia *findEstadia(int idReserva) override;
+
+    static ReservaController *getInstance();
+
+    int getNextCodigoReserva();
 };
 
 
