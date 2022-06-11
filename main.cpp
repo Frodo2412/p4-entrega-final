@@ -113,6 +113,10 @@ void test_dt() {
     cout << " - DtUsuario:" << endl;
     DtUsuario usuario("Juan", "juan@gmail.com");
     cout << usuario << endl;
+
+    cout << " - DtEmpleado:" << endl;
+    DtEmpleado empleado1("DIEGO MARADONA", "diegol@gmail.com", DtCargo(1));
+    cout << empleado1 << endl;
 }
 
 void test_comentario() {

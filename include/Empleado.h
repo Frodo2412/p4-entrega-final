@@ -12,7 +12,7 @@ class Empleado : public Usuario {
 private:
     DtCargo cargo;
 public:
-    DtEmpleado getDatos();
+    DtUsuario getDatos();
     void setCargo(DtCargo cargo);
     Empleado create(string nombre, string email, DtCargo cargo);
 };

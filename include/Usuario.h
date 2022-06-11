@@ -17,7 +17,7 @@ protected:
 public:
     Usuario(string nombre, string mail, string password);
 
-    virtual DtUsuario getDatos() = 0;
+    virtual DtUsuario getDatos();
 };
 
 
