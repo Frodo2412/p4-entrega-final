@@ -14,7 +14,7 @@ private:
     static Reloj * instancia;
     Reloj();
 public:
-    static Reloj getInstance();
+    static Reloj *getInstance();
     DtFecha getFechaActual();
     void modificarFechaDeSistema(int, int, int, int);
 };
