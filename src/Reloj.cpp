@@ -14,12 +14,12 @@ DtFecha Reloj::getFechaActual() {
 }
 
 void Reloj::modificarFechaDeSistema(int anio, int mes, int dia, int hora) {
-    this->fechaActual = DtFecha(anio, mes, dia, hora);
+    this->fechaActual = DtFecha(hora, dia, mes, anio);
 }
 
-Reloj Reloj::getInstance() {
+Reloj *Reloj::getInstance() {
     if (instancia == nullptr) {
         instancia = new Reloj();
     }
-    return *instancia;
+    return instancia;
 }

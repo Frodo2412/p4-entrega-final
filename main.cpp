@@ -13,6 +13,8 @@
 #include "Comentario.h"
 #include "Huesped.h"
 #include "Empleado.h"
+#include "ReservaIndividual.h"
+#include "Habitacion.h"
 
 #include <iostream>
 
@@ -127,10 +129,11 @@ void test_dt() {
 void test_comentario() {
     cout << " - Comentario:" << endl;
     Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
-    Comentario comentario("Hola", &resenia);
+    Comentario comentario("Hola");
+//    Comentario comentario("Hola", &resenia);
     cout << comentario.getTexto() << endl;
     DtComentario comentarioDt = comentario.getDatos();
-    Resenia *resenia1 = comentario.getResenia();
+//    Resenia *resenia1 = comentario.getResenia();
 }
 
 void test_resenia() {
@@ -139,17 +142,28 @@ void test_resenia() {
     cout << resenia.getCalificacion() << endl;
     cout << resenia.getFecha() << endl;
     cout << resenia.getComentario() << endl;
-    auto *comentario = new Comentario("Hola", &resenia);
+    auto *comentario = new Comentario("Hola");
+//    auto *comentario = new Comentario("Hola", &resenia);
     resenia.setComentario(comentario);
 }
 
+// TODO: Cuando se implemente la reserva volver a activar el test
 void test_usuario() {
-    cout << " - Huesped:" << endl;
-    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
-    cout << usuario.isMail("juan@gmail.com") << endl;
-    cout << usuario.isMail("") << endl;
-    auto *reserva = new Reserva();
-    usuario.agregarReserva(reserva);
+//    cout << " - Huesped:" << endl;
+//    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
+//    cout << usuario.isMail("juan@gmail.com") << endl;
+//    cout << usuario.isMail("") << endl;
+//    auto *reserva = new ReservaIndividual();
+//    usuario.agregarReserva(reserva);
+}
+
+// TODO: Cuando se implemente hostal y reserva testear la habitacion
+void test_habitacion() {
+//    cout << " - Habitacion:" << endl;
+//    Habitacion habitacion(1, 1, 1);
+//    Hostal hostal;
+//    habitacion.setHostal(&hostal);
+//    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
 }
 
 int main() {

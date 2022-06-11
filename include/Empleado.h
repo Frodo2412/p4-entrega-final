@@ -1,6 +1,3 @@
-//
-// Created by guillermorey on 6/8/22.
-//
 
 #ifndef P4_ENTREGA_FINAL_EMPLEADO_H
 #define P4_ENTREGA_FINAL_EMPLEADO_H

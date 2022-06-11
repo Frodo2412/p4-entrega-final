@@ -4,25 +4,21 @@
 
 
 #include <string>
-#include "Resenia.h"
 #include "DtComentario.h"
+//En teoria no deberia haber mas include excepto los DtTypes necessarios
+//No agregamos lo de puntero a reseña porque nunca lo usamos
 
 using namespace std;
-
-class Resenia;
 
 class Comentario {
 private:
     string texto;
-    Resenia *resenia;
 public:
     Comentario();
 
-    Comentario(string texto, Resenia *resenia);
+    explicit Comentario(string texto);
 
     string getTexto();
-
-    Resenia *getResenia();
 
     DtComentario getDatos();
 };

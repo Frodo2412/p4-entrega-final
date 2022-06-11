@@ -1,6 +1,3 @@
-//
-// Created by guillermorey on 6/8/22.
-//
 
 #include "../include/Empleado.h"
 
@@ -20,4 +17,4 @@ void Empleado::setCargo(DtCargo cargo) {
 
 DtCargo Empleado::getCargo() {
     return this->cargo;
-}
+};
