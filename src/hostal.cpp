@@ -22,7 +22,7 @@ DtHostal hostal::getDatos(){
         ++it;
     }
 
-    return DtHostal(this->nombre, this->direcccion, califs/n);
+    return DtHostal(this->nombre, this->direccion, califs/n);
 }
 
 //Mismo problema
@@ -38,8 +38,7 @@ DtHostalExt hostal::getDatosExt(){
         ++it;
     }
 
-    int califProm = califs / n;
-    return DtHostalExt(this->nombre, this->direcccion, califs/n, l);
+    return DtHostalExt(this->nombre, this->direccion, califs/n, l);
 }
 
 
@@ -55,10 +54,10 @@ void hostal::setTelefono(int telefono){
     this->telefono = telefono;
 }
 
+
 string hostal::getNombre(){
     return nombre;
 }
-
 
 string hostal::getDireccion(){
     return direccion;
@@ -147,7 +146,7 @@ bool hostal::habitacionPerteneceAHostal(habitacion hab){
     if(!habitaciones.empty()){
         list<habitacion>::iterator it = habitaciones.begin();
 
-        while(it != habitaciones.back() && (*it).getNumero() != getNumero(hab))
+        while(it != habitaciones.back() && (*it).getNumero() != hab.getNumero())
             ++it;
 
         return it == habitaciones.back();
