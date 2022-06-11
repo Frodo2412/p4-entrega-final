@@ -12,9 +12,10 @@ class Empleado : public Usuario {
 private:
     DtCargo cargo;
 public:
-    DtUsuario getDatos();
+    Empleado(string nombre, string mail, string password, DtCargo cargo);
     void setCargo(DtCargo cargo);
-    Empleado create(string nombre, string email, DtCargo cargo);
+    DtUsuario getDatos() override;
+    DtCargo getCargo();
 };
 
 #endif //P4_ENTREGA_FINAL_EMPLEADO_H

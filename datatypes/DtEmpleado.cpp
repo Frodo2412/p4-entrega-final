@@ -13,12 +13,13 @@ DtCargo DtEmpleado::getCargo() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const DtEmpleado empleado) {
-    os << "nombre: " << empleado.getNombre() << ", mail: " << empleado.getEmail() << ", cargo: " << empleado.cargoToString();
+    os << "nombre: " << empleado.getNombre() << ", mail: " << empleado.getEmail() << ", cargo: "
+       << empleado.cargoToString();
     return os;
 }
 
 string DtEmpleado::cargoToString() const {
-    switch(cargo) {
+    switch (cargo) {
         case Administracion:
             return "Administracion";
         case Limpieza:
