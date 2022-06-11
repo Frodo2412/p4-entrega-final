@@ -80,10 +80,10 @@ bool hostal::trabajaEmpleadoEnHostal(empleado e){
     if(!empleados.empty()){
         list<empleado>::iterator it = empleados.begin();
 
-        while(it != empleados.back() && (*it).getMail() != e.getMail())
+        while(it != empleados.end() && (*it).getMail() != e.getMail())
             ++it;
 
-        return it == empleados.back();
+        return it == empleados.end();
     } else
         return false;
 }
@@ -94,7 +94,7 @@ list<DtHabitacion> hostal::getInfoDeHabitaciones(){
     if(!habitaciones.empty()){
         list<habitacion>::iterator it;
 
-        for(it = habitaciones.begin() ; it != habitaciones.back() ; ++it)
+        for(it = habitaciones.begin() ; it != habitaciones.end() ; ++it)
             l.push_back((*it).getDatos());
     }
     return l;
@@ -146,10 +146,10 @@ bool hostal::habitacionPerteneceAHostal(habitacion hab){
     if(!habitaciones.empty()){
         list<habitacion>::iterator it = habitaciones.begin();
 
-        while(it != habitaciones.back() && (*it).getNumero() != hab.getNumero())
+        while(it != habitaciones.end() && (*it).getNumero() != hab.getNumero())
             ++it;
 
-        return it == habitaciones.back();
+        return it == habitaciones.end();
     } else
         return false;
 }
