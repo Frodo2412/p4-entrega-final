@@ -2,8 +2,8 @@
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
 
-#include "habitacion.h"
-#include "empleado.h"
+#include "Habitacion.h"
+#include "Empleado.h"
 #include "../datatypes/DtHostal.h"
 #include "../datatypes/DtHostalExt.h"
 #include "../datatypes/DtHabitacion.h"
@@ -18,23 +18,24 @@
 using std::string;
 
 //Borrar, es para tener ref temprana
-class habitacion;
-class empleado;
+class Habitacion;
+
+class Empleado;
 
 
-class hostal {
+class Hostal {
 private:
     string nombre;
     string direccion;
     int telefono;
 
-   list<habitacion> habitaciones;
-   list<empleado> empleados;
+    list<Habitacion> habitaciones;
+    list<Empleado> empleados;
 
 private:
-    hostal(string nombre, string direccion, int telefono);
+    Hostal(string nombre, string direccion, int telefono);
 
-    ~hostal();
+    ~Hostal();
 
     DtHostal getDatos();
 
@@ -54,25 +55,25 @@ private:
     int getTelefono();
 
 
-    void agregarHabitacionAHostal(habitacion hab);
+    void agregarHabitacionAHostal(Habitacion hab);
 
-    void agregarEmpleadoAHostal(empleado e);
+    void agregarEmpleadoAHostal(Empleado e);
 
-    bool trabajaEmpleadoEnHostal(empleado e);
+    bool trabajaEmpleadoEnHostal(Empleado e);
 
     list<DtHabitacion> getInfoDeHabitaciones();
 
-    habitacion getHabitacion(int codigo);
+    Habitacion getHabitacion(int codigo);
 
     list<DtReserva> getReservasNoCanceladas(string email);
 
-    bool esEsteHostal(hostal h); //Boolean ¿? No me convence
+    bool esEsteHostal(Hostal h); //Boolean ¿? No me convence
 
     list<DtResenia> getReseniasSinResponder();
 
-    hostal getHostalSiTrabaja(empleado emp);
+    Hostal getHostalSiTrabaja(Empleado emp);
 
-    bool habitacionPerteneceAHostal(habitacion hab);
+    bool habitacionPerteneceAHostal(Habitacion hab);
 };
 
 
