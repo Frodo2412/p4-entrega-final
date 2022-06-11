@@ -14,6 +14,8 @@ public:
     DtUsuario getDatos() override;
     DtEmpleado getDatosEmpleado();
     DtCargo getCargo();
+
+    bool getMail();
 };
 
 #endif //P4_ENTREGA_FINAL_EMPLEADO_H

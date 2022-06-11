@@ -16,6 +16,8 @@ using namespace std;
 
 class Reserva;
 
+class Hostal;
+
 class Habitacion {
 private:
     int numero;
@@ -40,6 +42,7 @@ public:
 
     bool checkIfCoincideHostal(Hostal hostal);
 
+    int getNumero();
 };
 
 

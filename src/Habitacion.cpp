@@ -22,7 +22,7 @@ DtHabitacion Habitacion::getDatos() const {
 }
 
 list<DtReserva *> Habitacion::getReservasAsociadas(const string &email) {
-    list<DtReserva*> reservasAsociadas = list<DtReserva*>();
+    list<DtReserva *> reservasAsociadas = list<DtReserva *>();
     for (Reserva *reserva: reservas)
         if (reserva->isReservaCancelada() && reserva->tieneHuespedAsociado(email))
             reservasAsociadas.push_back(reserva->getDatos());
@@ -45,4 +45,8 @@ list<DtResenia> Habitacion::getReseniasSinResponder() {
 
 int Habitacion::getPrecioPorNoche() {
     return precioPorNoche;
+}
+
+int Habitacion::getNumero() {
+    return numero;
 }
