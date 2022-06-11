@@ -26,10 +26,9 @@ public:
 
     int getAnio() const;
 
-    int operator-(DtFecha *) const;
+    int operator-(DtFecha fecha) const;
 
     friend ostream &operator<<(ostream &os, DtFecha fecha);
-
 };
 
 

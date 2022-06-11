@@ -18,14 +18,19 @@ public:
 
     int getCodigo() const;
 
-    DtFecha getCheckIn();
+    DtFecha getCheckIn() const;
 
-    DtFecha getCheckOut();
+    DtFecha getCheckOut() const;
 
-    DtEstado getEstado();
+    DtEstado getEstado() const;
 
     int getCosto() const;
-};
 
+    string getEstadoToString() const;
+
+    friend ostream &operator<<(ostream &os, DtReserva* reserva);
+
+    virtual string getTipoReserva() = 0;
+};
 
 #endif //P4_ENTREGA_FINAL_DTRESERVA_H

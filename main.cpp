@@ -10,13 +10,17 @@
 #include "DtReserva.h"
 #include "DtReservaGrupal.h"
 #include "DtReservaIndividual.h"
+#include "Comentario.h"
+#include "Huesped.h"
+#include "Empleado.h"
+#include "ReservaIndividual.h"
+#include "Habitacion.h"
 
 #include <iostream>
 
 using namespace std;
 
-int main() {
-
+void test_dt() {
     cout << " - DtFecha:" << endl;
     DtFecha fecha(1, 1, 1, 1901);
     cout << fecha << endl;
@@ -83,13 +87,14 @@ int main() {
     cout << resenia.getComentario() << endl;
     cout << resenia.getFecha() << endl;
 
-    cout << " - DtReserva:" << endl;
-    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
-    cout << reserva.getCodigo() << endl;
-    cout << reserva.getCheckIn() << endl;
-    cout << reserva.getCheckOut() << endl;
-    cout << reserva.getEstado() << endl;
-    cout << reserva.getCosto() << endl;
+//    cout << " - DtReserva:" << endl;
+//    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
+//    cout << reserva.getCodigo() << endl;
+//    cout << reserva.getCheckIn() << endl;
+//    cout << reserva.getCheckOut() << endl;
+//    cout << reserva.getEstado() << endl;
+//    cout << reserva.getCosto() << endl;
+// EN PRINCIPIO NO SE NECESITA
 
     cout << " - DtReservaGrupal:" << endl;
     DtReservaGrupal reservaGrupal(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1, 1);
@@ -110,9 +115,61 @@ int main() {
 
     cout << " - DtUsuario:" << endl;
     DtUsuario usuario("Juan", "juan@gmail.com");
-    cout << usuario.getNombre() << endl;
-    cout << usuario.getEmail() << endl;
+    cout << usuario << endl;
 
+    cout << " - DtEmpleado:" << endl;
+    DtEmpleado empleado1("DIEGO MARADONA", "diegol@gmail.com", DtCargo(1));
+    cout << empleado1 << endl;
 
+    cout << " - DtHuesped:" << endl;
+    DtHuesped huesped1("DIEGO MARADONA", "diegol@gmail.com", true);
+    cout << huesped1 << endl;
+}
+
+void test_comentario() {
+    cout << " - Comentario:" << endl;
+    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
+    Comentario comentario("Hola");
+//    Comentario comentario("Hola", &resenia);
+    cout << comentario.getTexto() << endl;
+    DtComentario comentarioDt = comentario.getDatos();
+//    Resenia *resenia1 = comentario.getResenia();
+}
+
+void test_resenia() {
+    cout << " - Resenia:" << endl;
+    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
+    cout << resenia.getCalificacion() << endl;
+    cout << resenia.getFecha() << endl;
+    cout << resenia.getComentario() << endl;
+    auto *comentario = new Comentario("Hola");
+//    auto *comentario = new Comentario("Hola", &resenia);
+    resenia.setComentario(comentario);
+}
+
+// TODO: Cuando se implemente la reserva volver a activar el test
+void test_usuario() {
+//    cout << " - Huesped:" << endl;
+//    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
+//    cout << usuario.isMail("juan@gmail.com") << endl;
+//    cout << usuario.isMail("") << endl;
+//    auto *reserva = new ReservaIndividual();
+//    usuario.agregarReserva(reserva);
+}
+
+// TODO: Cuando se implemente hostal y reserva testear la habitacion
+void test_habitacion() {
+//    cout << " - Habitacion:" << endl;
+//    Habitacion habitacion(1, 1, 1);
+//    Hostal hostal;
+//    habitacion.setHostal(&hostal);
+//    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
+}
+
+int main() {
+    test_dt();
+    test_comentario();
+    test_resenia();
+    test_usuario();
     return 0;
 }

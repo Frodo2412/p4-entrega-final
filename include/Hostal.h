@@ -1,80 +1,44 @@
+
 #ifndef P4_ENTREGA_FINAL_HOSTAL_H
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
-
-#include "Habitacion.h"
 #include "Empleado.h"
-#include "../datatypes/DtHostal.h"
+#include "Habitacion.h"
 #include "../datatypes/DtHostalExt.h"
-#include "../datatypes/DtHabitacion.h"
-
-//No hables con extranios??
-#include "../datatypes/DtReserva.h"
 #include "../datatypes/DtResenia.h"
 
-#include <string>
 #include <list>
+//No deberian faltar includes a menos de Dts
 
-using std::string;
-
-//Borrar, es para tener ref temprana
 class Habitacion;
 
 class Empleado;
 
-
+//TODO: Falta implementar
 class Hostal {
 private:
     string nombre;
     string direccion;
     int telefono;
-
-    list<Habitacion> habitaciones;
-    list<Empleado> empleados;
-
-private:
+    //    Set(Habitacion) habitaciones;
+    //    Set(Empleado) empleados;
+    int getCalificacionPromedio();
+    list<DtResenia> getDatosReseniasDeHostal();
+public:
     Hostal(string nombre, string direccion, int telefono);
-
-    ~Hostal();
-
     DtHostal getDatos();
-
+    Habitacion * getHabitacion(int codigo);
+    void agregarHabitacionAHostal(Habitacion * habitacion);
+    void agregarEmpleadoAHostal(Empleado * empleado);
+    bool trabajaEmpleadoEnHostal(Empleado * empleado);
+//    Set(DtHabitacion) getInfoDeHabitaciones();
+    bool esEsteHostal(Hostal* otroHostal);
+//    Set(DtReseña) getReseniasSinResponder();
+    Hostal * getHostalSiTrabaja(Empleado * empleado);
     DtHostalExt getDatosExt();
-
-
-    void setNombre(string nombre);
-
-    void setDireccion(string direccion);
-
-    void setTelefono(int telefono);
-
-    string getNombre();
-
-    string getDireccion();
-
-    int getTelefono();
-
-
-    void agregarHabitacionAHostal(Habitacion hab);
-
-    void agregarEmpleadoAHostal(Empleado e);
-
-    bool trabajaEmpleadoEnHostal(Empleado e);
-
-    list<DtHabitacion> getInfoDeHabitaciones();
-
-    Habitacion getHabitacion(int codigo);
-
-    list<DtReserva> getReservasNoCanceladas(string email);
-
-    bool esEsteHostal(Hostal h); //Boolean ¿? No me convence
-
-    list<DtResenia> getReseniasSinResponder();
-
-    Hostal getHostalSiTrabaja(Empleado emp);
-
-    bool habitacionPerteneceAHostal(Habitacion hab);
+    bool habitacionPerteneceAHostal(Habitacion * habitacion);
+    bool operator==(Hostal hostal);
 };
 
 
-#endif //P4_ENTREGA_FINAL_HOSTAL_H
+#endif//P4_ENTREGA_FINAL_HOSTAL_H
