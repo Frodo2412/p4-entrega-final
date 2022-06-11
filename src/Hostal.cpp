@@ -12,7 +12,7 @@ void Hostal::agregarHabitacionAHostal(Habitacion *habitacion) {
 }
 void Hostal::agregarEmpleadoAHostal(Empleado *empleado) {
 }
-void Hostal::trabajaEmpleadoEnHostal(Empleado *empleado) {
+bool Hostal::trabajaEmpleadoEnHostal(Empleado *empleado) {
 }
 bool Hostal::esEsteHostal(Hostal *otroHostal) {
     return false;

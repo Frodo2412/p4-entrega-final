@@ -25,6 +25,8 @@ public:
 
     DtUsuario getDatos() override;
 
+    DtHuesped getDatosHuesped();
+
     void agregarReserva(Reserva *reserva);
 
     bool isMail(const string &mail);
