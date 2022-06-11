@@ -3,8 +3,9 @@
 #define P4_ENTREGA_FINAL_DTUSUARIO_H
 
 #include <string>
+#include <iostream>
 
-using std::string;
+using namespace std;
 
 class DtUsuario {
 private:
@@ -14,9 +15,9 @@ private:
 public:
     DtUsuario(string nombre, string mail);
 
-    string getNombre();
-    string getEmail();
+    string getNombre() const;
+    string getEmail() const;
+    friend ostream &operator<<(ostream &os, DtUsuario usuario);
 };
-
 
 #endif //P4_ENTREGA_FINAL_DTUSUARIO_H

@@ -12,6 +12,7 @@
 #include "DtReservaIndividual.h"
 #include "Comentario.h"
 #include "Huesped.h"
+#include "Empleado.h"
 #include "ReservaIndividual.h"
 #include "Habitacion.h"
 
@@ -86,13 +87,14 @@ void test_dt() {
     cout << resenia.getComentario() << endl;
     cout << resenia.getFecha() << endl;
 
-    cout << " - DtReserva:" << endl;
-    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
-    cout << reserva.getCodigo() << endl;
-    cout << reserva.getCheckIn() << endl;
-    cout << reserva.getCheckOut() << endl;
-    cout << reserva.getEstado() << endl;
-    cout << reserva.getCosto() << endl;
+//    cout << " - DtReserva:" << endl;
+//    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
+//    cout << reserva.getCodigo() << endl;
+//    cout << reserva.getCheckIn() << endl;
+//    cout << reserva.getCheckOut() << endl;
+//    cout << reserva.getEstado() << endl;
+//    cout << reserva.getCosto() << endl;
+// EN PRINCIPIO NO SE NECESITA
 
     cout << " - DtReservaGrupal:" << endl;
     DtReservaGrupal reservaGrupal(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1, 1);
@@ -113,8 +115,15 @@ void test_dt() {
 
     cout << " - DtUsuario:" << endl;
     DtUsuario usuario("Juan", "juan@gmail.com");
-    cout << usuario.getNombre() << endl;
-    cout << usuario.getEmail() << endl;
+    cout << usuario << endl;
+
+    cout << " - DtEmpleado:" << endl;
+    DtEmpleado empleado1("DIEGO MARADONA", "diegol@gmail.com", DtCargo(1));
+    cout << empleado1 << endl;
+
+    cout << " - DtHuesped:" << endl;
+    DtHuesped huesped1("DIEGO MARADONA", "diegol@gmail.com", true);
+    cout << huesped1 << endl;
 }
 
 void test_comentario() {
@@ -162,6 +171,5 @@ int main() {
     test_comentario();
     test_resenia();
     test_usuario();
-    test_habitacion();
     return 0;
 }

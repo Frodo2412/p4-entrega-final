@@ -15,9 +15,11 @@ private:
 public:
     DtEmpleado(string nombre, string email, DtCargo cargo);
 
-    DtCargo getCargo();
+    DtCargo getCargo() const;
 
+    friend ostream &operator<<(ostream &os, DtEmpleado empleado);
+
+    string cargoToString() const;
 };
-
 
 #endif //P4_ENTREGA_FINAL_DTEMPLEADO_H

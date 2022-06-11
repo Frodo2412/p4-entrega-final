@@ -1,18 +1,20 @@
-//
-// Created by unzip on 09/06/22.
-//
 
-#include "Empleado.h"
-#include "DtEmpleado.h"
+#include "../include/Empleado.h"
+
+Empleado::Empleado(string nombre, string mail, string password, DtCargo cargo) : Usuario(std::move(nombre),
+                                                                                         std::move(mail),
+                                                                                         std::move(password)) {
+    this->cargo = cargo;
+};
 
 DtUsuario Empleado::getDatos() {
-    return DtEmpleado(nombre, mail, cargo);
-}
+    return DtEmpleado(this->nombre, this->mail, this->cargo);
+};
+
+void Empleado::setCargo(DtCargo cargo) {
+    this->cargo = cargo;
+};
+
 DtCargo Empleado::getCargo() {
-    return Limpieza;
-}
-DtCargo Empleado::setCargo(DtCargo cargo) {
-    return Limpieza;
-}
-Empleado::Empleado(string nombre1, string mail1, string password1, string nombre, string mail, string password, DtCargo cargo) : Usuario(nombre1,mail1,password1) {
-}
+    return this->cargo;
+};

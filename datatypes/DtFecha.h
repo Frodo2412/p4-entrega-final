@@ -29,7 +29,6 @@ public:
     int operator-(DtFecha *) const;
 
     friend ostream &operator<<(ostream &os, DtFecha fecha);
-
 };
 
 
