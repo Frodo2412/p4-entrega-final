@@ -5,16 +5,19 @@
 
 #include "Hostal.h"
 #include "Reserva.h"
-#include "DtHabitacion.h"
-#include "DtResenia.h"
-#include "DtReserva.h"
+#include "../datatypes/DtHabitacion.h"
+#include "../datatypes/DtResenia.h"
+#include "../datatypes/DtReserva.h"
 
 #include <list>
+#include <map>
 #include <string>
 
 using namespace std;
 
 class Reserva;
+
+class Hostal;
 
 class Habitacion {
 private:
@@ -22,7 +25,7 @@ private:
     int precioPorNoche;
     int capacidad;
     Hostal *hostal;
-    list<Reserva *> reservas;
+    map<int,Reserva *> reservas;
 public:
     Habitacion(int numero, int precioPorNoche, int capacidad);
 
@@ -30,7 +33,7 @@ public:
 
     Hostal getHostal();
 
-    int getPrecioPorNoche();
+    int getPrecioPorNoche() const;
 
     DtHabitacion getDatos() const;
 
@@ -38,8 +41,13 @@ public:
 
     list<DtResenia> getReseniasSinResponder();
 
-    bool checkIfCoincideHostal(Hostal hostal);
+    list<DtResenia> getResenias();
 
+    int getCalificacionPromedio();
+
+    bool checkIfCoincideHostal(Hostal *hostal);
+
+    int getNumero() const;
 };
 
 

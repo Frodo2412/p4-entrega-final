@@ -25,3 +25,9 @@ string DtResenia::getComentario() {
 DtFecha DtResenia::getFecha() {
     return fecha;
 }
+bool DtResenia::operator==(const DtResenia &rhs) const {
+    return this->calificacion == rhs.calificacion &&
+           this->resenia == rhs.resenia &&
+           this->comentario == rhs.comentario &&
+           this->fecha == rhs.fecha;
+}

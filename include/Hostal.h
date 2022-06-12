@@ -2,15 +2,19 @@
 #ifndef P4_ENTREGA_FINAL_HOSTAL_H
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
-#include "Empleado.h"
-#include "Habitacion.h"
 #include "../datatypes/DtHostalExt.h"
 #include "../datatypes/DtResenia.h"
+#include "../datatypes/DtReserva.h"
+#include "Empleado.h"
+#include "Habitacion.h"
 
 #include <list>
+#include <map>
 //No deberian faltar includes a menos de Dts
 
 class Habitacion;
+
+class DtHabitacion;
 
 class Empleado;
 
@@ -20,24 +24,43 @@ private:
     string nombre;
     string direccion;
     int telefono;
-    //    Set(Habitacion) habitaciones;
-    //    Set(Empleado) empleados;
+    map<int, Habitacion *> habitaciones;
+    map<string, Empleado *> empleados;
+
     int getCalificacionPromedio();
+
     list<DtResenia> getDatosReseniasDeHostal();
+
 public:
     Hostal(string nombre, string direccion, int telefono);
+
     DtHostal getDatos();
-    Habitacion * getHabitacion(int codigo);
-    void agregarHabitacionAHostal(Habitacion * habitacion);
-    void agregarEmpleadoAHostal(Empleado * empleado);
-    bool trabajaEmpleadoEnHostal(Empleado * empleado);
-//    Set(DtHabitacion) getInfoDeHabitaciones();
-    bool esEsteHostal(Hostal* otroHostal);
-//    Set(DtReseña) getReseniasSinResponder();
-    Hostal * getHostalSiTrabaja(Empleado * empleado);
+
+    Habitacion *getHabitacion(int numero);
+
+    void agregarHabitacionAHostal(Habitacion *habitacion);
+
+    void agregarEmpleadoAHostal(Empleado *empleado);
+
+    bool trabajaEmpleadoEnHostal(Empleado *empleado);
+
+    list<DtHabitacion> getInfoDeHabitaciones();
+
+    bool checkIfSameHostal(Hostal * otroHostal);
+
+    list<DtResenia> getReseniasSinResponder();
+
     DtHostalExt getDatosExt();
-    bool habitacionPerteneceAHostal(Habitacion * habitacion);
-    bool operator==(Hostal hostal);
+
+    bool habitacionPerteneceAHostal(Habitacion *habitacion);
+
+    int getTelefono();
+
+    string getDireccion();
+
+    string getNombre();
+
+    list<DtReserva *> getReservasNoCanceladas(string email);
 };
 
 

@@ -24,6 +24,8 @@ public:
     string getComentario();
 
     DtFecha getFecha();
+
+    bool operator==(const DtResenia &rhs) const;
 };
 
 #endif //P4_ENTREGA_FINAL_DTRESENIA_H

@@ -3,8 +3,8 @@
 #define P4_ENTREGA_FINAL_RESERVA_H
 
 
-#include "DtEstado.h"
-#include "DtReserva.h"
+#include "../datatypes/DtEstado.h"
+#include "../datatypes/DtReserva.h"
 #include "Estadia.h"
 #include "Habitacion.h"
 #include "Huesped.h"
@@ -39,6 +39,10 @@ public:
 
     Huesped *getReservante();
 
+    bool hasReseniaSinResponder();
+
+    bool hasResenia();
+
     void setEstado(DtEstado estado);
 
     void setReservante(Huesped *huesped);
@@ -51,11 +55,11 @@ public:
 
     void finalizarReservaActiva();
 
-    list<DtResenia> getReseniasSinResponder();
+    DtResenia getReseniaSinResponder();
 
     Resenia *getResenia();
 
-    bool checkIfSameHostal(Hostal hostal);
+    bool checkIfSameHostal(Hostal *hostal);
 
     Habitacion *getHabitacion();
 

@@ -2,7 +2,7 @@
 #ifndef P4_ENTREGA_FINAL_USUARIO_H
 #define P4_ENTREGA_FINAL_USUARIO_H
 
-#include "DtUsuario.h"
+#include "../datatypes/DtUsuario.h"
 
 class Usuario {
 protected:
@@ -12,6 +12,12 @@ protected:
 
 public:
     Usuario(string nombre, string mail, string password);
+
+    string getNombre();
+
+    string getMail();
+
+    string getPassword();
 
     virtual DtUsuario getDatos() = 0;
 };
