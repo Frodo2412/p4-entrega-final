@@ -34,8 +34,7 @@ Estadia Reserva::createEstadia(DtFecha fecha) {
 }
 
 void Reserva::finalizarReservaActiva() {
-    Estadia *est = getEstadia();
-    if (est != nullptr) est->finalizarActiva();
+    if (maybeEstadia != nullptr) maybeEstadia->finalizarActiva();
 }
 
 DtResenia Reserva::getReseniaSinResponder() {
@@ -78,4 +77,7 @@ Reserva::Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, 
 }
 bool Reserva::hasResenia() {
     return maybeEstadia != nullptr && maybeEstadia->hasResenia();
+}
+int Reserva::getCodigo() {
+    return codigo;
 }

@@ -16,7 +16,8 @@ class ReservaController : public IReservaController {
 private:
     // la lista de estadias se borra aca
     map<int, Reserva *> reservas;
-    list<Estadia *> estadias;
+    //Capaz que usar el mismo int de reserva como "Key" de la lista de estadias
+    map<int,Estadia *> estadias;
     Habitacion *habitacionAux;
     Huesped *huespedAux;
     Huesped *huespedReservanteAux;
@@ -32,6 +33,7 @@ public:
 
     Huesped *getReservante() override;
 
+    //Capaz que es mejor que se devuelva un map? Sino esta bien que sea lista
     list<Huesped *> getInvitados() override;
 
     Estadia *getEstadia() override;

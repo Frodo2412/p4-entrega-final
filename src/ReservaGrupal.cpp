@@ -1,11 +1,9 @@
 
 #include "ReservaGrupal.h"
+#include <cmath>
 
 bool ReservaGrupal::tieneHuespedAsociado(string email) {
-    for (auto huesped: huespedes)
-        if (huesped->isMail(email))
-            return true;
-    return false;
+    return huespedes.find(email) != huespedes.end();
 }
 
 DtReservaGrupal *ReservaGrupal::getDatos() {
@@ -14,10 +12,9 @@ DtReservaGrupal *ReservaGrupal::getDatos() {
 
 int ReservaGrupal::getCosto() {
     int cantFingers = 0;
-    for (auto huesped: huespedes)
-        if (huesped->isFinger()) cantFingers++;
-
-    int total = habitacion->getPrecioPorNoche() * huespedes.size();
-    if (cantFingers >= 2) return total * 0.7;
-    else return total;
+    map<string, Huesped *>::iterator it;
+    for (it = huespedes.begin(); it != huespedes.end(); it++)
+        if (it->second->isFinger()) cantFingers++;
+    int total = floor(habitacion->getPrecioPorNoche() * huespedes.size());
+    return cantFingers >= 2 ? total * 0.7 : total;
 }
