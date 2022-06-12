@@ -37,6 +37,8 @@ public:
 
     virtual int getCosto() = 0;
 
+    int getCodigo();
+
     Huesped *getReservante();
 
     bool hasReseniaSinResponder();
@@ -65,7 +67,7 @@ public:
 
     bool isReservaCancelada();
 
-    virtual bool tieneHuespedAsociado(string basicString) = 0;
+    virtual bool tieneHuespedAsociado(string email) = 0;
 
 };
 

@@ -9,7 +9,7 @@
 
 class ReservaGrupal : public Reserva {
 private:
-    list<Huesped *> huespedes;
+    map<string ,Huesped *> huespedes;
 public:
     bool tieneHuespedAsociado(string email) override;
 

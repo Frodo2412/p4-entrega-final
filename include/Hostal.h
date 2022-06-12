@@ -18,7 +18,6 @@ class DtHabitacion;
 
 class Empleado;
 
-//TODO: Falta implementar
 class Hostal {
 private:
     string nombre;
