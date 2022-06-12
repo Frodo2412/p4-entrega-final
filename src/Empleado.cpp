@@ -21,7 +21,3 @@ DtCargo Empleado::getCargo() {
 DtEmpleado Empleado::getDatosEmpleado() {
     return {this->nombre, this->mail, this->cargo};
 }
-
-bool Empleado::getMail() {
-    return false;
-};

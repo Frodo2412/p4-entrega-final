@@ -1,22 +1,25 @@
 #include "../include/Hostal.h"
 
-Hostal::Hostal(string nombre, string direccion, int telefono) {
-    this->nombre = nombre;
-    this->direccion = direccion;
-    this->telefono = telefono;
+#include <cmath>
+#include <utility>
+
+Hostal::Hostal(string nombreNuevo, string direccionNuevo, int telefonoNuevo) {
+    nombre = std::move(nombreNuevo);
+    direccion = std::move(direccionNuevo);
+    telefono = telefonoNuevo;
 }
 
 //Como obtiene un Hostal su calificacion promedio?? En el disenio no aparece. El siguiente codigo recorre cada Habitacion
 DtHostal Hostal::getDatos() {
     int calificaionPromedio = getCalificacionPromedio();
-    return DtHostal(this->nombre, this->direccion, calificaionPromedio);
+    return {this->nombre, this->direccion, calificaionPromedio};
 }
 
 //Mismo problema
 DtHostalExt Hostal::getDatosExt() {
     int calificaionPromedio = getCalificacionPromedio();
     list<DtResenia> resenias = getDatosReseniasDeHostal();
-    return DtHostalExt(nombre, direccion, calificaionPromedio, resenias);
+    return {nombre, direccion, calificaionPromedio, resenias};
 }
 
 string Hostal::getDireccion() {
@@ -33,68 +36,58 @@ string Hostal::getNombre() {
 
 
 void Hostal::agregarHabitacionAHostal(Habitacion *hab) {
-    habitaciones.push_front(hab);
+    habitaciones.insert(std::pair<int, Habitacion *>(hab->getNumero(), hab));
 }
 
 void Hostal::agregarEmpleadoAHostal(Empleado *e) {
-    empleados.push_front(e);
+    empleados.insert(std::pair<string, Empleado *>(e->getMail(), e));
 }
 
 bool Hostal::trabajaEmpleadoEnHostal(Empleado *e) {
-    if (!empleados.empty()) {
-        auto it = empleados.begin();
-
-        while (it != empleados.end() && ((*it)->getMail() != e->getMail()))
-            ++it;
-
-        return it == empleados.end();
-    } else
+    if (empleados.find(e->getMail()) == empleados.end()) {
         return false;
+    } else {
+        return true;
+    }
 }
+
 
 
 list<DtHabitacion> Hostal::getInfoDeHabitaciones() {
-    list<DtHabitacion> l;
-    if (!habitaciones.empty()) {
-        list<Habitacion *>::iterator it;
-        for (it = habitaciones.begin(); it != habitaciones.end(); ++it)
-            l.push_back((*it)->getDatos());
+    map<int, Habitacion *>::iterator itr;
+    list<DtHabitacion> lista;
+    for (itr = habitaciones.begin(); itr != habitaciones.end(); itr++) {
+        lista.push_back(itr->second->getDatos());
     }
-    return l;
+    return lista;
 }
 
-//Precond: codigo es el codigo de una hab del Hostal
-Habitacion *Hostal::getHabitacion(int codigo) {
-    auto it = habitaciones.begin();
-    while (it != habitaciones.end() && (*it)->getNumero() != codigo)
-        ++it;
-    return *it;
+Habitacion *Hostal::getHabitacion(int numero) {
+    return habitaciones[numero];
 }
 
 list<DtReserva *> Hostal::getReservasNoCanceladas(string email) {
-    list<DtReserva *> l;
-    auto it = habitaciones.begin();
-    while (it != habitaciones.end()) {
-        l.merge((*it)->getReservasAsociadas(email));
-        ++it;
+    map<int, Habitacion *>::iterator itr;
+    list<DtReserva *> lista;
+    for (itr = habitaciones.begin(); itr != habitaciones.end(); itr++) {
+        lista.splice(lista.end(), itr->second->getReservasAsociadas(email));
     }
-    return l;
+    return lista;
 }
 
-//Asumo que el telefono identifica a un Hostal
-bool Hostal::esEsteHostal(Hostal *h) { //Boolean ¿? No me convence
-    return telefono == h->getTelefono();
+
+bool Hostal::checkIfSameHostal(Hostal *otroHostal) {
+    return nombre == otroHostal->getNombre();
 }
 
 //Al DC le falta decir que el resultado es la concatenacion de todos sdr de habitaciones
-list<DtResenia *> Hostal::getReseniasSinResponder() {
-    list<DtResenia *> l;
-//    auto it = habitaciones.begin();
-//    while (it != habitaciones.end()) {
-//        l.merge((*it)->getReseniasSinResponder());
-//        ++it;
-//    }
-    return l;
+list<DtResenia> Hostal::getReseniasSinResponder() {
+    map<int, Habitacion *>::iterator itrMap;
+    list<DtResenia> lista;
+    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
+        lista.splice(lista.end(), itrMap->second->getReseniasSinResponder());
+    }
+    return lista;
 }
 
 // TODO: si no se usa en el hostal controller borrar
@@ -107,25 +100,27 @@ list<DtResenia *> Hostal::getReseniasSinResponder() {
 
 
 bool Hostal::habitacionPerteneceAHostal(Habitacion *hab) {
-    if (!habitaciones.empty()) {
-        auto it = habitaciones.begin();
-
-        while (it != habitaciones.end() && (*it)->getNumero() != hab->getNumero())
-            ++it;
-
-        return it == habitaciones.end();
-    } else
+    if (habitaciones.find(hab->getNumero()) == habitaciones.end()) {
         return false;
-}
-
-bool Hostal::operator==(Hostal hostal) {
-    return false;
+    } else {
+        return true;
+    }
 }
 
 int Hostal::getCalificacionPromedio() {
-    return 0;
+    map<int, Habitacion *>::iterator itrMap;
+    int calificacionPromedio = 0;
+    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
+        calificacionPromedio += itrMap->second->getCalificacionPromedio();
+    }
+    return floor(calificacionPromedio / habitaciones.size());
 }
 
 list<DtResenia> Hostal::getDatosReseniasDeHostal() {
-    return {};
+    map<int, Habitacion *>::iterator itrMap;
+    list<DtResenia> lista;
+    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
+        lista.splice(lista.end(), itrMap->second->getResenias());
+    }
+    return lista;
 }

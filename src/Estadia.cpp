@@ -9,8 +9,17 @@ Resenia *Estadia::getResenia() {
     return maybeResenia;
 }
 
-list<DtResenia> Estadia::getReseniasSinResponder() {
-    return {};
+bool Estadia::hasReseniaSinResponder() {
+    if (hasResenia()) {
+        return !maybeResenia->isComentada();
+    } else {
+        return false;
+    }
 }
 
 void Estadia::destruirAsociaciones() {}
+
+
+bool Estadia::hasResenia() {
+    return maybeResenia != nullptr;
+}

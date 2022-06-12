@@ -2,13 +2,14 @@
 #ifndef P4_ENTREGA_FINAL_HOSTAL_H
 #define P4_ENTREGA_FINAL_HOSTAL_H
 
-#include "Empleado.h"
-#include "Habitacion.h"
-#include "../datatypes/DtReserva.h"
 #include "../datatypes/DtHostalExt.h"
 #include "../datatypes/DtResenia.h"
+#include "../datatypes/DtReserva.h"
+#include "Empleado.h"
+#include "Habitacion.h"
 
 #include <list>
+#include <map>
 //No deberian faltar includes a menos de Dts
 
 class Habitacion;
@@ -23,8 +24,8 @@ private:
     string nombre;
     string direccion;
     int telefono;
-    list<Habitacion *> habitaciones;
-    list<Empleado *> empleados;
+    map<int, Habitacion *> habitaciones;
+    map<string, Empleado *> empleados;
 
     int getCalificacionPromedio();
 
@@ -35,7 +36,7 @@ public:
 
     DtHostal getDatos();
 
-    Habitacion *getHabitacion(int codigo);
+    Habitacion *getHabitacion(int numero);
 
     void agregarHabitacionAHostal(Habitacion *habitacion);
 
@@ -45,17 +46,13 @@ public:
 
     list<DtHabitacion> getInfoDeHabitaciones();
 
-    bool esEsteHostal(Hostal *otroHostal);
+    bool checkIfSameHostal(Hostal * otroHostal);
 
-    list<DtResenia *> getReseniasSinResponder();
-
-//    Hostal *getHostalSiTrabaja(Empleado *empleado);
+    list<DtResenia> getReseniasSinResponder();
 
     DtHostalExt getDatosExt();
 
     bool habitacionPerteneceAHostal(Habitacion *habitacion);
-
-    bool operator==(Hostal hostal);
 
     int getTelefono();
 

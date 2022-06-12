@@ -1,6 +1,7 @@
 
 #include "Reserva.h"
 #include "ReservaController.h"
+#include <cassert>
 
 Estadia *Reserva::getEstadia() {
     return maybeEstadia;
@@ -37,21 +38,24 @@ void Reserva::finalizarReservaActiva() {
     if (est != nullptr) est->finalizarActiva();
 }
 
-list<DtResenia> Reserva::getReseniasSinResponder() {
-    Estadia *est = getEstadia();
-    if (est == nullptr) return est->getReseniasSinResponder();
-    else return {};
+DtResenia Reserva::getReseniaSinResponder() {
+    assert(hasReseniaSinResponder());
+    return maybeEstadia->getResenia()->getDatos();
+}
 
+
+
+bool Reserva::hasReseniaSinResponder() {
+    return maybeEstadia != nullptr && maybeEstadia->hasReseniaSinResponder();
 }
 
 Resenia *Reserva::getResenia() {
-    Estadia *est = getEstadia();
-    if (est == nullptr) return est->getResenia();
+    if (maybeEstadia != nullptr) return maybeEstadia->getResenia();
     else return nullptr;
 }
 
-bool Reserva::checkIfSameHostal(Hostal hostal) {
-    return hostal == habitacion->getHostal();
+bool Reserva::checkIfSameHostal(Hostal *otroHostal) {
+    return habitacion->checkIfCoincideHostal(otroHostal);
 }
 
 Habitacion *Reserva::getHabitacion() {
@@ -71,4 +75,7 @@ Reserva::Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, 
     setCodigoGenerado();
     this->maybeEstadia = nullptr;
     this->estado = DtEstado::Abierta;
+}
+bool Reserva::hasResenia() {
+    return maybeEstadia != nullptr && maybeEstadia->hasResenia();
 }

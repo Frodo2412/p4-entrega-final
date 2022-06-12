@@ -6,7 +6,6 @@
 #include "Reserva.h"
 #include "Reloj.h"
 
-#include <list>
 
 class Resenia;
 
@@ -18,7 +17,9 @@ public:
 
     Resenia *getResenia();
 
-    list<DtResenia> getReseniasSinResponder();
+    bool hasResenia();
+
+    bool hasReseniaSinResponder();
 
     void destruirAsociaciones();
 };

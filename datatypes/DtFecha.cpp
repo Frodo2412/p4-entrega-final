@@ -48,3 +48,9 @@ ostream &operator<<(ostream &os, const DtFecha fecha) {
     os << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio() << ", " << fecha.getHora() << "hrs";
     return os;
 }
+bool DtFecha::operator==(const DtFecha &rhs) const {
+    return this->hora == rhs.hora &&
+           this->dia == rhs.dia &&
+           this->mes == rhs.mes &&
+           this->anio == rhs.anio;
+}
