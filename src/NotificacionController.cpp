@@ -1,12 +1,10 @@
 
 #include "NotificacionController.h"
-#include "ControllerFactory.h"
 #include <list>
 
 list<DtEmpleado> NotificacionController::mostrarEmpleados() {
     UsuarioController* uc = UsuarioController::getInstance();
     return uc->getEmpleados();
-
 }
 
 void NotificacionController::suscribirANotificaciones(string email) {
@@ -16,6 +14,7 @@ void NotificacionController::suscribirANotificaciones(string email) {
 }
 
 list<DtNotificacion> NotificacionController::consultaDeNotificaciones(string email) {    //Cambio de tipo (no es void)
+    /*
     auto it = observers.begin();
 
     while(it != observers.end() && it->first != email)
@@ -25,6 +24,10 @@ list<DtNotificacion> NotificacionController::consultaDeNotificaciones(string ema
         return e->getNotificaciones();
     }
     return {};
+     */
+    UsuarioController* uc = UsuarioController::getInstance();
+    Empleado* e = uc->findEmpleado(email);
+    return e->getNotificaciones();
 }
 
 void NotificacionController::eliminarSubscripcion(string email) {
@@ -32,6 +35,7 @@ void NotificacionController::eliminarSubscripcion(string email) {
 
     while(it != observers.end() && it->first != email)
         it++;
+
     if(it != observers.end()){
         observers.erase(it);
     }
