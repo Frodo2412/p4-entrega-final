@@ -1,7 +1,9 @@
-#include "DtFecha.h"
+#include "Comentario.h"
+#include "ControllerFactory.h"
 #include "DtComentario.h"
 #include "DtEmpleado.h"
 #include "DtEstadia.h"
+#include "DtFecha.h"
 #include "DtHabitacion.h"
 #include "DtHostal.h"
 #include "DtHostalExt.h"
@@ -10,11 +12,10 @@
 #include "DtReserva.h"
 #include "DtReservaGrupal.h"
 #include "DtReservaIndividual.h"
-#include "Comentario.h"
-#include "Huesped.h"
 #include "Empleado.h"
-#include "ReservaIndividual.h"
 #include "Habitacion.h"
+#include "Huesped.h"
+#include "ReservaIndividual.h"
 
 #include <iostream>
 
@@ -87,14 +88,14 @@ void test_dt() {
     cout << resenia.getComentario() << endl;
     cout << resenia.getFecha() << endl;
 
-//    cout << " - DtReserva:" << endl;
-//    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
-//    cout << reserva.getCodigo() << endl;
-//    cout << reserva.getCheckIn() << endl;
-//    cout << reserva.getCheckOut() << endl;
-//    cout << reserva.getEstado() << endl;
-//    cout << reserva.getCosto() << endl;
-// EN PRINCIPIO NO SE NECESITA
+    //    cout << " - DtReserva:" << endl;
+    //    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
+    //    cout << reserva.getCodigo() << endl;
+    //    cout << reserva.getCheckIn() << endl;
+    //    cout << reserva.getCheckOut() << endl;
+    //    cout << reserva.getEstado() << endl;
+    //    cout << reserva.getCosto() << endl;
+    // EN PRINCIPIO NO SE NECESITA
 
     cout << " - DtReservaGrupal:" << endl;
     DtReservaGrupal reservaGrupal(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1, 1);
@@ -130,10 +131,10 @@ void test_comentario() {
     cout << " - Comentario:" << endl;
     Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
     Comentario comentario("Hola");
-//    Comentario comentario("Hola", &resenia);
+    //    Comentario comentario("Hola", &resenia);
     cout << comentario.getTexto() << endl;
     DtComentario comentarioDt = comentario.getDatos();
-//    Resenia *resenia1 = comentario.getResenia();
+    //    Resenia *resenia1 = comentario.getResenia();
 }
 
 void test_resenia() {
@@ -143,33 +144,392 @@ void test_resenia() {
     cout << resenia.getFecha() << endl;
     cout << resenia.getComentario() << endl;
     auto *comentario = new Comentario("Hola");
-//    auto *comentario = new Comentario("Hola", &resenia);
+    //    auto *comentario = new Comentario("Hola", &resenia);
     resenia.setComentario(comentario);
 }
 
 // TODO: Cuando se implemente la reserva volver a activar el test
 void test_usuario() {
-//    cout << " - Huesped:" << endl;
-//    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
-//    cout << usuario.isMail("juan@gmail.com") << endl;
-//    cout << usuario.isMail("") << endl;
-//    auto *reserva = new ReservaIndividual();
-//    usuario.agregarReserva(reserva);
+    //    cout << " - Huesped:" << endl;
+    //    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
+    //    cout << usuario.isMail("juan@gmail.com") << endl;
+    //    cout << usuario.isMail("") << endl;
+    //    auto *reserva = new ReservaIndividual();
+    //    usuario.agregarReserva(reserva);
 }
 
 // TODO: Cuando se implemente hostal y reserva testear la habitacion
 void test_habitacion() {
-//    cout << " - Habitacion:" << endl;
-//    Habitacion habitacion(1, 1, 1);
-//    Hostal hostal;
-//    habitacion.setHostal(&hostal);
-//    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
+    //    cout << " - Habitacion:" << endl;
+    //    Habitacion habitacion(1, 1, 1);
+    //    Hostal hostal;
+    //    habitacion.setHostal(&hostal);
+    //    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+DtCargo cargoDialog() {
+    cout << "Ingrese cargo: ";
+    cout << "1. Adminstracion" << endl;
+    cout << "2. Limpieza" << endl;
+    cout << "3. Recepcion" << endl;
+    cout << "4. Infraestructura" << endl;
+    DtCargo cargo;
+    int opcion;
+    cin >> opcion;
+    while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4) {
+        cout << "Opcion invalida, ingrese nuevamente: ";
+        cin >> opcion;
+    }
+    switch (opcion) {
+        case 1:
+            cargo = DtCargo(1);
+            break;
+        case 2:
+            cargo = DtCargo(2);
+            break;
+        case 3:
+            cargo = DtCargo(3);
+            break;
+        case 4:
+            cargo = DtCargo(4);
+            break;
+        default:
+            break;
+    }
+    return cargo;
+}
+
+void printInterlineado() {
+    cout << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << endl;
+}
+
+bool siNoDialog() {
+    int opcion;
+    cout << "1. Si" << endl;
+    cout << "2. No" << endl;
+    while (opcion != 1 && opcion != 2) {
+        cout << "Opcion invalida, ingrese nuevamente: ";
+        cin >> opcion;
+    }
+    return opcion == 1;
+}
+
+void printHostales(list<DtHostal> &hostales) {
+    for (auto hostal: hostales) {
+        cout << hostal.getNombre() << endl;
+        cout << " - "
+             << "Direccion: " << hostal.getDireccion() << endl;
+        cout << " - "
+             << "Calificacion promedio: " << hostal.getCalificacionProm() << endl;
+    }
+}
+void mostrarElegirHostal() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IHostalController *hostalController = factory->getHostalController();
+    list<DtHostal> hostales = hostalController->mostrarHostales();
+    cout << "Los Hostales disponibles son: " << endl;
+    printHostales(hostales);
+    cout << "Ingrese el nombre del Hostal que se desee: ";
+    string nombre;
+    cin >> nombre;
+    hostalController->elegirHostal(nombre);
+}
+
+void altaUsuario() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IUsuarioController *usuarioController = factory->getUsuarioController();
+
+    //Datos basicos del usuario
+    string nombre, mail, contrasena;
+    cout << "Ingrese nombre: ";
+    cin >> nombre;
+    cout << "Ingrese mail: ";
+    cin >> mail;
+    cout << "Ingrese contrasena: ";
+    cin >> contrasena;
+    usuarioController->comenzarAltaUsuario(nombre, mail, contrasena);
+
+    //Eleccion de tipo de usuario
+    cout << "Eliga que tipo de usurio desea registrar: " << endl;
+    cout << "1. Huesped" << endl;
+    cout << "2. Empleado" << endl;
+    int opcion;
+    cin >> opcion;
+    while (opcion != 1 && opcion != 2) {
+        cout << "Opcion invalida, ingrese nuevamente: ";
+        cin >> opcion;
+    }
+    if (opcion == 1) {
+        cout << "Es Finger?" << endl;
+        bool esFinger = siNoDialog();
+        usuarioController->especificarEsFinger(esFinger == 1);
+    } else {
+        DtCargo cargo = cargoDialog();
+        usuarioController->especificarCargo(cargo);
+    }
+
+    //Verificar que no se repita el mail
+    while (usuarioController->findUsuario(mail) != nullptr) {
+        cout << "Usuario ya existe" << endl;
+        cout << "Desea cancelar el alta?" << endl;
+        bool isCancelada = siNoDialog();
+        if (isCancelada) {
+            usuarioController->cancelarAltaUsuario();
+            return;
+        } else {
+            cout << "Ingrese nuevo mail: ";
+            cin >> mail;
+            usuarioController->ingresarEmail(mail);
+        }
+    }
+
+    //Confirmacion de la operacion
+    cout << "Todo esta correcto, desea confirmar el alta? (De lo contrario la cancelara)" << endl;
+    bool isConfirmada = siNoDialog();
+    if (isConfirmada) {
+        usuarioController->confirmarAltaUsuario();
+    } else {
+        cout << "Alta cancelada" << endl;
+        usuarioController->cancelarAltaUsuario();
+    }
+}
+
+void altaHostal() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IHostalController *hostalController = factory->getHostalController();
+    cout << "Ingrese nombre del Hostal: ";
+    string nombre;
+    cin >> nombre;
+    cout << "Ingrese direccion del Hostal: ";
+    string direccion;
+    cin >> direccion;
+    cout << "Ingrese telefono del Hostal: ";
+    int telefono;
+    cin >> telefono;
+    hostalController->altaHostal(nombre, direccion, telefono);
+}
+
+void altaHabitacion() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IHostalController *hostalController = factory->getHostalController();
+    mostrarElegirHostal();
+    cout << "Ingrese numero de habitacion: ";
+    int numero;
+    cin >> numero;
+    cout << "Ingrese cantidad de camas: ";
+    int cantidad;
+    cin >> cantidad;
+    cout << "Ingrese precio por noche: ";
+    int precio;
+    cin >> precio;
+    hostalController->ingresarDatosHabitacion(numero, cantidad, precio);
+
+    //Confirmacion de la operacion
+    cout << "Todo esta correcto, desea confirmar el alta? (De lo contrario la cancelara)" << endl;
+    bool isConfirmada = siNoDialog();
+    if (isConfirmada) {
+        hostalController->confirmarAltaHabitacion();
+    } else {
+        cout << "Alta cancelada" << endl;
+        hostalController->cancelarAltaHabitacion();
+    }
+}
+void asignarEmpleadoAHostal() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IHostalController *hostalController = factory->getHostalController();
+    mostrarElegirHostal();
+    list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
+    cout << "Los empleados disponibles son: " << endl;
+    for (auto empleado: desempleados) {
+        cout << empleado << endl;
+    }
+    cout << "Ingrese el email del empleado que se desee: ";
+    string email;
+    cin >> email;
+    DtCargo cargo = cargoDialog();
+}
+
+void realizarReserva() {
+}
+
+void bajaReserva() {
+}
+
+void consultarTop3Hostales() {
+}
+
+void registrarEstadia() {
+}
+
+void finalizarEstadia() {
+}
+
+
+void calificarEstadia() {
+}
+
+void comentarCalificacion() {
+}
+
+void consultaUsuario() {
+}
+
+void consultaHostal() {
+}
+
+void consultaReserva() {
+}
+
+void consultaEstadia() {
+}
+
+void consultaCalificacion() {
+}
+
+void subscribirseANotificaciones() {
+}
+
+void consultarNotificaciones() {
+}
+
+void eliminarSubscripcion() {
+}
+
+void modificarFechaDelSistema() {
+}
+
+void printOpciones() {
+    cout << "Eliga el numero de la opcion que desea realizar:" << endl;
+    cout << "1 - Alta de Usuario" << endl;
+    cout << "2 - Alta de Hostal" << endl;
+    cout << "3 - Alta de Habitacion" << endl;
+    cout << "4 - Asignar Empleado a Hostal" << endl;
+    cout << "5 - Realizar Reserva" << endl;
+    cout << "6 - Baja de Reserva" << endl;
+    cout << "7 - Consultar TOP 3 de Hostales" << endl;
+    cout << "8 - Registrar Estadia" << endl;
+    cout << "9 - Finalizar Estadia" << endl;
+    cout << "10 - Calificar Estadia" << endl;
+    cout << "11 - Comentar Calificacion" << endl;
+    cout << "12 - Consulta de Usuario" << endl;
+    cout << "13 - Consulta de Hostal" << endl;
+    cout << "14 - Consulta de Reserva" << endl;
+    cout << "15 - Consulta de Estadia" << endl;
+    cout << "16 - Consulta de Calificacion" << endl;
+    cout << "17 - Subscribirse a Notificaciones" << endl;
+    cout << "18 - Consultar Notificaciones" << endl;
+    cout << "19 - Eliminar Subscripcion" << endl;
+    cout << "20 - Modificar Fecha del Sistema" << endl;
+    cout << "21 - Salir" << endl;
 }
 
 int main() {
-    test_dt();
-    test_comentario();
-    test_resenia();
-    test_usuario();
+    //    test_dt();
+    //    test_comentario();
+    //    test_resenia();
+    //    test_usuario();
+
+    cout << "Bienvenido al sistema de gestion de hoteleria FING" << endl;
+    int opcion = 0;
+    while (opcion != 21) {
+        printOpciones();
+        cin >> opcion;
+        switch (opcion) {
+            case 1:
+                altaUsuario();
+                printInterlineado();
+                break;
+            case 2:
+                altaHostal();
+                printInterlineado();
+                break;
+            case 3:
+                altaHabitacion();
+                printInterlineado();
+                break;
+            case 4:
+                asignarEmpleadoAHostal();
+                printInterlineado();
+                break;
+            case 5:
+                realizarReserva();
+                printInterlineado();
+                break;
+            case 6:
+                bajaReserva();
+                printInterlineado();
+                break;
+            case 7:
+                consultarTop3Hostales();
+                printInterlineado();
+                break;
+            case 8:
+                registrarEstadia();
+                printInterlineado();
+                break;
+            case 9:
+                finalizarEstadia();
+                printInterlineado();
+                break;
+            case 10:
+                calificarEstadia();
+                printInterlineado();
+                break;
+            case 11:
+                comentarCalificacion();
+                printInterlineado();
+                break;
+            case 12:
+                consultaUsuario();
+                printInterlineado();
+                break;
+            case 13:
+                consultaHostal();
+                printInterlineado();
+                break;
+            case 14:
+                consultaReserva();
+                printInterlineado();
+                break;
+            case 15:
+                consultaEstadia();
+                printInterlineado();
+                break;
+            case 16:
+                consultaCalificacion();
+                printInterlineado();
+                break;
+            case 17:
+                subscribirseANotificaciones();
+                printInterlineado();
+                break;
+            case 18:
+                consultarNotificaciones();
+                printInterlineado();
+                break;
+            case 19:
+                eliminarSubscripcion();
+                printInterlineado();
+                break;
+            case 20:
+                modificarFechaDelSistema();
+                printInterlineado();
+                break;
+            case 21:
+                cout << "Gracias por utilizar el sistema de gestion de hoteleria FING" << endl;
+                break;
+            default:
+                cout << "Opcion incorrecta" << endl;
+                cout << "Por favor, ingrese una opcion valida" << endl;
+                printInterlineado();
+                break;
+        }
+        printOpciones();
+        cin >> opcion;
+    }
     return 0;
 }

@@ -5,7 +5,12 @@
 #include "UsuarioController.h"
 
 Empleado *UsuarioController::getEmpleado(string email) {
-    return empleados[email];
+    Empleado *empleado;
+    if (empleados.find(email) != empleados.end())
+        empleado = empleados[email];
+    else
+        empleado = nullptr;
+    return empleado;
 }
 
 list<DtEmpleado> UsuarioController::getEmpleadosDesemplados(Hostal *hostal) {
@@ -28,7 +33,12 @@ list<DtHuesped> UsuarioController::getHuespedes() {
     return lista;
 }
 Huesped *UsuarioController::findHuesped(string email) {
-    return huespedes[email];
+    Huesped *huesped;
+    if (huespedes.find(email) != huespedes.end())
+        huesped = huespedes[email];
+    else
+        huesped = nullptr;
+    return huesped;
 }
 list<DtUsuario> UsuarioController::mostrarUsuarios() {
     map<string, Usuario *>::iterator itr;
@@ -42,7 +52,20 @@ DtUsuario UsuarioController::mostrarInformacionUsuario(string email) {
     return usuarios[email]->getDatos();
 }
 Empleado *UsuarioController::findEmpleado(string email) {
-    return empleados[email];
+    Empleado *empleado;
+    if (empleados.find(email) != empleados.end())
+        empleado = empleados[email];
+    else
+        empleado = nullptr;
+    return empleado;
+}
+Usuario *UsuarioController::findUsuario(string email) {
+    Usuario *usuario;
+    if (usuarios.find(email) != usuarios.end())
+        usuario = usuarios[email];
+    else
+        usuario = nullptr;
+    return usuario;
 }
 void UsuarioController::especificarEsFinger(bool esFinger) {
     esFingerAux = esFinger;

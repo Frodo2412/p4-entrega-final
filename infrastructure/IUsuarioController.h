@@ -13,6 +13,7 @@
 
 class IUsuarioController {
 public:
+    virtual Usuario* findUsuario(string email) = 0;
     virtual Empleado* getEmpleado(string email) = 0;
     virtual list<DtEmpleado> getEmpleadosDesemplados(Hostal * hostal) = 0;
     virtual list<DtHuesped> getHuespedes() = 0;

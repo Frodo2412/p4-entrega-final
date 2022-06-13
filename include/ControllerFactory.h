@@ -20,7 +20,7 @@ public:
     IHostalController* getHostalController();
     IReservaController* getReservaController();
     INotificacionController* getNotificacionController();
-    ControllerFactory* getInstance();
+    static ControllerFactory* getInstance();
 };
 
 #endif//P4_ENTREGA_FINAL_CONTROLLERFACTORY_H

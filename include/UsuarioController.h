@@ -26,6 +26,7 @@ private:
     UsuarioController();
 
 public:
+    Usuario *findUsuario(string email);
     Empleado *getEmpleado(string email);
     list<DtEmpleado> getEmpleadosDesemplados(Hostal * hostal);
     list<DtHuesped> getHuespedes();
