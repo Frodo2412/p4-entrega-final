@@ -32,6 +32,7 @@ Empleado *HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
 }
 Hostal* HostalController::findHostal(Empleado *empleado) {
+    return nullptr;
 }
 void HostalController::elegirHostal(string nombre) {
 }
