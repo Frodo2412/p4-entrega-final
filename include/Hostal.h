@@ -26,11 +26,12 @@ private:
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
 
-    int getCalificacionPromedio();
-
     list<DtResenia> getDatosReseniasDeHostal();
 
 public:
+
+    int getCalificacionPromedio();
+
     Hostal(string nombre, string direccion, int telefono);
 
     DtHostal getDatos();
