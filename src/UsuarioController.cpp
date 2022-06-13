@@ -98,3 +98,6 @@ UsuarioController::~UsuarioController() {
 UsuarioController *UsuarioController::instancia = nullptr;
 
 UsuarioController::UsuarioController() = default;
+
+
+list<DtEmpleado> getEmpleados();

@@ -41,6 +41,9 @@ public:
     void ingresarEmail(string email);
     ~UsuarioController();
     static UsuarioController *getInstance();
+
+    //Agregada
+    list<DtEmpleado> getEmpleados();
 };
 
 

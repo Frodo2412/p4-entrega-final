@@ -21,3 +21,11 @@ DtCargo Empleado::getCargo() {
 DtEmpleado Empleado::getDatosEmpleado() {
     return {this->nombre, this->mail, this->cargo};
 }
+
+void Empleado::notify(DtNotificacion notif) {
+
+}
+
+list<DtNotificacion> Empleado::getNotificaciones() {
+    return {};
+}

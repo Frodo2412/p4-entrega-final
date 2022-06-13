@@ -9,6 +9,8 @@
 //#include "Estadia.h" No lo usamos nunca creo
 #include "Huesped.h"
 
+#include '../datatypes/DtNotificacion.h'
+
 //Deberia esta pronto los includes a menos del dt
 
 class Comentario;
@@ -22,6 +24,8 @@ private:
     string comentario;
     Comentario *maybeComentario;
 //    Estadia *maybeEstadia;
+    Huesped* autor;
+
 public:
     Resenia();
 
@@ -45,7 +49,9 @@ public:
 
     bool isComentada();
 
+    void setAutor(Huesped* aut);
 
+    DtNotificacion getNotificacion();
 };
 
 

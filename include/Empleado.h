@@ -4,8 +4,11 @@
 
 #include "../datatypes/DtEmpleado.h"
 #include "Usuario.h"
+#include "Observer.h"
 
-class Empleado : public Usuario {
+#include <list>
+
+class Empleado : public Usuario, public Observer{
 private:
     DtCargo cargo;
 public:
@@ -14,6 +17,9 @@ public:
     DtUsuario getDatos() override;
     DtEmpleado getDatosEmpleado();
     DtCargo getCargo();
+
+    void notify(DtNotificacion notif) override;
+    list<DtNotificacion> getNotificaciones();
 };
 
 #endif //P4_ENTREGA_FINAL_EMPLEADO_H
