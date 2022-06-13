@@ -22,6 +22,8 @@ public:
     bool hasReseniaSinResponder();
 
     void destruirAsociaciones();
+
+    void setResenia(Resenia* res);
 };
 
 

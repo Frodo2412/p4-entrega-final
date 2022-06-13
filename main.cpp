@@ -15,6 +15,7 @@
 #include "Empleado.h"
 #include "ReservaIndividual.h"
 #include "Habitacion.h"
+#include "include/ControllerFactory.h"
 
 #include <iostream>
 
@@ -166,10 +167,18 @@ void test_habitacion() {
 //    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
 }
 
+
+void test_NotificacionController(){
+    ControllerFactory* cf = cf->getInstance();
+    INotificacionController* nc = cf->getNotificacionController();
+}
+
+
 int main() {
     test_dt();
     test_comentario();
     test_resenia();
     test_usuario();
+    test_NotificacionController();
     return 0;
 }
