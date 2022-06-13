@@ -135,6 +135,8 @@ void NotificacionController::eliminarObserver(Observer *observer) {
 void NotificacionController::notifyObservers(DtNotificacion notif) {
 }
 
+NotificacionController* NotificacionController::instancia = nullptr;
+
 NotificacionController *NotificacionController::getInstance() {
     if(instancia == nullptr){
         instancia = new NotificacionController();
