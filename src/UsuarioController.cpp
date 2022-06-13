@@ -101,5 +101,10 @@ UsuarioController::UsuarioController() = default;
 
 
 list<DtEmpleado> UsuarioController::getEmpleados() {
-    return list<DtEmpleado>();
+    map<string, Empleado *>::iterator itr;
+    list<DtEmpleado> lista;
+    for (itr = empleados.begin(); itr != empleados.end(); itr++) {
+        lista.push_back(itr->second->getDatosEmpleado());
+    }
+    return lista;
 }

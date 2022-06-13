@@ -26,6 +26,7 @@ private:
     UsuarioController();
 
 public:
+    list<DtEmpleado> getEmpleados();
     Empleado *getEmpleado(string email);
     list<DtEmpleado> getEmpleadosDesemplados(Hostal * hostal);
     list<DtHuesped> getHuespedes();
@@ -41,9 +42,6 @@ public:
     void ingresarEmail(string email);
     ~UsuarioController();
     static UsuarioController *getInstance();
-
-    //Agregada
-    list<DtEmpleado> getEmpleados();
 };
 
 

@@ -23,9 +23,12 @@ DtEmpleado Empleado::getDatosEmpleado() {
 }
 
 void Empleado::notify(DtNotificacion notif) {
-
+    notificaciones.push_back(notif);
 }
 
 list<DtNotificacion> Empleado::getNotificaciones() {
-    return {};
+    list<DtNotificacion> notisLeidas;
+    //No estoy seguro si con splice la lista de notificaciones queda vacia como deberia
+    notisLeidas.splice(notisLeidas.end(), notificaciones);
+    return notisLeidas;
 }
