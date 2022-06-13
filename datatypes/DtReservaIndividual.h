@@ -10,6 +10,7 @@
 class DtReservaIndividual : public DtReserva {
 public:
     DtReservaIndividual(int codigo, DtFecha checkIn, DtFecha checkOut, DtEstado estadoInicial, int costo);
+    string getTipoReserva() override;
 };
 
 

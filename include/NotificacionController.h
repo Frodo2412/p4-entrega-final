@@ -10,7 +10,8 @@
 //TODO: Implementar
 class NotificacionController : public INotificacionController {
 private:
-    list<Observer *> observers;
+    //El "Key" de la lista es el mail del empleado
+    map<string ,Observer *> observers;
     Resenia *reseniaAux;
     Estadia *estadiaAux;
     Hostal *hostalAux;

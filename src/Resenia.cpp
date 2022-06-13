@@ -40,7 +40,7 @@ void Resenia::setComentario(Comentario *respuesta) {
 //}
 
 bool Resenia::isComentada() {
-    return maybeComentario == nullptr;
+    return maybeComentario != nullptr;
 }
 
 Resenia::~Resenia() {

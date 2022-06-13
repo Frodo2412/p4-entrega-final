@@ -14,9 +14,7 @@
 class IUsuarioController {
 public:
     virtual Empleado* getEmpleado(string email) = 0;
-    virtual DtEmpleado getDatos(Empleado* empleado) = 0;
-    virtual Empleado* getEmpleado() = 0;
-    virtual list<DtEmpleado> getEmpleados() = 0;
+    virtual list<DtEmpleado> getEmpleadosDesemplados(Hostal * hostal) = 0;
     virtual list<DtHuesped> getHuespedes() = 0;
     virtual Huesped* findHuesped(string email) = 0;
     virtual list<DtUsuario> mostrarUsuarios() = 0;

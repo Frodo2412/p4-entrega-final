@@ -37,14 +37,20 @@ int DtFecha::getAnio() const {
     return anio;
 }
 
-int DtFecha::operator-(DtFecha *f) const {
-    int f1 = this->dia + this->mes * 30 + this->anio * 365;
-    int f2 = f->getDia() + f->getMes() * 30 + f->getAnio() * 365;
+int DtFecha::operator-(DtFecha fecha) const {
+    int fecha1 = this->dia + this->mes * 30 + this->anio * 365;
+    int fecha2 = fecha.getDia() + fecha.getMes() * 30 + fecha.getAnio() * 365;
 
-    return f1 - f2;
+    return fecha1 - fecha2;
 }
 
 ostream &operator<<(ostream &os, const DtFecha fecha) {
     os << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio() << ", " << fecha.getHora() << "hrs";
     return os;
+}
+bool DtFecha::operator==(const DtFecha &rhs) const {
+    return this->hora == rhs.hora &&
+           this->dia == rhs.dia &&
+           this->mes == rhs.mes &&
+           this->anio == rhs.anio;
 }

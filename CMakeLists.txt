@@ -8,9 +8,9 @@ include_directories(include)
 include_directories(src)
 
 add_executable(p4_entrega_final
-        datatypes/DtCargo.h
         datatypes/DtComentario.cpp
         datatypes/DtComentario.h
+        datatypes/DtCargo.h
         datatypes/DtEmpleado.cpp
         datatypes/DtEmpleado.h
         datatypes/DtEstadia.cpp

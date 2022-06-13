@@ -7,7 +7,6 @@ Huesped::Huesped(string nombre, string email, string password, bool esFinger) : 
                                                                                         std::move(email),
                                                                                         std::move(password)) {
     this->esFinger = esFinger;
-    this->reservas = list<Reserva *>();
 }
 
 DtUsuario Huesped::getDatos() {
@@ -15,7 +14,7 @@ DtUsuario Huesped::getDatos() {
 }
 
 void Huesped::agregarReserva(Reserva *reserva) {
-    this->reservas.push_back(reserva);
+    reservas.insert(std::pair<int, Reserva *>(reserva->getCodigo(), reserva));
 }
 
 bool Huesped::isMail(const string &mail) {
@@ -23,11 +22,21 @@ bool Huesped::isMail(const string &mail) {
 }
 
 void Huesped::finalizarReservaActiva() {
-    for (auto reserva: this->reservas)
-        reserva->getEstadia()->finalizarActiva();
+    map<int, Reserva *>::iterator it;
+    for (it = reservas.begin(); it != reservas.end(); it++)
+        it->second->getEstadia()->finalizarActiva();
 }
 
 Huesped::~Huesped() {
-    for (auto reserva: this->reservas)
-        delete reserva;
+    //No tiene sentido lo de abajo
+//    for (auto reserva: this->reservas)
+//        delete reserva;
+}
+
+DtHuesped Huesped::getDatosHuesped() {
+    return {this->nombre, this->mail, this->esFinger};
+}
+
+bool Huesped::isFinger() {
+    return esFinger;
 }

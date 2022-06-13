@@ -6,3 +6,7 @@
 
 DtReservaIndividual::DtReservaIndividual(int codigo, DtFecha checkIn, DtFecha checkOut, DtEstado estadoInicial,
                                          int costo) : DtReserva(codigo, checkIn, checkOut, estadoInicial, costo) {}
+
+string DtReservaIndividual::getTipoReserva() {
+    return "Individual";
+}

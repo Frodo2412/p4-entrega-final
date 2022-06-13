@@ -8,6 +8,7 @@
 //Deberian estar los imports a mneos de los DT
 
 #include <list>
+#include <map>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ class Reserva;
 class Huesped : public Usuario {
 private:
     bool esFinger;
-    list<Reserva *> reservas;
+    map<int ,Reserva *> reservas;
 
 public:
     Huesped(string nombre, string email, string password, bool esFinger);
@@ -25,11 +26,15 @@ public:
 
     DtUsuario getDatos() override;
 
+    DtHuesped getDatosHuesped();
+
     void agregarReserva(Reserva *reserva);
 
     bool isMail(const string &mail);
 
     void finalizarReservaActiva();
+
+    bool isFinger();
 };
 
 
