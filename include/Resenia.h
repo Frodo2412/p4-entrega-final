@@ -6,10 +6,13 @@
 #include "Comentario.h"
 #include "DtFecha.h"
 #include "DtResenia.h"
-//#include "Estadia.h" No lo usamos nunca creo
+#include "DtNotificacion.h"
 #include "Huesped.h"
+//#include "Estadia.h" No lo usamos nunca creo
 
 //Deberia esta pronto los includes a menos del dt
+
+class Huesped;
 
 class Comentario;
 
@@ -22,6 +25,8 @@ private:
     string comentario;
     Comentario *maybeComentario;
 //    Estadia *maybeEstadia;
+    Huesped *autor;
+
 public:
     Resenia();
 
@@ -45,7 +50,9 @@ public:
 
     bool isComentada();
 
+    void setAutor(Huesped* aut);
 
+    DtNotificacion getNotificacion();
 };
 
 

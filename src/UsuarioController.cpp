@@ -121,3 +121,13 @@ UsuarioController::~UsuarioController() {
 UsuarioController *UsuarioController::instancia = nullptr;
 
 UsuarioController::UsuarioController() = default;
+
+
+list<DtEmpleado> UsuarioController::getEmpleados() {
+    map<string, Empleado *>::iterator itr;
+    list<DtEmpleado> lista;
+    for (itr = empleados.begin(); itr != empleados.end(); itr++) {
+        lista.push_back(itr->second->getDatosEmpleado());
+    }
+    return lista;
+}

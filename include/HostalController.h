@@ -34,7 +34,7 @@ public:
     void cancelarContratoEmpleado() override;
     void seleccionarEmpleado(string email, DtCargo cargo) override;
     void altaHostal(string nombre, string direccion, int telefono) override;
-    void findHostal(Empleado *empleado) override;
+    Hostal* findHostal(Empleado *empleado) override;
     void elegirHostal(string nombre) override;
     void cancelarAltaHabitacion() override;
     static HostalController* getInstance();

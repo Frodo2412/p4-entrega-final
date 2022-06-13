@@ -20,9 +20,9 @@ class INotificacionController {
 public:
     virtual list<DtEmpleado> mostrarEmpleados() = 0;
     virtual void suscribirANotificaciones(string email) = 0;
-    virtual void consultaDeNotificaciones(string email) = 0;
+    virtual list<DtNotificacion>  consultaDeNotificaciones(string email) = 0;    //Cambio de tipo (no es void)
     virtual void eliminarSubscripcion(string email) = 0;
-    virtual void notificar() = 0;
+    virtual void notificar(DtNotificacion notif) = 0;
     virtual Resenia *getResenia() = 0;
     virtual Estadia *getEstadia() = 0;
     virtual list<DtEstadia> mostrarEstadiasFinalizadas(string email) = 0;

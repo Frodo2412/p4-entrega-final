@@ -1,5 +1,6 @@
 
 #include "Resenia.h"
+#include "DtNotificacion.h"
 
 #include <utility>
 
@@ -48,4 +49,13 @@ Resenia::~Resenia() {
 }
 
 Resenia::Resenia() = default;
+
+
+void Resenia::setAutor(Huesped *aut) {
+    autor = aut;
+}
+
+DtNotificacion Resenia::getNotificacion(){
+    return {calificacion, fecha, comentario, maybeComentario->getTexto(), autor->getNombre()};
+}
 
