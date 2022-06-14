@@ -65,4 +65,4 @@ add_executable(p4_entrega_final
         include/ReservaIndividual.h
         src/ReservaController.cpp
         include/ReservaController.h
-        main.cpp src/UsuarioController.cpp include/UsuarioController.h src/HostalController.cpp include/HostalController.h infrastructure/IReservaController.h infrastructure/IHostalController.h infrastructure/IUsuarioController.h src/NotificacionController.cpp include/NotificacionController.h infrastructure/INotificacionController.h src/ControllerFactory.cpp include/ControllerFactory.h)
+        main.cpp src/UsuarioController.cpp include/UsuarioController.h src/HostalController.cpp include/HostalController.h infrastructure/IReservaController.h infrastructure/IHostalController.h infrastructure/IUsuarioController.h src/NotificacionController.cpp include/NotificacionController.h infrastructure/INotificacionController.h src/ControllerFactory.cpp include/ControllerFactory.h datatypes/DtTipoReserva.h)

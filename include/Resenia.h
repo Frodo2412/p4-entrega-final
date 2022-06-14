@@ -8,9 +8,6 @@
 #include "DtResenia.h"
 #include "DtNotificacion.h"
 #include "Huesped.h"
-//#include "Estadia.h" No lo usamos nunca creo
-
-//Deberia esta pronto los includes a menos del dt
 
 class Huesped;
 
@@ -24,7 +21,7 @@ private:
     DtFecha fecha;
     string comentario;
     Comentario *maybeComentario;
-//    Estadia *maybeEstadia;
+    Estadia *maybeEstadia;
     Huesped *autor;
 
 public:
@@ -46,11 +43,13 @@ public:
 
     void setComentario(Comentario *respuesta);
 
-//    void setEstadia(Estadia *estadia);
+    void setEstadia(Estadia *estadia);
+
+    Estadia *getEstadia();
 
     bool isComentada();
 
-    void setAutor(Huesped* aut);
+    void setAutor(Huesped *aut);
 
     DtNotificacion getNotificacion();
 };
