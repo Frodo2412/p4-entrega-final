@@ -4,13 +4,14 @@
 #include <utility>
 
 DtEstadia::DtEstadia(string nombreHostal, string emailHuesped, int numeroHabitacion, DtFecha checkIn,
-                     DtFecha checkOut, string codigoPromo) {
+                     DtFecha checkOut, string codigoPromo, int codigo) {
     this->nombreHostal = std::move(nombreHostal);
     this->emailHuesped = std::move(emailHuesped);
     this->numeroHabitacion = numeroHabitacion;
     this->checkIn = checkIn;
     this->checkOut = checkOut;
     promo = std::move(codigoPromo);
+    this->codigo = codigo;
 }
 
 string DtEstadia::getHostal() {
@@ -35,4 +36,7 @@ DtFecha DtEstadia::getCheckOut() {
 
 string DtEstadia::getPromo() {
     return promo;
+}
+int DtEstadia::getCodigo() const {
+    return codigo;
 }

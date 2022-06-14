@@ -19,6 +19,7 @@
 
 #include <iostream>
 
+void printEstadias(list<DtEstadia> &estadias);
 using namespace std;
 
 void test_dt() {
@@ -37,7 +38,7 @@ void test_dt() {
     cout << empleado.getCargo() << endl;
 
     cout << " - DtEstadia:" << endl;
-    DtEstadia estadia("Hostal", "juan@gmail.com", 1, DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 1, 1901), "Promo");
+    DtEstadia estadia("Hostal", "juan@gmail.com", 1, DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 1, 1901), "Promo", 1);
     cout << estadia.getHostal() << endl;
     cout << estadia.getHuesped() << endl;
     cout << estadia.getHabitacion() << endl;
@@ -57,9 +58,9 @@ void test_dt() {
     cout << hostal.getDireccion() << endl;
     cout << hostal.getCalificacionProm() << endl;
 
-    DtResenia resenia1(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901)),
-            resenia2(2, "Hola", "Juan", DtFecha(1, 1, 1, 1901)),
-            resenia3(3, "Hola", "Juan", DtFecha(1, 1, 1, 1901));
+    DtResenia resenia1(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1),
+            resenia2(2, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1),
+            resenia3(3, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1);
     list<DtResenia> resenias({resenia1, resenia2, resenia3});
     cout << " - DtHostalExt" << endl;
     DtHostalExt hostalExt("HostalExt", "El Viejo Pancho 1234", 3, resenias);
@@ -82,7 +83,7 @@ void test_dt() {
     cout << notificacion.getAutor() << endl;
 
     cout << " - DtResenia:" << endl;
-    DtResenia resenia(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901));
+    DtResenia resenia(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1);
     cout << resenia.getCalificacion() << endl;
     cout << resenia.getResenia() << endl;
     cout << resenia.getComentario() << endl;
@@ -218,13 +219,37 @@ bool siNoDialog() {
     return opcion == 1;
 }
 
+void printHostal(DtHostal &hostal) {
+    cout << hostal.getNombre() << endl;
+    cout << " - "
+         << "Direccion: " << hostal.getDireccion() << endl;
+    cout << " - "
+         << "Calificacion promedio: " << hostal.getCalificacionProm() << endl;
+}
+
+void printResenia(DtResenia &resenia) {
+    cout << "Calificacion: " << resenia.getCalificacion() << endl;
+    cout << "Resenia: " << resenia.getResenia() << endl;
+    cout << "Comentario: " << resenia.getComentario() << endl;
+    cout << "Fecha: " << resenia.getFecha() << endl;
+}
+
+void printResenias(list<DtResenia> resenias) {
+    for (DtResenia resenia: resenias) {
+        printResenia(resenia);
+    }
+}
+
+
+void printHostalExt(DtHostalExt &hostal) {
+    printHostal(hostal);
+    cout << "Sus resenias: " << endl;
+    printResenias(hostal.getResenias());
+}
+
 void printHostales(list<DtHostal> &hostales) {
     for (auto hostal: hostales) {
-        cout << hostal.getNombre() << endl;
-        cout << " - "
-             << "Direccion: " << hostal.getDireccion() << endl;
-        cout << " - "
-             << "Calificacion promedio: " << hostal.getCalificacionProm() << endl;
+        printHostal(hostal);
     }
 }
 void printHabitaciones(list<DtHabitacion> &habitaciones) {
@@ -260,6 +285,18 @@ void mostrarElegirHostal_ReservaController() {
     string nombre;
     cin >> nombre;
     reservaController->elegirHostal(nombre);
+}
+
+void mostrarElegirHostal_NotificacionController() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    INotificacionController *notificacionController = factory->getNotificacionController();
+    list<DtHostal> hostales = notificacionController->mostrarHostales();
+    cout << "Los Hostales disponibles son: " << endl;
+    printHostales(hostales);
+    cout << "Ingrese el nombre del Hostal que se desee: ";
+    string nombre;
+    cin >> nombre;
+    notificacionController->elegirHostal(nombre);
 }
 
 void mostrarElegirHabitacion() {
@@ -376,10 +413,11 @@ void altaHabitacion() {
 void asignarEmpleadoAHostal() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
+
     mostrarElegirHostal_HostalController();
-    list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
 
     //Mostrar desempleados
+    list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
     cout << "Los empleados disponibles son: " << endl;
     for (const auto &empleado: desempleados) {
         cout << empleado << endl;
@@ -430,7 +468,9 @@ bool tipoReservaDialog() {
 void realizarReserva() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
+
     mostrarElegirHostal_ReservaController();
+
     cout << "Ingrese fecha de inicio: ";
     fechaDialog();
     DtFecha inicio = fechaDialog();
@@ -504,14 +544,6 @@ void bajaReserva() {
     }
 }
 
-void printResenias(list<DtResenia> &resenias) {
-    for (DtResenia resenia: resenias) {
-        cout << "Calificacion: " << resenia.getCalificacion() << endl;
-        cout << "Resenia: " << resenia.getResenia() << endl;
-        cout << "Comentario: " << resenia.getComentario() << endl;
-        cout << "Fecha: " << resenia.getFecha() << endl;
-    }
-}
 void consultarTop3Hostales() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
@@ -536,37 +568,234 @@ void consultarTop3Hostales() {
 }
 
 void registrarEstadia() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IReservaController *reservaController = factory->getReservaController();
+
+    mostrarElegirHostal_ReservaController();
+
+    cout << "Ingrese el mail del huesped que desea registrar su estadia: " << endl;
+    string email;
+    cin >> email;
+
+
+    list<DtReserva *> reservas = reservaController->mostrarReservasNoCanceladas(email);
+    cout << "Para el Huesped indicado, las reservas disponibles para registra estadia son: " << endl;
+    for (const auto &reserva: reservas) {
+        cout << reserva << endl;
+    }
+
+    cout << "Ingrese el codigo de la reserva que desea registrar: " << endl;
+    int numero;
+    cin >> numero;
+
+    reservaController->registrarEstadia(numero);
+    cout << "Estadia registrada" << endl;
 }
+
 
 void finalizarEstadia() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IReservaController *reservaController = factory->getReservaController();
+
+    mostrarElegirHostal_ReservaController();
+
+    cout << "Ingrese el mail del huesped que desea finalizar su estadia: " << endl;
+    string email;
+    cin >> email;
+
+    reservaController->finalizarReservasActivasDeUsuario(email);
+    cout << "Estadia finalizada" << endl;
 }
 
+void printEstadia(DtEstadia &estadia) {
+    cout << "Codigo de estadia: " << estadia.getCodigo() << endl;
+    cout << "Email del huesped: " << estadia.getHuesped() << endl;
+    cout << "Numero de Habitacion: " << estadia.getHabitacion() << endl;
+    cout << "Fecha de inicio: " << estadia.getCheckIn() << endl;
+    cout << "Fecha de fin: " << estadia.getCheckOut() << endl;
+}
+
+void printEstadias(list<DtEstadia> &estadias) {
+    for (DtEstadia estadia: estadias) {
+        printEstadia(estadia);
+    }
+}
 
 void calificarEstadia() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    INotificacionController *notificacionController = factory->getNotificacionController();
+
+    mostrarElegirHostal_NotificacionController();
+
+    cout << "Ingrese el mail del huesped que desea calificar alguna de sus estadias: " << endl;
+    string email;
+    cin >> email;
+    list<DtEstadia> estadias = notificacionController->mostrarEstadiasFinalizadas(email);
+    cout << "Las estadias disponibles para calificar son: " << endl;
+    printEstadias(estadias);
+
+    cout << "Ingrese el codigo de la estadia que desea calificar: " << endl;
+    int numero;
+    cin >> numero;
+    notificacionController->seleccionarEstadia(numero);
+
+    cout << "Ingrese la calificacion: " << endl;
+    int calificacion;
+    cin >> calificacion;
+    cout << "Ingrese la resenia: " << endl;
+    string resenia;
+    cin >> resenia;
+    notificacionController->ingresarCalificacion(calificacion, resenia);
 }
 
 void comentarCalificacion() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    INotificacionController *notificacionController = factory->getNotificacionController();
+
+    cout << "Ingrese el mail del Empleado que desea comentar una calificacion: " << endl;
+    string email;
+    cin >> email;
+    list<DtResenia> resenias = notificacionController->mostrarComentariosSinResponder(email);
+
+    if (!resenias.empty()) {
+        cout << "Las calificaciones disponibles para comentar son: " << endl;
+        printResenias(resenias);
+        cout << endl;
+        cout << "Ingrese el codigo de la calificacion que desea comentar: " << endl;
+        int numero;
+        cin >> numero;
+        notificacionController->elegirComentario(numero);
+        cout << "Ingrese el comentario que desea darle a la calificacion: " << endl;
+        string comentario;
+        cin >> comentario;
+        notificacionController->enviarComentario(comentario);
+        cout << "Comentario enviado" << endl;
+    } else {
+        cout << "No hay calificaciones disponibles para comentar" << endl;
+    }
 }
 
 void consultaUsuario() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IUsuarioController *usuarioController = factory->getUsuarioController();
+
+    list<DtUsuario> usuarios = usuarioController->mostrarUsuarios();
+    cout << "Los usuarios registrados son: " << endl;
+    for (const auto &usuario: usuarios) {
+        cout << usuario << endl;
+    }
+
+    cout << "Ingrese el mail del usuario que desea consultar: " << endl;
+    string email;
+    cin >> email;
+    DtUsuario usuario = usuarioController->mostrarInformacionUsuario(email);
+    cout << "La informacion del usuario es: " << endl;
+    cout << usuario << endl;
+
+    cout << "Operacion finalizada" << endl;
 }
 
 void consultaHostal() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IHostalController *hostalController = factory->getHostalController();
+
+    mostrarElegirHostal_HostalController();
+
+    DtHostalExt hostal = hostalController->informacionHostal();
+    cout << "La informacion del hostal es: " << endl;
+    printHostalExt(hostal);
+
+    cout << endl;
+    cout << "Operacion finalizada" << endl;
 }
 
 void consultaReserva() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IReservaController *reservaController = factory->getReservaController();
+
+    mostrarElegirHostal_ReservaController();
+
+    list<DtReserva *> reservas = reservaController->mostrarReservas();
+    cout << "Las reservas disponibles son: " << endl;
+    for (const auto &reserva: reservas) {
+        cout << reserva << endl;
+    }
+
+    cout << endl;
+    cout << "Operacion finalizada" << endl;
 }
 
 void consultaEstadia() {
-}
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    IReservaController *reservaController = factory->getReservaController();
 
-void consultaCalificacion() {
+    mostrarElegirHostal_ReservaController();
+
+    list<DtEstadia> estadias = reservaController->listarEstadias();
+    cout << "Las estadias disponibles son: " << endl;
+    printEstadias(estadias);
+
+    cout << "Seleccione el codigo de la estadia que desea consultar: " << endl;
+    int numero;
+    cin >> numero;
+    reservaController->seleccionarEstadia(numero);
+    DtEstadia estadia = reservaController->mostrarInformacionEstadia();
+    cout << "La informacion de la estadia es: " << endl;
+    printEstadia(estadia);
+
+    cout << "Desea ver la calificacion de la estadia? (1. Si / 2. No)" << endl;
+    bool desea = siNoDialog();
+    if (desea) {
+        DtResenia resenia = reservaController->verCalificacion();
+        cout << "La calificacion de la estadia es: " << endl;
+        printResenia(resenia);
+    }
+    cout << "Desea ver la reserva de la estadia? (1. Si / 2. No)" << endl;
+    desea = siNoDialog();
+    if (desea) {
+        DtReserva* reserva = reservaController->verReserva();
+        cout << "La reserva de la estadia es: " << endl;
+        cout << reserva << endl;
+    }
+    cout << endl;
+    cout << "Operacion finalizada" << endl;
 }
 
 void subscribirseANotificaciones() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    INotificacionController *notificacionController = factory->getNotificacionController();
+
+    list<DtEmpleado> empleados = notificacionController->mostrarEmpleados();
+    cout << "Los empleados disponibles son: " << endl;
+    for (const auto &empleado: empleados) {
+        cout << empleado << endl;
+    }
+
+    cout << "Ingrese el mail del empleado que desea subscribirse: " << endl;
+    string email;
+    cin >> email;
+    notificacionController->suscribirANotificaciones(email);
+
+    cout << endl;
+    cout << "El empleado fue suscrito a las notificaciones" << endl;
 }
 
 void consultarNotificaciones() {
+    ControllerFactory *factory = ControllerFactory::getInstance();
+    INotificacionController *notificacionController = factory->getNotificacionController();
+
+    list<DtEmpleado> empleados = notificacionController->mostrarEmpleados();
+    cout << "Los empleados disponibles son: " << endl;
+    for (const auto &empleado: empleados) {
+        cout << empleado << endl;
+    }
+
+    cout << "Ingrese el mail del empleado que desea consultar: " << endl;
+    string email;
+    cin >> email;
+    list<DtNotificacion> notificaciones = notificacionController->consultaDeNotificaciones(email);
+    cout << "Las notificaciones del empleado son: " << endl;
+//    printNotificaciones(notificaciones);
 }
 
 void eliminarSubscripcion() {
@@ -592,12 +821,11 @@ void printOpciones() {
     cout << "13 - Consulta de Hostal" << endl;
     cout << "14 - Consulta de Reserva" << endl;
     cout << "15 - Consulta de Estadia" << endl;
-    cout << "16 - Consulta de Calificacion" << endl;
-    cout << "17 - Subscribirse a Notificaciones" << endl;
-    cout << "18 - Consultar Notificaciones" << endl;
-    cout << "19 - Eliminar Subscripcion" << endl;
-    cout << "20 - Modificar Fecha del Sistema" << endl;
-    cout << "21 - Salir" << endl;
+    cout << "16 - Subscribirse a Notificaciones" << endl;
+    cout << "17 - Consultar Notificaciones" << endl;
+    cout << "18 - Eliminar Subscripcion" << endl;
+    cout << "19 - Modificar Fecha del Sistema" << endl;
+    cout << "20 - Salir" << endl;
 }
 
 void mainApp() {
@@ -668,26 +896,22 @@ void mainApp() {
                 printInterlineado();
                 break;
             case 16:
-                consultaCalificacion();
-                printInterlineado();
-                break;
-            case 17:
                 subscribirseANotificaciones();
                 printInterlineado();
                 break;
-            case 18:
+            case 17:
                 consultarNotificaciones();
                 printInterlineado();
                 break;
-            case 19:
+            case 18:
                 eliminarSubscripcion();
                 printInterlineado();
                 break;
-            case 20:
+            case 19:
                 modificarFechaDelSistema();
                 printInterlineado();
                 break;
-            case 21:
+            case 20:
                 cout << "Gracias por utilizar el sistema de gestion de hoteleria FING" << endl;
                 break;
             default:
@@ -696,7 +920,7 @@ void mainApp() {
                 printInterlineado();
                 break;
         }
-        if (opcion != 21) {
+        if (opcion != 20) {
             printOpciones();
             cin >> opcion;
         }

@@ -26,8 +26,6 @@ private:
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
 
-    int getCalificacionPromedio();
-
     list<DtResenia> getDatosReseniasDeHostal();
 
 public:
@@ -45,7 +43,7 @@ public:
 
     list<DtHabitacion> getInfoDeHabitaciones();
 
-    bool checkIfSameHostal(Hostal * otroHostal);
+    bool checkIfSameHostal(Hostal *otroHostal);
 
     list<DtResenia> getReseniasSinResponder();
 
@@ -60,6 +58,8 @@ public:
     string getNombre();
 
     list<DtReserva *> getReservasNoCanceladas(string email);
+    int getCalificacionPromedio();
+    list<DtResenia> getResenias();
 };
 
 

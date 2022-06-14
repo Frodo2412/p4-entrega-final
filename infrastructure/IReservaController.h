@@ -48,7 +48,7 @@ public:
 
     virtual list<DtHuesped> mostrarHuespedes() = 0;
 
-    virtual list<DtEstadia> mostrarInformacionEstadia() = 0;
+    virtual DtEstadia mostrarInformacionEstadia() = 0;
 
     virtual list<DtReserva *> mostrarReservas() = 0;
 
@@ -87,6 +87,10 @@ public:
     virtual void confirmarReserva() = 0;
 
     virtual Estadia *findEstadia(int idReserva) = 0;
+
+    virtual void seleccionarEstadia(int codigoReserva) = 0;
+
+    virtual DtResenia verCalificacion() = 0;
 };
 
 #endif//P4_ENTREGA_FINAL_IRESERVACONTROLLER_H

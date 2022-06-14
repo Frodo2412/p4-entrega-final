@@ -27,7 +27,7 @@ Hostal *HostalController::getHostal() {
     return nullptr;
 }
 DtResenia HostalController::getCalificacion() {
-    return DtResenia(0, " __cxx11::basic_string()", "__cxx11::basic_string()", DtFecha());
+    return DtResenia(0, " __cxx11::basic_string()", "__cxx11::basic_string()", DtFecha(), 1);
 }
 list<Hostal *> HostalController::getHostales() {
     return list<Hostal *>();
@@ -50,7 +50,7 @@ void HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
 }
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
 }
-Hostal* HostalController::findHostal(Empleado *empleado) {
+Hostal *HostalController::findHostal(Empleado *empleado) {
     return nullptr;
 }
 void HostalController::elegirHostal(string nombre) {
@@ -68,4 +68,7 @@ void HostalController::confirmarContratoEmpleado() {
 //TODO: Implementar
 list<DtHostal> HostalController::mostrarTop3Hostales() {
     return list<DtHostal>();
+}
+DtHostalExt HostalController::informacionHostal() {
+    return {hostalAux->getNombre(), hostalAux->getDireccion(), hostalAux->getCalificacionPromedio(), hostalAux->getResenias()};
 }

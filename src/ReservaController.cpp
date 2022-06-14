@@ -50,8 +50,8 @@ list<DtHuesped> ReservaController::mostrarHuespedes() {
     return {};
 }
 
-list<DtEstadia> ReservaController::mostrarInformacionEstadia() {
-    return {};
+DtEstadia ReservaController::mostrarInformacionEstadia() {
+    return {"a", "b", 1, {}, {}, "c", 1};
 }
 
 list<DtReserva *> ReservaController::mostrarReservas() {
@@ -129,4 +129,9 @@ int ReservaController::getNextCodigoReserva() {
     currentIdReserva++;
     return currentIdReserva;
 }
-
+void ReservaController::seleccionarEstadia(int codigoReserva) {
+    estadiaAux = reservas[codigoReserva]->getEstadia();
+}
+DtResenia ReservaController::verCalificacion() {
+    return estadiaAux->getResenia()->getDatos();
+}

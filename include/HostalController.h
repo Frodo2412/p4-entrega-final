@@ -39,6 +39,7 @@ public:
     Hostal* findHostal(Empleado *empleado) override;
     void elegirHostal(string nombre) override;
     void cancelarAltaHabitacion() override;
+    DtHostalExt informacionHostal() override;
     static HostalController* getInstance();
 };
 

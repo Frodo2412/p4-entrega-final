@@ -9,15 +9,18 @@ using std::string;
 
 class DtResenia {
 private:
+    int codigo;
     int calificacion;
     string resenia;
     string comentario;
     DtFecha fecha;
 
 public:
-    DtResenia(int calificacion, string resenia, string comentario, DtFecha fecha);
+    DtResenia(int calificacion, string resenia, string comentario, DtFecha fecha, int codigo);
 
     int getCalificacion() const;
+
+    int getCodigo() const;
 
     string getResenia();
 
