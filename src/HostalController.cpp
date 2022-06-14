@@ -60,3 +60,12 @@ void HostalController::cancelarAltaHabitacion() {
 HostalController *HostalController::getInstance() {
     return nullptr;
 }
+void HostalController::confirmarContratoEmpleado() {
+    empleadoAux->setCargo(cargoAux);
+    hostalAux->agregarEmpleadoAHostal(empleadoAux);
+}
+
+//TODO: Implementar
+list<DtHostal> HostalController::mostrarTop3Hostales() {
+    return list<DtHostal>();
+}

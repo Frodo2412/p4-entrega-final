@@ -79,6 +79,9 @@ list<DtEstadia> ReservaController::mostrarEstadiasFinalizadas(string email) {
 void ReservaController::cancelarReserva() {
 }
 
+void ReservaController::confirmarReserva() {
+}
+
 list<DtEstadia> ReservaController::listarEstadias() {
     return {};
 }
@@ -126,3 +129,4 @@ int ReservaController::getNextCodigoReserva() {
     currentIdReserva++;
     return currentIdReserva;
 }
+

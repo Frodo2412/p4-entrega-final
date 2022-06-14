@@ -84,6 +84,8 @@ public:
 
     virtual void confirmarBajaReserva() = 0;
 
+    virtual void confirmarReserva() = 0;
+
     virtual Estadia *findEstadia(int idReserva) = 0;
 };
 

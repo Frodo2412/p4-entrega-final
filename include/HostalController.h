@@ -22,13 +22,15 @@ private:
     HostalController *instancia;
 
 public:
-    void ingresarDatosHabitacion(int numero, int cantidad, int precio);
-    void confirmarAltaHabitacion();
+    void ingresarDatosHabitacion(int numero, int cantidad, int precio) override;
+    void confirmarAltaHabitacion() override;
+    void confirmarContratoEmpleado() override;
     Empleado *getEmpleado() override;
     Hostal *getHostal() override;
     DtResenia getCalificacion() override;
     list<Hostal *> getHostales() override;
     list<DtHostal> mostrarHostales() override;
+    list<DtHostal> mostrarTop3Hostales() override;
     list<DtResenia> masInformacionSobreHostal(string nombre) override;
     list<DtEmpleado> mostrarDesempleados() override;
     void cancelarContratoEmpleado() override;

@@ -72,6 +72,8 @@ public:
 
     void cancelarReserva() override;
 
+    void confirmarReserva() override;
+
     list<DtEstadia> listarEstadias() override;
 
     list<DtReserva *> verCalificaciones() override;
