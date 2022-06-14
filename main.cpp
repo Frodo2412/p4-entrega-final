@@ -482,7 +482,7 @@ void bajaReserva() {
 
     mostrarElegirHostal_ReservaController();
 
-    list<DtReserva *> reservas =  reservaController->informacionReservas();
+    list<DtReserva *> reservas = reservaController->informacionReservas();
     cout << "Las reservas disponibles son: " << endl;
     for (const auto &reserva: reservas) {
         cout << reserva << endl;
@@ -502,7 +502,6 @@ void bajaReserva() {
         cout << "Baja cancelada" << endl;
         reservaController->cancelarBajaReserva();
     }
-
 }
 
 void printResenias(list<DtResenia> &resenias) {
@@ -534,7 +533,6 @@ void consultarTop3Hostales() {
         cout << "Desea ver las calificaciones de otro hostal? (1. Si, 2. No)" << endl;
         quieraInfo = siNoDialog();
     }
-
 }
 
 void registrarEstadia() {
@@ -602,12 +600,7 @@ void printOpciones() {
     cout << "21 - Salir" << endl;
 }
 
-int main() {
-    //    test_dt();
-    //    test_comentario();
-    //    test_resenia();
-    //    test_usuario();
-
+void mainApp() {
     cout << "Bienvenido al sistema de gestion de hoteleria FING" << endl;
     int opcion = 0;
     while (opcion != 21) {
@@ -703,8 +696,19 @@ int main() {
                 printInterlineado();
                 break;
         }
-        printOpciones();
-        cin >> opcion;
+        if (opcion != 21) {
+            printOpciones();
+            cin >> opcion;
+        }
     }
+}
+
+int main() {
+    //    test_dt();
+    //    test_comentario();
+    //    test_resenia();
+    //    test_usuario();
+
+    mainApp();
     return 0;
 }
