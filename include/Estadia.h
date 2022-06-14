@@ -10,8 +10,11 @@
 #include "../datatypes/DtEstadia.h"
 
 class Reserva;
+
 class Resenia;
+
 class Huesped;
+
 class Habitacion;
 
 class Estadia {
@@ -22,11 +25,10 @@ private:
     DtFecha checkOut;
     string promo;
     Reserva *reserva;
-    map<string ,Huesped *> huespedes;
-    Resenia *calificacion;
- //   Habitacion *hab;
+    map<string, Huesped *> huespedes;
+
 public:
-    Estadia(DtFecha checkIn,Huesped *reservante,    map<string ,Huesped *> invitados, Reserva *reserva);
+    Estadia(DtFecha checkIn, Huesped *reservante, map<string, Huesped *> invitados, Reserva *reserva);
 
     Estadia(DtFecha checkIn, Huesped *reservante, Reserva *reserva);
 
@@ -40,13 +42,11 @@ public:
 
     bool hasReseniaSinResponder();
 
-    void destruirAsociaciones();
-
     bool isAbierta();
 
     void setCheckOut(DtFecha fecha);
 
-    Resenia setResenia(Resenia *r);
+    void setResenia(Resenia *resenia);
 
     void setReserva(Reserva *res);
 };

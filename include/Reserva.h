@@ -8,6 +8,7 @@
 #include "Estadia.h"
 #include "Habitacion.h"
 #include "Huesped.h"
+
 class Estadia;
 
 class Huesped;
@@ -36,7 +37,7 @@ public:
 
     virtual int getCosto() = 0;
 
-    int getCodigo();
+    int getCodigo() const;
 
     Huesped *getReservante();
 
@@ -66,9 +67,9 @@ public:
 
     virtual bool tieneHuespedAsociado(string email) = 0;
 
-    DtEstado getEstado();
+    static DtEstado getEstado();
 
-    virtual Estadia createEstadia(DtFecha checkIn) =0;
+    virtual Estadia createEstadia(DtFecha checkIn) = 0;
 
 };
 

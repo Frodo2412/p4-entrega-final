@@ -28,19 +28,14 @@ void Reserva::configReserva(Huesped *huespedReservante) {
     setCodigoGenerado();
 }
 
-// TODO: Cuando este el constructor de Estadia hacer este metodo
-
-
 void Reserva::finalizarReservaActiva() {
     if (maybeEstadia != nullptr) maybeEstadia->finalizarActiva();
 }
 
 DtResenia Reserva::getReseniaSinResponder() {
-    assert(hasReseniaSinResponder());
-    return maybeEstadia->getResenia()->getDatos();
+    if (hasReseniaSinResponder()) return maybeEstadia->getResenia()->getDatos();
+    else throw invalid_argument("No hay resenia sin responder");
 }
-
-
 
 bool Reserva::hasReseniaSinResponder() {
     return maybeEstadia != nullptr && maybeEstadia->hasReseniaSinResponder();
@@ -73,10 +68,12 @@ Reserva::Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, 
     this->maybeEstadia = nullptr;
     this->estado = DtEstado::Abierta;
 }
+
 bool Reserva::hasResenia() {
     return maybeEstadia != nullptr && maybeEstadia->hasResenia();
 }
-int Reserva::getCodigo() {
+
+int Reserva::getCodigo() const {
     return codigo;
 }
 

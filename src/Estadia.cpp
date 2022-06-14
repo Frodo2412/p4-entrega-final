@@ -1,38 +1,40 @@
 
 #include "Estadia.h"
 #include <utility>
-void Estadia::finalizarActiva(){
+
+void Estadia::finalizarActiva() {
     if (isAbierta()) {
-        Reloj* r = Reloj::getInstance();
+        Reloj *r = Reloj::getInstance();
         setCheckOut(r->getFechaActual());
     }
 }
 
-Estadia::Estadia(DtFecha checkIn,Huesped *reservante, map<string,Huesped *> invitados, Reserva *reserva){
-    this->checkIn= checkIn;
+Estadia::Estadia(DtFecha checkIn, Huesped *reservante, map<string, Huesped *> invitados, Reserva *reserva) {
+    this->checkIn = checkIn;
     this->huespedes = invitados;
     this->huespedes[reservante->getMail()] = reservante;
-    this->reserva= reserva;
+    this->reserva = reserva;
+    this->maybeResenia = nullptr;
 }
 
-Estadia::Estadia(DtFecha checkIn,Huesped *reservante, Reserva *reserva) {
-    this->checkIn= checkIn;
+Estadia::Estadia(DtFecha checkIn, Huesped *reservante, Reserva *reserva) {
+    this->checkIn = checkIn;
     this->huespedes[reservante->getMail()] = reservante;
-    this->reserva= reserva;
+    this->reserva = reserva;
 
 }
 
-void Estadia::setReserva(Reserva *res){
-    this->reserva= res;
+void Estadia::setReserva(Reserva *res) {
+    this->reserva = res;
 }
 
 bool Estadia::isAbierta() {
-return reserva->getEstado() == Abierta;
-}
-void Estadia::setCheckOut(DtFecha fechaSalida){
-    this->checkOut = fechaSalida;
+    return reserva->getEstado() == Abierta;
 }
 
+void Estadia::setCheckOut(DtFecha fechaSalida) {
+    this->checkOut = fechaSalida;
+}
 
 
 Resenia *Estadia::getResenia() {
@@ -40,15 +42,14 @@ Resenia *Estadia::getResenia() {
 }
 
 DtEstadia Estadia::getDatos() {
-    return DtEstadia(nombreHostal,huespedes[]);
-
+    return {reserva->getHabitacion()->getHostal().getNombre(), reserva->getReservante()->getMail(),
+            reserva->getHabitacion()->getNumero(), checkIn, checkOut, ""};
 }
 
-Resenia Estadia::setResenia(Resenia *r) {
-    this->calificacion = r;
+void Estadia::setResenia(Resenia *resenia) {
+    this->maybeResenia = resenia;
 
 }
-
 
 
 bool Estadia::hasReseniaSinResponder() {
@@ -59,13 +60,6 @@ bool Estadia::hasReseniaSinResponder() {
     }
 }
 
-void Estadia::destruirAsociaciones() {}
-
-
 bool Estadia::hasResenia() {
     return maybeResenia != nullptr;
-}
-
-void Estadia::setResenia(Resenia *res) {
-    maybeResenia = res;
 }
