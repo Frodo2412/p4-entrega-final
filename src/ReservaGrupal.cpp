@@ -20,7 +20,6 @@ int ReservaGrupal::getCosto() {
 }
 
 
-
 Estadia ReservaGrupal::createEstadia(DtFecha checkIn) {
-    return Estadia(checkIn,huespedReservante,huespedes, this);
+    return {checkIn, huespedReservante, huespedes, this};
 }

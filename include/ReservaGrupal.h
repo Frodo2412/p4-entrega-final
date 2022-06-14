@@ -9,7 +9,7 @@
 
 class ReservaGrupal : public Reserva {
 private:
-    map<string ,Huesped *> huespedes;
+    map<string, Huesped *> huespedes;
 public:
     bool tieneHuespedAsociado(string email) override;
 
@@ -17,7 +17,7 @@ public:
 
     int getCosto() override;
 
-    virtual Estadia createEstadia(DtFecha checkIn) =0;
+    Estadia createEstadia(DtFecha checkIn) override;
 
 };
 

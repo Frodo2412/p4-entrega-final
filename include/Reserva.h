@@ -67,7 +67,7 @@ public:
 
     virtual bool tieneHuespedAsociado(string email) = 0;
 
-    static DtEstado getEstado();
+    DtEstado getEstado();
 
     virtual Estadia createEstadia(DtFecha checkIn) = 0;
 

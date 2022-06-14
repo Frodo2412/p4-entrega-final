@@ -12,16 +12,16 @@ void Estadia::finalizarActiva() {
 Estadia::Estadia(DtFecha checkIn, Huesped *reservante, map<string, Huesped *> invitados, Reserva *reserva) {
     this->checkIn = checkIn;
     this->huespedes = invitados;
-    this->huespedes[reservante->getMail()] = reservante;
+    this->huespedes.insert(pair<string, Huesped *>(reservante->getMail(), reservante));
     this->reserva = reserva;
     this->maybeResenia = nullptr;
 }
 
 Estadia::Estadia(DtFecha checkIn, Huesped *reservante, Reserva *reserva) {
     this->checkIn = checkIn;
-    this->huespedes[reservante->getMail()] = reservante;
+    this->huespedes.insert(pair<string, Huesped *>(reservante->getMail(), reservante));
     this->reserva = reserva;
-
+    this->maybeResenia = nullptr;
 }
 
 void Estadia::setReserva(Reserva *res) {
