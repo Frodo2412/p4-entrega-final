@@ -4,24 +4,24 @@
 
 #include <algorithm>
 #include "HostalController.h"
+#include "NotificacionController.h"
 
 using namespace std;
 typedef std::pair<std::string, Hostal *> hostalesPair;
 
 Empleado *HostalController::getEmpleado() {
-    return nullptr;
+    return empleadoAux;
 }
 
 Hostal *HostalController::getHostal() {
-    return nullptr;
-}
-
-DtResenia HostalController::getCalificacion() {
-    return DtResenia(0, " __cxx11::basic_string()", "__cxx11::basic_string()", DtFecha());
+    return hostalAux;
 }
 
 list<Hostal *> HostalController::getHostales() {
-    return list<Hostal *>();
+    list<Hostal *> hostalesList = list<Hostal *>();
+    for (auto &hostal: hostales)
+        hostalesList.push_back(hostal.second);
+    return hostalesList;
 }
 
 list<DtHostal> HostalController::mostrarHostales() {
@@ -35,7 +35,12 @@ list<DtHostal> HostalController::mostrarHostales() {
 }
 
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    return list<DtResenia>();
+    INotificacionController *notificacionController = NotificacionController::getInstance();
+    try{
+            hostales[nombre]->getDatosReseniasDeHostal();
+    } catch (std::exception& e) {
+        cout << "el hostal ingresado no es correcto" << e.what() <<endl;
+    }
 }
 
 list<DtEmpleado> HostalController::mostrarDesempleados() {
@@ -48,15 +53,40 @@ void HostalController::cancelarContratoEmpleado() {
     delete hostalAux;
 }
 
-Empleado *HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
+void HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
     IUsuarioController *usuarioController = UsuarioController::getInstance();
-    return usuarioController->getEmpleado(email);
+    empleadoAux = usuarioController->getEmpleado(email);
+    cargoAux = cargo;
 }
 
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
+    if (hostales[nombre] == nullptr) {
+        hostalAux = new Hostal(nombre, direccion, telefono);
+        hostales.insert({nombre, hostalAux});
+    } else {
+        cout << "ya existe un hostal con ese nombre" << endl;
+    }
 }
-Hostal* HostalController::findHostal(Empleado *empleado) {
-    return nullptr;
+
+Hostal *HostalController::findHostal(Empleado *empleado) {
+//TODO: en el diagrama aparece que tengo que ver si existe un
+// empleado con ese nombre pero hostalController no tiene lista
+// de empleados y en el miro no hay ningun getinstance a usuariocontroller
+    map<string, Hostal *>::iterator it;
+    it = hostales.begin();
+    bool found = false;
+    Hostal *hostal;
+    while (it != hostales.end() && !found) {
+        if (it->second->trabajaEmpleadoEnHostal(empleado)) {
+            hostal = it->second;
+            found = true;
+        }
+        it++;
+    }
+    if (found)
+        return hostal;
+    else
+        return nullptr;
 }
 
 void HostalController::elegirHostal(string nombre) {
@@ -80,6 +110,8 @@ void HostalController::confirmarContratoEmpleado() {
 
 HostalController *HostalController::instancia = nullptr;
 
+HostalController::HostalController() = default;
+
 list<DtHostal *> HostalController::mostrarTop3Hostales() {
     vector<hostalesPair> vec;
     std::copy(hostales.begin(), hostales.end(), std::back_inserter<std::vector<hostalesPair>>(vec));
@@ -92,11 +124,14 @@ list<DtHostal *> HostalController::mostrarTop3Hostales() {
               });
     list<DtHostal *> top3;
     int it = 0;
-    while(it < 3 && vec[it].second != nullptr) {
-        top3.push_back(vec[it].second);
-
+    while (it < 3 && vec[it].second != nullptr) {
+        auto top = new DtHostal(vec[it].second->getDatos());
+        top3.push_back(top);
         it++;
     }
+    return top3;
 }
 
-HostalController::HostalController() = default;
+DtHostalExt HostalController::informacionHostal() {
+    return hostalAux->getDatosExt();
+} //TODO: se libera memoria como dice el diagrama?

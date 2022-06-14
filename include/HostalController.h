@@ -22,19 +22,18 @@ private:
 public:
     Empleado *getEmpleado() override;
     Hostal *getHostal() override;
-    DtResenia getCalificacion() override;
     list<Hostal *> getHostales() override;
     list<DtHostal> mostrarHostales() override;
     list<DtResenia> masInformacionSobreHostal(string nombre) override;
     list<DtEmpleado> mostrarDesempleados() override;
     void cancelarContratoEmpleado() override;
     void confirmarContratoEmpleado() override;
-    Empleado *seleccionarEmpleado(string email, DtCargo cargo) override;
+    void seleccionarEmpleado(string email, DtCargo cargo) override;
     void altaHostal(string nombre, string direccion, int telefono) override;
     Hostal* findHostal(Empleado *empleado) override;
     void elegirHostal(string nombre) override;
     list<DtHostal *> mostrarTop3Hostales() override;
-//    void cancelarAltaHabitacion() override; TODO: CREO QUE NO VA PORQUE NO ESTA ALTA DE HABITACION
+    DtHostalExt informacionHostal() override;
     static HostalController* getInstance();
 };
 

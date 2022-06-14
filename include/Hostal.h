@@ -26,9 +26,9 @@ private:
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
 
-    list<DtResenia> getDatosReseniasDeHostal();
-
 public:
+
+    list<DtResenia> getDatosReseniasDeHostal();
 
     int getCalificacionPromedio();
 
