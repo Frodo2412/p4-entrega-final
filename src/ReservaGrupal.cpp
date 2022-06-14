@@ -18,3 +18,9 @@ int ReservaGrupal::getCosto() {
     int total = floor(habitacion->getPrecioPorNoche() * huespedes.size());
     return cantFingers >= 2 ? total * 0.7 : total;
 }
+
+
+
+Estadia ReservaGrupal::createEstadia(DtFecha checkIn) {
+    return Estadia(checkIn,huespedReservante,huespedes, this);
+}

@@ -16,6 +16,9 @@ public:
     DtReservaGrupal *getDatos() override;
 
     int getCosto() override;
+
+    virtual Estadia createEstadia(DtFecha checkIn) =0;
+
 };
 
 

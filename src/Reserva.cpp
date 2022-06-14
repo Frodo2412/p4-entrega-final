@@ -29,9 +29,7 @@ void Reserva::configReserva(Huesped *huespedReservante) {
 }
 
 // TODO: Cuando este el constructor de Estadia hacer este metodo
-Estadia Reserva::createEstadia(DtFecha fecha) {
-    return Estadia();
-}
+
 
 void Reserva::finalizarReservaActiva() {
     if (maybeEstadia != nullptr) maybeEstadia->finalizarActiva();
@@ -80,4 +78,8 @@ bool Reserva::hasResenia() {
 }
 int Reserva::getCodigo() {
     return codigo;
+}
+
+DtEstado Reserva::getEstado() {
+    return Abierta;
 }

@@ -6,7 +6,7 @@
 #include "Comentario.h"
 #include "DtFecha.h"
 #include "DtResenia.h"
-//#include "Estadia.h" No lo usamos nunca creo
+//#include "Estadia.h"
 #include "Huesped.h"
 
 //Deberia esta pronto los includes a menos del dt
