@@ -9,11 +9,12 @@ Resenia::Resenia(int calificacion, DtFecha fecha, string comentario) {
     this->fecha = fecha;
     this->comentario = std::move(comentario);
     this->maybeComentario = nullptr;
-//    this->maybeEstadia = nullptr;
+    this->maybeEstadia = nullptr;
+    this->autor = nullptr;
 }
 
 DtResenia Resenia::getDatos() {
-    return DtResenia(calificacion, comentario, maybeComentario->getTexto(), fecha);
+    return {calificacion, comentario, maybeComentario->getTexto(), fecha};
 }
 
 int Resenia::getCalificacion() const {
@@ -36,9 +37,9 @@ void Resenia::setComentario(Comentario *respuesta) {
     this->maybeComentario = respuesta;
 }
 
-//void Resenia::setEstadia(Estadia *estadia) {
-//    this->maybeEstadia = estadia;
-//}
+void Resenia::setEstadia(Estadia *estadia) {
+    this->maybeEstadia = estadia;
+}
 
 bool Resenia::isComentada() {
     return maybeComentario != nullptr;
@@ -55,7 +56,10 @@ void Resenia::setAutor(Huesped *aut) {
     autor = aut;
 }
 
-DtNotificacion Resenia::getNotificacion(){
+DtNotificacion Resenia::getNotificacion() {
     return {calificacion, fecha, comentario, maybeComentario->getTexto(), autor->getNombre()};
 }
 
+Estadia *Resenia::getEstadia() {
+    return maybeEstadia;
+}
