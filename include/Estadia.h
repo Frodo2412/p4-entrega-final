@@ -5,14 +5,35 @@
 #include "Resenia.h"
 #include "Reserva.h"
 #include "Reloj.h"
+#include "Observer.h"
+#include "Habitacion.h"
+#include "../datatypes/DtEstadia.h"
 
+class Reserva;
 
 class Resenia;
 
+class Huesped;
+
+class Habitacion;
+
 class Estadia {
 private:
+
     Resenia *maybeResenia;
+    DtFecha checkIn;
+    DtFecha checkOut;
+    string promo;
+    Reserva *reserva;
+    map<string, Huesped *> huespedes;
+
 public:
+    Estadia(DtFecha checkIn, Huesped *reservante, map<string, Huesped *> invitados, Reserva *reserva);
+
+    Estadia(DtFecha checkIn, Huesped *reservante, Reserva *reserva);
+
+    DtEstadia getDatos();
+
     void finalizarActiva();
 
     Resenia *getResenia();
@@ -21,9 +42,13 @@ public:
 
     bool hasReseniaSinResponder();
 
-    void destruirAsociaciones();
+    bool isAbierta();
 
-    void setResenia(Resenia* res);
+    void setCheckOut(DtFecha fecha);
+
+    void setResenia(Resenia *resenia);
+
+    void setReserva(Reserva *res);
 };
 
 

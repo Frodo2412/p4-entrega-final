@@ -9,13 +9,16 @@
 
 class ReservaGrupal : public Reserva {
 private:
-    map<string ,Huesped *> huespedes;
+    map<string, Huesped *> huespedes;
 public:
     bool tieneHuespedAsociado(string email) override;
 
     DtReservaGrupal *getDatos() override;
 
     int getCosto() override;
+
+    Estadia createEstadia(DtFecha checkIn) override;
+
 };
 
 

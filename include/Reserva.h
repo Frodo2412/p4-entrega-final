@@ -37,7 +37,7 @@ public:
 
     virtual int getCosto() = 0;
 
-    int getCodigo();
+    int getCodigo() const;
 
     Huesped *getReservante();
 
@@ -53,8 +53,6 @@ public:
 
     virtual DtReserva *getDatos() = 0;
 
-    Estadia createEstadia(DtFecha fecha);
-
     void finalizarReservaActiva();
 
     DtResenia getReseniaSinResponder();
@@ -68,6 +66,10 @@ public:
     bool isReservaCancelada();
 
     virtual bool tieneHuespedAsociado(string email) = 0;
+
+    DtEstado getEstado();
+
+    virtual Estadia createEstadia(DtFecha checkIn) = 0;
 
 };
 
