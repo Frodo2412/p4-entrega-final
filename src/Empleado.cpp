@@ -21,3 +21,14 @@ DtCargo Empleado::getCargo() {
 DtEmpleado Empleado::getDatosEmpleado() {
     return {this->nombre, this->mail, this->cargo};
 }
+
+void Empleado::notify(DtNotificacion notif) {
+    notificaciones.push_back(notif);
+}
+
+list<DtNotificacion> Empleado::getNotificaciones() {
+    list<DtNotificacion> notisLeidas;
+    //No estoy seguro si con splice la lista de notificaciones queda vacia como deberia
+    notisLeidas.splice(notisLeidas.end(), notificaciones);
+    return notisLeidas;
+}

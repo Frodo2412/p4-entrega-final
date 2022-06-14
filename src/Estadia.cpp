@@ -65,3 +65,7 @@ void Estadia::destruirAsociaciones() {}
 bool Estadia::hasResenia() {
     return maybeResenia != nullptr;
 }
+
+void Estadia::setResenia(Resenia *res) {
+    maybeResenia = res;
+}

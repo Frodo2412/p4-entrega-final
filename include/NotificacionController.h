@@ -7,7 +7,7 @@
 
 #include "../infrastructure/INotificacionController.h"
 
-//TODO: Implementar
+
 class NotificacionController : public INotificacionController {
 private:
     //El "Key" de la lista es el mail del empleado
@@ -16,14 +16,16 @@ private:
     Estadia *estadiaAux;
     Hostal *hostalAux;
     Comentario *comentarioAux;
-    NotificacionController *instancia;
+    static NotificacionController *instancia;
 
+    string mailAux;
+    list<Resenia *> resenias;
 public:
     list<DtEmpleado> mostrarEmpleados() override;
     void suscribirANotificaciones(string email) override;
-    void consultaDeNotificaciones(string email) override;
-    void eliminarSubscripcion(string email) override;
-    void notificar() override;
+    list<DtNotificacion> consultaDeNotificaciones(string email) override;    //Cambio de tipo (no es void), en DC es DtResenia pero es mas sencillo
+    void eliminarSubscripcion(string email) override;                        //un DtNotificacion
+    void notificar(DtNotificacion notif) override;
     Resenia *getResenia() override;
     Estadia *getEstadia() override;
     list<DtEstadia> mostrarEstadiasFinalizadas(string email) override;

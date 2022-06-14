@@ -1,13 +1,12 @@
-//
-// Created by unzip on 07/06/22.
-//
 
 #ifndef P4_ENTREGA_FINAL_OBSERVER_H
 #define P4_ENTREGA_FINAL_OBSERVER_H
 
+#include "../datatypes/DtNotificacion.h"
+
 class Observer {
 public:
-    virtual void notify() = 0;
+    virtual void notify(DtNotificacion notif) = 0;
 };
 
 

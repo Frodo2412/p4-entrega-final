@@ -28,7 +28,7 @@ public:
     virtual void cancelarContratoEmpleado() = 0;
     virtual Empleado* seleccionarEmpleado(string email, DtCargo cargo) = 0;
     virtual void altaHostal(string nombre, string direccion, int telefono) = 0;
-    virtual void findHostal(Empleado* empleado) = 0;
+    virtual Hostal* findHostal(Empleado* empleado) = 0;
     virtual void elegirHostal(string nombre) = 0;
     virtual void cancelarAltaHabitacion() = 0;
 };
