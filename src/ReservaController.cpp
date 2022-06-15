@@ -192,7 +192,8 @@ void ReservaController::cancelarBajaReserva() {
 
 void ReservaController::confirmarBajaReserva() {
     Reserva *res = getReserva();
-    res->setEstado(DtEstado::Cancelada);
+    reservas.erase(res->getCodigo());
+    delete res;
 }
 
 Estadia *ReservaController::findEstadia(int idReserva) {
