@@ -33,6 +33,8 @@ protected:
 public:
     Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, Habitacion *habitacion);
 
+    virtual ~Reserva();
+
     Estadia *getEstadia();
 
     virtual int getCosto() = 0;
@@ -69,7 +71,7 @@ public:
 
     DtEstado getEstado();
 
-    virtual Estadia createEstadia(DtFecha checkIn) = 0;
+    virtual Estadia *createEstadia(DtFecha checkIn) = 0;
 
 };
 

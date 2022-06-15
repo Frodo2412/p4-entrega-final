@@ -1,6 +1,3 @@
-//
-// Created by unzip on 09/06/22.
-//
 
 #ifndef P4_ENTREGA_FINAL_IRESERVACONTROLLER_H
 #define P4_ENTREGA_FINAL_IRESERVACONTROLLER_H
@@ -26,7 +23,7 @@ public:
 
     virtual Huesped *getReservante() = 0;
 
-    virtual list<Huesped *> getInvitados() = 0;
+    virtual map<string, Huesped *> getInvitados() = 0;
 
     virtual Estadia *getEstadia() = 0;
 
@@ -70,7 +67,7 @@ public:
 
     virtual DtReserva *verReserva() = 0;
 
-    virtual void especificarFechas(DtFecha chekIn, DtFecha chekOut) = 0;
+    virtual void especificarFechas(DtFecha checkIn, DtFecha checkOut) = 0;
 
     virtual void elegirHostal(string nombre) = 0;
 

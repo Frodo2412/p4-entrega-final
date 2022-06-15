@@ -17,9 +17,8 @@ int ReservaIndividual::getCosto() {
     return habitacion->getPrecioPorNoche() * (checkOut - checkIn);
 }
 
-
-
-Estadia ReservaIndividual::createEstadia(DtFecha checkIn) {
-    return Estadia(checkIn,huespedReservante, this );
+Estadia *ReservaIndividual::createEstadia(DtFecha checkIn) {
+    maybeEstadia = new Estadia(checkIn, huespedReservante, this);
+    return maybeEstadia;
 }
 

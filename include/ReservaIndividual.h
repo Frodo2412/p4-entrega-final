@@ -15,7 +15,8 @@ public:
     bool tieneHuespedAsociado(string email) override;
 
     int getCosto() override;
-     Estadia createEstadia(DtFecha checkIn) override;
+
+    Estadia *createEstadia(DtFecha checkIn) override;
 
 };
 
