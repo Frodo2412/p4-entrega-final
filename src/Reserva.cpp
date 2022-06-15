@@ -78,5 +78,7 @@ int Reserva::getCodigo() const {
 }
 
 DtEstado Reserva::getEstado() {
-    return Abierta;
+    return estado;
 }
+
+Reserva::~Reserva() = default;

@@ -63,6 +63,17 @@ bool Estadia::hasReseniaSinResponder() {
 bool Estadia::hasResenia() {
     return maybeResenia != nullptr;
 }
+
 Reserva *Estadia::getReserva() {
     return reserva;
+}
+
+DtResenia Estadia::getDatosResenia() {
+    if (maybeResenia != nullptr) return maybeResenia->getDatos();
+    else throw invalid_argument("No hay resenia");
+
+}
+
+DtReserva *Estadia::getDatosReserva() {
+    return reserva->getDatos();
 }

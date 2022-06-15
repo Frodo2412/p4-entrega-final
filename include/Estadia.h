@@ -51,6 +51,10 @@ public:
     void setResenia(Resenia *resenia);
 
     void setReserva(Reserva *res);
+
+    DtResenia getDatosResenia();
+
+    DtReserva *getDatosReserva();
 };
 
 

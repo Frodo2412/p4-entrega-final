@@ -1,13 +1,9 @@
-//
-// Created by unzip on 07/06/22.
-//
 
 #include "Reloj.h"
 
 Reloj * Reloj::instancia = nullptr;
 
 Reloj::Reloj() = default;
-
 
 DtFecha Reloj::getFechaActual() {
     return this->fechaActual;

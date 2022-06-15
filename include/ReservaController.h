@@ -1,6 +1,3 @@
-//
-// Created by unzip on 09/06/22.
-//
 
 #ifndef P4_ENTREGA_FINAL_RESERVACONTROLLER_H
 #define P4_ENTREGA_FINAL_RESERVACONTROLLER_H
@@ -9,32 +6,31 @@
 
 #include <list>
 #include <map>
-//Deberian estar todos los include desde la interfaz
 
-//TODO: Implementar
 class ReservaController : public IReservaController {
 private:
-    // la lista de estadias se borra aca
     map<int, Reserva *> reservas;
-    //Capaz que usar el mismo int de reserva como "Key" de la lista de estadias
-    map<int,Estadia *> estadias;
+    map<int, Estadia *> estadias;
     Habitacion *habitacionAux;
-    Huesped *huespedAux;
+    map<string, Huesped *> invitadosAux;
     Huesped *huespedReservanteAux;
+    Reserva *reservaAux;
     Estadia *estadiaAux;
-    DtCargo tipoReservaAux;
+    string tipoReservaAux;
     DtFecha checkInAux;
     DtFecha checkOutAux;
     Hostal *hostalAux;
-    ReservaController *instance;
+    static ReservaController *instance;
     int currentIdReserva = 0;
 public:
+
+    ~ReservaController();
+
     Habitacion *getHabitacion() override;
 
     Huesped *getReservante() override;
 
-    //Capaz que es mejor que se devuelva un map? Sino esta bien que sea lista
-    list<Huesped *> getInvitados() override;
+    map<string, Huesped *> getInvitados() override;
 
     Estadia *getEstadia() override;
 
@@ -103,6 +99,10 @@ public:
     void seleccionarEstadia(int codigoReserva) override;
 
     DtResenia verCalificacion() override;
+
+    string getTipoReserva();
+
+    Reserva *getReserva();
 };
 
 
