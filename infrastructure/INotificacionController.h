@@ -35,6 +35,7 @@ public:
     virtual void agregarObserver(Observer *observer) = 0;
     virtual void eliminarObserver(Observer *observer) = 0;
     virtual void notifyObservers(DtNotificacion notif) = 0;
+    virtual void seleccionarEstadia(int codigoReserva) = 0;
 };
 
 #endif//P4_ENTREGA_FINAL_INOTIFICACIONCONTROLLER_H

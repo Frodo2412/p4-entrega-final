@@ -124,3 +124,12 @@ list<DtResenia> Hostal::getDatosReseniasDeHostal() {
     }
     return lista;
 }
+
+list<DtResenia> Hostal::getResenias() {
+    map<int, Habitacion *>::iterator itrMap;
+    list<DtResenia> lista;
+    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
+        lista.splice(lista.end(), itrMap->second->getResenias());
+    }
+    return lista;
+}

@@ -56,7 +56,7 @@ public:
 
     list<DtHuesped> mostrarHuespedes() override;
 
-    list<DtEstadia> mostrarInformacionEstadia() override;
+    DtEstadia mostrarInformacionEstadia() override;
 
     list<DtReserva *> mostrarReservas() override;
 
@@ -71,6 +71,8 @@ public:
     list<DtEstadia> mostrarEstadiasFinalizadas(string email) override;
 
     void cancelarReserva() override;
+
+    void confirmarReserva() override;
 
     list<DtEstadia> listarEstadias() override;
 
@@ -97,6 +99,10 @@ public:
     static ReservaController *getInstance();
 
     int getNextCodigoReserva();
+
+    void seleccionarEstadia(int codigoReserva) override;
+
+    DtResenia verCalificacion() override;
 };
 
 

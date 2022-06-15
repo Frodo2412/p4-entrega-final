@@ -14,7 +14,7 @@ Resenia::Resenia(int calificacion, DtFecha fecha, string comentario) {
 }
 
 DtResenia Resenia::getDatos() {
-    return {calificacion, comentario, maybeComentario->getTexto(), fecha};
+    return {calificacion, comentario, maybeComentario->getTexto(), fecha, maybeEstadia->getReserva()->getCodigo()};
 }
 
 int Resenia::getCalificacion() const {
