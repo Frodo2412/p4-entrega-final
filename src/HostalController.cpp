@@ -35,12 +35,10 @@ list<DtHostal> HostalController::mostrarHostales() {
 }
 
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    INotificacionController *notificacionController = NotificacionController::getInstance();
-    try{
-            hostales[nombre]->getDatosReseniasDeHostal();
-    } catch (std::exception& e) {
-        cout << "el hostal ingresado no es correcto" << e.what() <<endl;
-    }
+    if (hostales[nombre] != nullptr)
+        return hostales[nombre]->getDatosReseniasDeHostal();
+    else
+        throw std::invalid_argument("no se encontro un hostal con ese nombre");
 }
 
 list<DtEmpleado> HostalController::mostrarDesempleados() {
@@ -93,9 +91,6 @@ void HostalController::elegirHostal(string nombre) {
     hostalAux = hostales[nombre];
 }
 
-//void HostalController::cancelarAltaHabitacion() {
-//    delete hostalAux;
-//}
 HostalController *HostalController::getInstance() {
     if (instancia == nullptr) {
         instancia = new HostalController();
@@ -112,7 +107,7 @@ HostalController *HostalController::instancia = nullptr;
 
 HostalController::HostalController() = default;
 
-list<DtHostal *> HostalController::mostrarTop3Hostales() {
+list<DtHostal> HostalController::mostrarTop3Hostales() {
     vector<hostalesPair> vec;
     std::copy(hostales.begin(), hostales.end(), std::back_inserter<std::vector<hostalesPair>>(vec));
     std::sort(vec.begin(), vec.end(),
@@ -122,10 +117,10 @@ list<DtHostal *> HostalController::mostrarTop3Hostales() {
                   }
                   return l < r;
               });
-    list<DtHostal *> top3;
+    list<DtHostal> top3;
     int it = 0;
     while (it < 3 && vec[it].second != nullptr) {
-        auto top = new DtHostal(vec[it].second->getDatos());
+        auto top = DtHostal(vec[it].second->getDatos());
         top3.push_back(top);
         it++;
     }
@@ -134,4 +129,28 @@ list<DtHostal *> HostalController::mostrarTop3Hostales() {
 
 DtHostalExt HostalController::informacionHostal() {
     return hostalAux->getDatosExt();
-} //TODO: se libera memoria como dice el diagrama?
+}
+
+void HostalController::ingresarDatosHabitacion(int num, int precio, int capacidad) {
+    this->num = num;
+    this->precio = precio;
+    this->capacidad = capacidad;
+}
+
+void HostalController::cancelarAltaHabitacion() {}
+
+void HostalController::confirmarAltaHabitacion() {
+    auto *habitacion = new Habitacion(num, precio, capacidad);
+    habitacion->setHostal(hostalAux);
+    hostalAux->agregarHabitacionAHostal(habitacion);
+}
+
+HostalController::~HostalController() {
+    map<string, Hostal *>::iterator itr;
+    for (itr = hostales.begin(); itr != hostales.end(); itr++)
+        delete itr->second;
+    delete hostalAux;
+    delete empleadoAux;
+    delete instancia;
+}
+//TODO: se libera memoria como dice el diagrama?

@@ -60,6 +60,8 @@ public:
     string getNombre();
 
     list<DtReserva *> getReservasNoCanceladas(string email);
+
+    list<DtResenia> getResenias();
 };
 
 

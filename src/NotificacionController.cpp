@@ -94,8 +94,7 @@ void NotificacionController::ingresarCalificacion(int calificacion, string comen
     Reloj *clock = Reloj::getInstance();
     DtFecha fActual = clock->getFechaActual();
 
-    auto c = new Resenia(calificacion, fActual, comentario);
-    c->setEstadia(estadiaAux);
+    auto c = new Resenia(calificacion, fActual, comentario, estadiaAux);
     c->setAutor(h);
     DtNotificacion dt = c->getNotificacion();
     estadiaAux->setResenia(c);

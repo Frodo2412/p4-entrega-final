@@ -128,26 +128,31 @@ void test_dt() {
     cout << huesped1 << endl;
 }
 
-void test_comentario() {
-    cout << " - Comentario:" << endl;
-    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
-    Comentario comentario("Hola");
-    //    Comentario comentario("Hola", &resenia);
-    cout << comentario.getTexto() << endl;
-    DtComentario comentarioDt = comentario.getDatos();
-    //    Resenia *resenia1 = comentario.getResenia();
-}
+//void test_comentario() {
+//    cout << " - Comentario:" << endl;
+//    auto* huesped = new Huesped("carlos", "carlos@gmail.com", "contrasenia", false);
+//    auto* estadia = new Estadia(DtFecha(1, 1, 1, 1901), huesped, new Reserva(DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 2, 1901), huesped, new Habitacion(3, 3, 3)));
+//    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad", estadia);
+//    Comentario comentario("Hola");
+//    //    Comentario comentario("Hola", &resenia);
+//    cout << comentario.getTexto() << endl;
+//    DtComentario comentarioDt = comentario.getDatos();
+//    //    Resenia *resenia1 = comentario.getResenia();
+//}
 
-void test_resenia() {
-    cout << " - Resenia:" << endl;
-    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad");
-    cout << resenia.getCalificacion() << endl;
-    cout << resenia.getFecha() << endl;
-    cout << resenia.getComentario() << endl;
-    auto *comentario = new Comentario("Hola");
-    //    auto *comentario = new Comentario("Hola", &resenia);
-    resenia.setComentario(comentario);
-}
+//TODO: faltan implementar cosas en estadia para el de arriba y para el de abajo
+//void test_resenia() {
+//    cout << " - Resenia:" << endl;
+//    auto* huesped = new Huesped("carlos", "carlos@gmail.com", "contrasenia", false);
+//    auto* estadia = new Estadia(DtFecha(1, 1, 1, 1901), huesped, new Reserva(DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 2, 1901), huesped, new Habitacion(3, 3, 3)));
+//    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad", estadia);
+//    cout << resenia.getCalificacion() << endl;
+//    cout << resenia.getFecha() << endl;
+//    cout << resenia.getComentario() << endl;
+//    auto *comentario = new Comentario("Hola");
+//    //    auto *comentario = new Comentario("Hola", &resenia);
+//    resenia.setComentario(comentario);
+//}
 
 // TODO: Cuando se implemente la reserva volver a activar el test
 void test_usuario() {

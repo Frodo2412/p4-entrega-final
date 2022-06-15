@@ -11,7 +11,7 @@
 class NotificacionController : public INotificacionController {
 private:
     //El "Key" de la lista es el mail del empleado
-    map<string ,Observer *> observers;
+    list<Observer*> observers;
     Resenia *reseniaAux;
     Estadia *estadiaAux;
     Hostal *hostalAux;
@@ -43,7 +43,6 @@ public:
     void agregarObserver(Observer *observer) override;
     void eliminarObserver(Observer *observer) override;
     void notifyObservers(DtNotificacion notif) override;
-    list<DtResenia> getCalificaciones(Hostal hostal) override;
     static NotificacionController *getInstance();
 };
 

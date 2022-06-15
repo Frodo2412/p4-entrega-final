@@ -4,12 +4,12 @@
 
 #include <utility>
 
-Resenia::Resenia(int calificacion, DtFecha fecha, string comentario) {
+Resenia::Resenia(int calificacion, DtFecha fecha, string comentario, Estadia* estadia) {
     this->calificacion = calificacion;
     this->fecha = fecha;
     this->comentario = std::move(comentario);
     this->maybeComentario = nullptr;
-    this->maybeEstadia = nullptr;
+    this->maybeEstadia = estadia;
     this->autor = nullptr;
 }
 
@@ -37,7 +37,7 @@ void Resenia::setComentario(Comentario *respuesta) {
     this->maybeComentario = respuesta;
 }
 
-void Resenia::setEstadia(Estadia *estadia) {
+void Resenia::setEstadia(Estadia* estadia) {
     this->maybeEstadia = estadia;
 }
 

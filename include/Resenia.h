@@ -8,6 +8,7 @@
 #include "DtResenia.h"
 #include "DtNotificacion.h"
 #include "Huesped.h"
+#include "Hostal.h"
 
 class Huesped;
 
@@ -35,7 +36,7 @@ public:
 
     int getCalificacion() const;
 
-    void setEstadia(Estadia estadia);
+    void setEstadia(Estadia* estadia);
 
     DtFecha getFecha();
 
@@ -45,15 +46,13 @@ public:
 
     void setComentario(Comentario *respuesta);
 
-    void setEstadia(Estadia *estadia);
-
     Estadia *getEstadia();
 
     bool isComentada();
 
     void setAutor(Huesped *aut);
 
-    bool isFrom(Hostal hostal);
+//    bool isFrom(Hostal hostal);
 
     DtNotificacion getNotificacion();
 };

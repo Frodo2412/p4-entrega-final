@@ -35,7 +35,6 @@ public:
     virtual void agregarObserver(Observer *observer) = 0;
     virtual void eliminarObserver(Observer *observer) = 0;
     virtual void notifyObservers(DtNotificacion notif) = 0;
-    virtual list<DtResenia> getCalificaciones(Hostal hostal) = 0;
     virtual void seleccionarEstadia(int codigoReserva) = 0;
 };
 

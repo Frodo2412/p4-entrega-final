@@ -7,15 +7,15 @@
 
 #include "../infrastructure/IHostalController.h"
 
-//TODO: Implementar
 class HostalController : public IHostalController {
 private:
     map<string, Hostal*> hostales;
-    map<int, Habitacion*> habitaciones;
-    Huesped *huespedAux;
     Empleado *empleadoAux;
     DtCargo cargoAux;
     Hostal *hostalAux;
+    int num;
+    int precio;
+    int capacidad;
     static HostalController *instancia;
     HostalController();
 
@@ -32,8 +32,12 @@ public:
     void altaHostal(string nombre, string direccion, int telefono) override;
     Hostal* findHostal(Empleado *empleado) override;
     void elegirHostal(string nombre) override;
-    list<DtHostal *> mostrarTop3Hostales() override;
+    list<DtHostal> mostrarTop3Hostales() override;
     DtHostalExt informacionHostal() override;
+    void ingresarDatosHabitacion(int num, int precio, int capacidad);
+    void cancelarAltaHabitacion();
+    void confirmarAltaHabitacion();
+    ~HostalController();
     static HostalController* getInstance();
 };
 
