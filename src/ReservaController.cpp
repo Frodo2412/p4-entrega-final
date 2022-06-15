@@ -130,14 +130,13 @@ void ReservaController::confirmarReserva() {
     if (tipoRes == "Grupal") {
         map<string, Huesped *> huespedes = getInvitados();
         reserva = new ReservaGrupal(checkIn, checkOut, reservante, habitacion, huespedes);
-    } else {
-        reserva = new ReservaIndividual(checkIn, checkOut, reservante, habitacion);
-        for (auto &it: invitadosAux) {
+        for (auto &it: invitadosAux)
             it.second->agregarReserva(reserva);
-        }
-    }
+    } else reserva = new ReservaIndividual(checkIn, checkOut, reservante, habitacion);
+
     reserva->configReserva(reservante);
     reservante->agregarReserva(reserva);
+    reservas.insert(pair<int, Reserva *>(reserva->getCodigo(), reserva));
 }
 
 list<DtEstadia> ReservaController::listarEstadias() {
