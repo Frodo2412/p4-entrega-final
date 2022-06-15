@@ -9,6 +9,7 @@ using std::string;
 
 class DtEstadia {
 private:
+    int codigo;
     string nombreHostal;
     string emailHuesped;
     int numeroHabitacion;
@@ -18,7 +19,9 @@ private:
 
 public:
     DtEstadia(string nombreHostal, string emailHuesped, int numeroHabitacion, DtFecha checkIn,
-              DtFecha checkOut, string codigoPromo);
+              DtFecha checkOut, string codigoPromo, int codigo);
+
+    int getCodigo() const;
 
     string getHostal();
 

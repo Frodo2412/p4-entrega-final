@@ -34,6 +34,8 @@ public:
 
     DtEstadia getDatos();
 
+    Reserva * getReserva();
+
     void finalizarActiva();
 
     Resenia *getResenia();

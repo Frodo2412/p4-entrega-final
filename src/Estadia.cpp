@@ -11,7 +11,7 @@ void Estadia::finalizarActiva() {
 
 Estadia::Estadia(DtFecha checkIn, Huesped *reservante, map<string, Huesped *> invitados, Reserva *reserva) {
     this->checkIn = checkIn;
-    this->huespedes = invitados;
+    this->huespedes = std::move(invitados);
     this->huespedes.insert(pair<string, Huesped *>(reservante->getMail(), reservante));
     this->reserva = reserva;
     this->maybeResenia = nullptr;
@@ -43,7 +43,7 @@ Resenia *Estadia::getResenia() {
 
 DtEstadia Estadia::getDatos() {
     return {reserva->getHabitacion()->getHostal().getNombre(), reserva->getReservante()->getMail(),
-            reserva->getHabitacion()->getNumero(), checkIn, checkOut, ""};
+            reserva->getHabitacion()->getNumero(), checkIn, checkOut, "", reserva->getCodigo()};
 }
 
 void Estadia::setResenia(Resenia *resenia) {
@@ -62,4 +62,7 @@ bool Estadia::hasReseniaSinResponder() {
 
 bool Estadia::hasResenia() {
     return maybeResenia != nullptr;
+}
+Reserva *Estadia::getReserva() {
+    return reserva;
 }

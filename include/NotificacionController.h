@@ -21,6 +21,8 @@ private:
     string mailAux;
     list<Resenia *> resenias;
 public:
+    void seleccionarEstadia(int codigoReserva) override;
+
     list<DtEmpleado> mostrarEmpleados() override;
     void suscribirANotificaciones(string email) override;
 

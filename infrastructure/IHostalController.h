@@ -20,6 +20,7 @@ class IHostalController {
 public:
     virtual Empleado* getEmpleado() = 0;
     virtual Hostal* getHostal() = 0;
+    virtual DtResenia getCalificacion() = 0;
     virtual list<Hostal*> getHostales() = 0;
     virtual list<DtHostal> mostrarHostales() = 0;
     virtual list<DtResenia> masInformacionSobreHostal(string nombre) = 0;

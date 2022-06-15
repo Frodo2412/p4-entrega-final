@@ -128,3 +128,7 @@ NotificacionController *NotificacionController::getInstance() {
     }
     return instancia;
 }
+void NotificacionController::seleccionarEstadia(int codigoReserva) {
+    ReservaController *rc = ReservaController::getInstance();
+    estadiaAux = rc->findEstadia(codigoReserva);
+}

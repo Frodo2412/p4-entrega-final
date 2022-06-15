@@ -25,7 +25,6 @@ private:
     int telefono;
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
-
 public:
 
     list<DtResenia> getDatosReseniasDeHostal();
@@ -46,7 +45,7 @@ public:
 
     list<DtHabitacion> getInfoDeHabitaciones();
 
-    bool checkIfSameHostal(Hostal * otroHostal);
+    bool checkIfSameHostal(Hostal *otroHostal);
 
     list<DtResenia> getReseniasSinResponder();
 
