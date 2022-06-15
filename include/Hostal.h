@@ -25,10 +25,12 @@ private:
     int telefono;
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
+public:
 
     list<DtResenia> getDatosReseniasDeHostal();
 
-public:
+    int getCalificacionPromedio();
+
     Hostal(string nombre, string direccion, int telefono);
 
     DtHostal getDatos();
@@ -58,7 +60,7 @@ public:
     string getNombre();
 
     list<DtReserva *> getReservasNoCanceladas(string email);
-    int getCalificacionPromedio();
+
     list<DtResenia> getResenias();
 };
 

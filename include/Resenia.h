@@ -8,6 +8,7 @@
 #include "DtResenia.h"
 #include "DtNotificacion.h"
 #include "Huesped.h"
+#include "Hostal.h"
 
 class Huesped;
 
@@ -23,17 +24,19 @@ private:
     Comentario *maybeComentario;
     Estadia *maybeEstadia;
     Huesped *autor;
-
+    Estadia *estadia;
 public:
     Resenia();
 
-    Resenia(int calificacion, DtFecha fecha, string comentario);
+    Resenia(int calificacion, DtFecha fecha, string comentario, Estadia* estadia);
 
     ~Resenia();
 
     DtResenia getDatos();
 
     int getCalificacion() const;
+
+    void setEstadia(Estadia* estadia);
 
     DtFecha getFecha();
 
@@ -43,13 +46,13 @@ public:
 
     void setComentario(Comentario *respuesta);
 
-    void setEstadia(Estadia *estadia);
-
     Estadia *getEstadia();
 
     bool isComentada();
 
     void setAutor(Huesped *aut);
+
+//    bool isFrom(Hostal hostal);
 
     DtNotificacion getNotificacion();
 };

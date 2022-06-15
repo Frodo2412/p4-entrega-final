@@ -2,89 +2,155 @@
 // Created by unzip on 09/06/22.
 //
 
+#include <algorithm>
 #include "HostalController.h"
+#include "NotificacionController.h"
 
-void HostalController::ingresarDatosHabitacion(int numero, int cantidad, int precio) {
-    numeroAux = numero;
-    cantidadAux = cantidad;
-    precioAux = precio;
-    auto *hab = new Habitacion(numero, cantidad, precio);
-    habitaciones.insert(pair<int, Habitacion *>(numero, hab));
-}
-
-void HostalController::confirmarAltaHabitacion() {
-    auto *hab = new Habitacion(numeroAux, cantidadAux, precioAux);
-    hab->setHostal(hostalAux);
-    habitaciones.insert(pair<int, Habitacion *>(hab->getNumero(), hab));
-    hostalAux->agregarHabitacionAHostal(hab);
-}
-
+using namespace std;
+typedef std::pair<std::string, Hostal *> hostalesPair;
 
 Empleado *HostalController::getEmpleado() {
-    return nullptr;
+    return empleadoAux;
 }
+
 Hostal *HostalController::getHostal() {
-    return nullptr;
+    return hostalAux;
 }
-DtResenia HostalController::getCalificacion() {
-    return DtResenia(0, " __cxx11::basic_string()", "__cxx11::basic_string()", DtFecha(), 1);
-}
+
 list<Hostal *> HostalController::getHostales() {
-    return list<Hostal *>();
+    list<Hostal *> hostalesList = list<Hostal *>();
+    for (auto &hostal: hostales)
+        hostalesList.push_back(hostal.second);
+    return hostalesList;
 }
+
 list<DtHostal> HostalController::mostrarHostales() {
-    return list<DtHostal>();
+    map<string, Hostal *>::iterator itr;
+    list<DtHostal> lista;
+    for (itr = hostales.begin(); itr != hostales.end(); itr++) {
+        lista.push_back(itr->second->getDatos());
+    }
+    return lista;
+
 }
+
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    return hostales[nombre]->getResenias();
+    if (hostales[nombre] != nullptr)
+        return hostales[nombre]->getDatosReseniasDeHostal();
+    else
+        throw std::invalid_argument("no se encontro un hostal con ese nombre");
 }
+
 list<DtEmpleado> HostalController::mostrarDesempleados() {
-    return list<DtEmpleado>();
+    IUsuarioController *usuarioController = UsuarioController::getInstance();
+    return usuarioController->getEmpleadosDesemplados(hostalAux);
 }
+
 void HostalController::cancelarContratoEmpleado() {
+    delete empleadoAux;
+    delete hostalAux;
 }
+
 void HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
-    UsuarioController *usuarioController = UsuarioController::getInstance();
+    IUsuarioController *usuarioController = UsuarioController::getInstance();
     empleadoAux = usuarioController->getEmpleado(email);
     cargoAux = cargo;
 }
+
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
+    if (hostales[nombre] == nullptr) {
+        hostalAux = new Hostal(nombre, direccion, telefono);
+        hostales.insert({nombre, hostalAux});
+    } else {
+        cout << "ya existe un hostal con ese nombre" << endl;
+    }
 }
+
 Hostal *HostalController::findHostal(Empleado *empleado) {
-    return nullptr;
+//TODO: en el diagrama aparece que tengo que ver si existe un
+// empleado con ese nombre pero hostalController no tiene lista
+// de empleados y en el miro no hay ningun getinstance a usuariocontroller
+    map<string, Hostal *>::iterator it;
+    it = hostales.begin();
+    bool found = false;
+    Hostal *hostal;
+    while (it != hostales.end() && !found) {
+        if (it->second->trabajaEmpleadoEnHostal(empleado)) {
+            hostal = it->second;
+            found = true;
+        }
+        it++;
+    }
+    if (found)
+        return hostal;
+    else
+        return nullptr;
 }
+
 void HostalController::elegirHostal(string nombre) {
+    hostalAux = hostales[nombre];
 }
-void HostalController::cancelarAltaHabitacion() {
-}
+
 HostalController *HostalController::getInstance() {
-    return nullptr;
+    if (instancia == nullptr) {
+        instancia = new HostalController();
+    }
+    return instancia;
 }
+
 void HostalController::confirmarContratoEmpleado() {
     empleadoAux->setCargo(cargoAux);
     hostalAux->agregarEmpleadoAHostal(empleadoAux);
 }
 
+HostalController *HostalController::instancia = nullptr;
+
+HostalController::HostalController() = default;
+
 list<DtHostal> HostalController::mostrarTop3Hostales() {
-    map<string, Hostal *>::iterator itr;
-    list<DtHostal> topOrdenado;
-    for (itr = hostales.begin(); itr != hostales.end(); itr++) {
-        topOrdenado.push_back(itr->second->getDatos());
-    }
-    topOrdenado.sort([](const DtHostal &a, const DtHostal &b) {
-        return a.getCalificacionProm() < b.getCalificacionProm();
-    });
+    vector<hostalesPair> vec;
+    std::copy(hostales.begin(), hostales.end(), std::back_inserter<std::vector<hostalesPair>>(vec));
+    std::sort(vec.begin(), vec.end(),
+              [](const hostalesPair &l, const hostalesPair &r) {
+                  if (l.second->getCalificacionPromedio() > r.second->getCalificacionPromedio()) {
+                      return l.second > r.second;
+                  }
+                  return l < r;
+              });
     list<DtHostal> top3;
-    int tope = 3;
-    if (topOrdenado.size() < 3) {
-        tope = topOrdenado.size();
-    }
-    for (int i = 0; i < tope; i++) {
-        top3.push_back(topOrdenado.front());
-        topOrdenado.pop_front();
+    int it = 0;
+    while (it < 3 && vec[it].second != nullptr) {
+        auto top = DtHostal(vec[it].second->getDatos());
+        top3.push_back(top);
+        it++;
     }
     return top3;
 }
+
 DtHostalExt HostalController::informacionHostal() {
-    return {hostalAux->getNombre(), hostalAux->getDireccion(), hostalAux->getCalificacionPromedio(), hostalAux->getResenias()};
+    return hostalAux->getDatosExt();
 }
+
+void HostalController::ingresarDatosHabitacion(int num, int precio, int capacidad) {
+    this->num = num;
+    this->precio = precio;
+    this->capacidad = capacidad;
+}
+
+void HostalController::cancelarAltaHabitacion() {}
+
+void HostalController::confirmarAltaHabitacion() {
+    auto *habitacion = new Habitacion(num, precio, capacidad);
+    habitacion->setHostal(hostalAux);
+    hostalAux->agregarHabitacionAHostal(habitacion);
+}
+
+HostalController::~HostalController() {
+    map<string, Hostal *>::iterator itr;
+    for (itr = hostales.begin(); itr != hostales.end(); itr++)
+        delete itr->second;
+    delete hostalAux;
+    delete empleadoAux;
+    delete instancia;
+}
+//TODO: se libera memoria como dice el diagrama?
