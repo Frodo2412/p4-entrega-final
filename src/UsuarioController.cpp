@@ -32,6 +32,7 @@ list<DtHuesped> UsuarioController::getHuespedes() {
     }
     return lista;
 }
+
 Huesped *UsuarioController::findHuesped(string email) {
     Huesped *huesped;
     if (huespedes.find(email) != huespedes.end())
@@ -40,6 +41,7 @@ Huesped *UsuarioController::findHuesped(string email) {
         huesped = nullptr;
     return huesped;
 }
+
 list<DtUsuario> UsuarioController::mostrarUsuarios() {
     map<string, Usuario *>::iterator itr;
     list<DtUsuario> lista;
@@ -48,9 +50,11 @@ list<DtUsuario> UsuarioController::mostrarUsuarios() {
     }
     return lista;
 }
+
 DtUsuario UsuarioController::mostrarInformacionUsuario(string email) {
     return usuarios[email]->getDatos();
 }
+
 Empleado *UsuarioController::findEmpleado(string email) {
     Empleado *empleado;
     if (empleados.find(email) != empleados.end())
@@ -59,6 +63,7 @@ Empleado *UsuarioController::findEmpleado(string email) {
         empleado = nullptr;
     return empleado;
 }
+
 Usuario *UsuarioController::findUsuario(string email) {
     Usuario *usuario;
     if (usuarios.find(email) != usuarios.end())
@@ -67,17 +72,21 @@ Usuario *UsuarioController::findUsuario(string email) {
         usuario = nullptr;
     return usuario;
 }
+
 void UsuarioController::especificarEsFinger(bool esFinger) {
     esFingerAux = esFinger;
 }
+
 void UsuarioController::especificarCargo(DtCargo cargo) {
     cargoAux = &cargo;
 }
+
 void UsuarioController::comenzarAltaUsuario(string nombre, string email, string password) {
     nombreAux = nombre;
     emailAux = email;
     passwordAux = password;
 }
+
 void UsuarioController::confirmarAltaUsuario() {
     if (cargoAux != nullptr) {
         empleadoAux = new Empleado(nombreAux, emailAux, passwordAux, *cargoAux);
@@ -89,6 +98,7 @@ void UsuarioController::confirmarAltaUsuario() {
         usuarios.insert(pair<string, Usuario *>(emailAux, huespedAux));
     }
 }
+
 void UsuarioController::cancelarAltaUsuario() {
     delete empleadoAux;
     delete huespedAux;
@@ -98,15 +108,18 @@ void UsuarioController::cancelarAltaUsuario() {
     passwordAux = "";
     esFingerAux = false;
 }
+
 void UsuarioController::ingresarEmail(string email) {
     emailAux = email;
 }
+
 UsuarioController *UsuarioController::getInstance() {
     if (instancia == nullptr) {
         instancia = new UsuarioController();
     }
     return instancia;
 }
+
 UsuarioController::~UsuarioController() {
     map<string, Empleado *>::iterator itr;
     for (itr = empleados.begin(); itr != empleados.end(); itr++) {
@@ -120,7 +133,18 @@ UsuarioController::~UsuarioController() {
 
 UsuarioController *UsuarioController::instancia = nullptr;
 
-UsuarioController::UsuarioController() = default;
+UsuarioController::UsuarioController() {
+    usuarios = {};
+    empleados = {};
+    huespedes = {};
+    empleadoAux = nullptr;
+    huespedAux = nullptr;
+    cargoAux = nullptr;
+    nombreAux = "";
+    emailAux = "";
+    passwordAux = "";
+    esFingerAux = false;
+};
 
 
 list<DtEmpleado> UsuarioController::getEmpleados() {

@@ -72,7 +72,7 @@ public:
 
     list<DtEstadia> listarEstadias() override;
 
-    list<DtReserva *> verCalificaciones() override;
+//    list<DtReserva *> verCalificaciones() override;
 
     DtReserva *verReserva() override;
 

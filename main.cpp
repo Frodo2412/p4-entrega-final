@@ -20,160 +20,8 @@
 #include <iostream>
 
 void printEstadias(list<DtEstadia> &estadias);
+
 using namespace std;
-
-void test_dt() {
-    cout << " - DtFecha:" << endl;
-    DtFecha fecha(1, 1, 1, 1901);
-    cout << fecha << endl;
-
-    cout << " - DtComentario:" << endl;
-    DtComentario comentario("Hola Mundo");
-    cout << comentario.getTexto() << endl;
-
-    cout << " - DtEmpleado:" << endl;
-    DtEmpleado empleado("Juan", "juan@gmail.com", DtCargo::Administracion);
-    cout << empleado.getNombre() << endl;
-    cout << empleado.getEmail() << endl;
-    cout << empleado.getCargo() << endl;
-
-    cout << " - DtEstadia:" << endl;
-    DtEstadia estadia("Hostal", "juan@gmail.com", 1, DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 1, 1901), "Promo", 1);
-    cout << estadia.getHostal() << endl;
-    cout << estadia.getHuesped() << endl;
-    cout << estadia.getHabitacion() << endl;
-    cout << estadia.getCheckIn() << endl;
-    cout << estadia.getCheckOut() << endl;
-    cout << estadia.getPromo() << endl;
-
-    cout << " - DtHabitacion" << endl;
-    DtHabitacion habitacion(1, 1, 1);
-    cout << habitacion.getNumero() << endl;
-    cout << habitacion.getCapacidad() << endl;
-    cout << habitacion.getPrecio() << endl;
-
-    cout << " - DtHostal" << endl;
-    DtHostal hostal("Hostal", "El Viejo Pancho 1234", 3);
-    cout << hostal.getNombre() << endl;
-    cout << hostal.getDireccion() << endl;
-    cout << hostal.getCalificacionProm() << endl;
-
-    DtResenia resenia1(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1),
-            resenia2(2, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1),
-            resenia3(3, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1);
-    list<DtResenia> resenias({resenia1, resenia2, resenia3});
-    cout << " - DtHostalExt" << endl;
-    DtHostalExt hostalExt("HostalExt", "El Viejo Pancho 1234", 3, resenias);
-    cout << hostal.getNombre() << endl;
-    cout << hostal.getDireccion() << endl;
-    cout << hostal.getCalificacionProm() << endl;
-
-    cout << " - DtHuesped:" << endl;
-    DtHuesped huesped("Pedro", "pedro@gmail.com", true);
-    cout << huesped.getNombre() << endl;
-    cout << huesped.getEmail() << endl;
-    cout << huesped.getEsFinger() << endl;
-
-    cout << " - DtNotificacion:" << endl;
-    DtNotificacion notificacion(1, DtFecha(1, 1, 1, 1901), "Estaba rica la torta", "Noo en que te sentaste", "Pedro");
-    cout << notificacion.getCalificacion() << endl;
-    cout << notificacion.getFecha() << endl;
-    cout << notificacion.getResenia() << endl;
-    cout << notificacion.getComentario() << endl;
-    cout << notificacion.getAutor() << endl;
-
-    cout << " - DtResenia:" << endl;
-    DtResenia resenia(1, "Hola", "Juan", DtFecha(1, 1, 1, 1901), 1);
-    cout << resenia.getCalificacion() << endl;
-    cout << resenia.getResenia() << endl;
-    cout << resenia.getComentario() << endl;
-    cout << resenia.getFecha() << endl;
-
-    //    cout << " - DtReserva:" << endl;
-    //    DtReserva reserva(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
-    //    cout << reserva.getCodigo() << endl;
-    //    cout << reserva.getCheckIn() << endl;
-    //    cout << reserva.getCheckOut() << endl;
-    //    cout << reserva.getEstado() << endl;
-    //    cout << reserva.getCosto() << endl;
-    // EN PRINCIPIO NO SE NECESITA
-
-    cout << " - DtReservaGrupal:" << endl;
-    DtReservaGrupal reservaGrupal(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1, 1);
-    cout << reservaGrupal.getCodigo() << endl;
-    cout << reservaGrupal.getCheckIn() << endl;
-    cout << reservaGrupal.getCheckOut() << endl;
-    cout << reservaGrupal.getEstado() << endl;
-    cout << reservaGrupal.getCosto() << endl;
-    cout << reservaGrupal.getCantidadHuespedes() << endl;
-
-    cout << " - DtReservaIndividual:" << endl;
-    DtReservaIndividual reservaIndividual(1, DtFecha(1, 1, 1, 1901), DtFecha(2, 1, 1, 1901), DtEstado::Abierta, 1);
-    cout << reservaIndividual.getCodigo() << endl;
-    cout << reservaIndividual.getCheckIn() << endl;
-    cout << reservaIndividual.getCheckOut() << endl;
-    cout << reservaIndividual.getEstado() << endl;
-    cout << reservaIndividual.getCosto() << endl;
-
-    cout << " - DtUsuario:" << endl;
-    DtUsuario usuario("Juan", "juan@gmail.com");
-    cout << usuario << endl;
-
-    cout << " - DtEmpleado:" << endl;
-    DtEmpleado empleado1("DIEGO MARADONA", "diegol@gmail.com", DtCargo(1));
-    cout << empleado1 << endl;
-
-    cout << " - DtHuesped:" << endl;
-    DtHuesped huesped1("DIEGO MARADONA", "diegol@gmail.com", true);
-    cout << huesped1 << endl;
-}
-
-//void test_comentario() {
-//    cout << " - Comentario:" << endl;
-//    auto* huesped = new Huesped("carlos", "carlos@gmail.com", "contrasenia", false);
-//    auto* estadia = new Estadia(DtFecha(1, 1, 1, 1901), huesped, new Reserva(DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 2, 1901), huesped, new Habitacion(3, 3, 3)));
-//    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad", estadia);
-//    Comentario comentario("Hola");
-//    //    Comentario comentario("Hola", &resenia);
-//    cout << comentario.getTexto() << endl;
-//    DtComentario comentarioDt = comentario.getDatos();
-//    //    Resenia *resenia1 = comentario.getResenia();
-//}
-
-//TODO: faltan implementar cosas en estadia para el de arriba y para el de abajo
-//void test_resenia() {
-//    cout << " - Resenia:" << endl;
-//    auto* huesped = new Huesped("carlos", "carlos@gmail.com", "contrasenia", false);
-//    auto* estadia = new Estadia(DtFecha(1, 1, 1, 1901), huesped, new Reserva(DtFecha(1, 1, 1, 1901), DtFecha(1, 1, 2, 1901), huesped, new Habitacion(3, 3, 3)));
-//    Resenia resenia(1, DtFecha(1, 1, 1, 1901), "bastante mala la verdad", estadia);
-//    cout << resenia.getCalificacion() << endl;
-//    cout << resenia.getFecha() << endl;
-//    cout << resenia.getComentario() << endl;
-//    auto *comentario = new Comentario("Hola");
-//    //    auto *comentario = new Comentario("Hola", &resenia);
-//    resenia.setComentario(comentario);
-//}
-
-// TODO: Cuando se implemente la reserva volver a activar el test
-void test_usuario() {
-    //    cout << " - Huesped:" << endl;
-    //    Huesped usuario("Juan", "juan@gmail.com", "tuViejaEnTanga", true);
-    //    cout << usuario.isMail("juan@gmail.com") << endl;
-    //    cout << usuario.isMail("") << endl;
-    //    auto *reserva = new ReservaIndividual();
-    //    usuario.agregarReserva(reserva);
-}
-
-// TODO: Cuando se implemente hostal y reserva testear la habitacion
-void test_habitacion() {
-    //    cout << " - Habitacion:" << endl;
-    //    Habitacion habitacion(1, 1, 1);
-    //    Hostal hostal;
-    //    habitacion.setHostal(&hostal);
-    //    list<DtReserva> reservas = habitacion.getReservasAsociadas("juan@gmail.com");
-}
-
-//----------------------------------------------------------------------------------------------------------------------
 
 DtCargo cargoDialog() {
     cout << "Ingrese cargo: " << endl;
@@ -217,6 +65,7 @@ bool siNoDialog() {
     int opcion;
     cout << "1. Si" << endl;
     cout << "2. No" << endl;
+    cin >> opcion;
     while (opcion != 1 && opcion != 2) {
         cout << "Opcion invalida, ingrese nuevamente: ";
         cin >> opcion;
@@ -239,7 +88,7 @@ void printResenia(DtResenia &resenia) {
     cout << "Fecha: " << resenia.getFecha() << endl;
 }
 
-void printResenias(const list<DtResenia>& resenias) {
+void printResenias(const list<DtResenia> &resenias) {
     for (DtResenia resenia: resenias) {
         printResenia(resenia);
     }
@@ -257,6 +106,7 @@ void printHostales(list<DtHostal> &hostales) {
         printHostal(hostal);
     }
 }
+
 void printNotificacion(DtNotificacion &notificacion) {
     cout << endl;
     cout << "Calificacion: " << notificacion.getCalificacion() << endl;
@@ -338,7 +188,8 @@ void altaUsuario() {
     //Datos basicos del usuario
     string nombre, mail, contrasena;
     cout << "Ingrese nombre: ";
-    cin >> nombre;
+    cin.ignore();
+    getline(cin, nombre);
     cout << "Ingrese mail: ";
     cin >> mail;
     cout << "Ingrese contrasena: ";
@@ -430,6 +281,7 @@ void altaHabitacion() {
         hostalController->cancelarAltaHabitacion();
     }
 }
+
 void asignarEmpleadoAHostal() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
@@ -472,6 +324,7 @@ DtFecha fechaDialog() {
     cin >> hora;
     return {hora, dia, mes, anio};
 }
+
 bool tipoReservaDialog() {
     //Devuelve true si es Grupal
     cout << "Tipo de Reserva: " << endl;
@@ -485,6 +338,7 @@ bool tipoReservaDialog() {
     }
     return opcion == 1;
 }
+
 void realizarReserva() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
@@ -970,11 +824,6 @@ void mainApp() {
 }
 
 int main() {
-    //    test_dt();
-    //    test_comentario();
-    //    test_resenia();
-    //    test_usuario();
-
     mainApp();
     return 0;
 }

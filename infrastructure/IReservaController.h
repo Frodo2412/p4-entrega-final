@@ -63,8 +63,6 @@ public:
 
     virtual list<DtEstadia> listarEstadias() = 0;
 
-    virtual list<DtReserva *> verCalificaciones() = 0;
-
     virtual DtReserva *verReserva() = 0;
 
     virtual void especificarFechas(DtFecha checkIn, DtFecha checkOut) = 0;
