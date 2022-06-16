@@ -9,9 +9,9 @@ DtFecha::DtFecha() = default;
 DtFecha::DtFecha(int hora, int dia, int mes, int anio) {
     if (hora < 0 || hora > 23)
         throw invalid_argument("Hora invalida");
-    if (dia < 0 || dia > 30)
+    if (dia < 1 || dia > 30)
         throw invalid_argument("Dia invalido");
-    if (mes < 0 || 12 < mes)
+    if (mes < 1 || 12 < mes)
         throw invalid_argument("Mes invalido");
     if (anio < 1901)
         throw invalid_argument("Anio invalido");

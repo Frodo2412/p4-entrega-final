@@ -40,6 +40,7 @@ list<DtUsuario> UsuarioController::mostrarUsuarios() {
 }
 
 DtUsuario UsuarioController::mostrarInformacionUsuario(string email) {
+    if (usuarios.find(email) == usuarios.end()) throw invalid_argument("No existe un usuario con ese mail.");
     return usuarios[email]->getDatos();
 }
 

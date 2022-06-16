@@ -562,49 +562,62 @@ void calificarEstadia() {
 }
 
 void comentarCalificacion() {
-    ControllerFactory *factory = ControllerFactory::getInstance();
-    INotificacionController *notificacionController = factory->getNotificacionController();
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        INotificacionController *notificacionController = factory->getNotificacionController();
 
-    cout << "Ingrese el mail del Empleado que desea comentar una calificacion: " << endl;
-    string email;
-    cin >> email;
-    list<DtResenia> resenias = notificacionController->mostrarComentariosSinResponder(email);
+        list<DtEmpleado> empleados = notificacionController->mostrarEmpleados();
+        cout << "Los empleados disponibles son: " << endl;
+        for (const auto &empleado: empleados)
+            cout << empleado << endl;
 
-    if (!resenias.empty()) {
-        cout << "Las calificaciones disponibles para comentar son: " << endl;
-        printResenias(resenias);
-        cout << endl;
-        cout << "Ingrese el codigo de la calificacion que desea comentar: " << endl;
-        int numero;
-        cin >> numero;
-        notificacionController->elegirComentario(numero);
-        cout << "Ingrese el comentario que desea darle a la calificacion: " << endl;
-        string comentario;
-        cin >> comentario;
-        notificacionController->enviarComentario(comentario);
-        cout << "Comentario enviado" << endl;
-    } else {
-        cout << "No hay calificaciones disponibles para comentar" << endl;
+        cout << "Ingrese el mail del Empleado que desea comentar una calificacion: " << endl;
+        string email;
+        cin >> email;
+        list<DtResenia> resenias = notificacionController->mostrarComentariosSinResponder(email);
+
+        if (!resenias.empty()) {
+            cout << "Las calificaciones disponibles para comentar son: " << endl;
+            printResenias(resenias);
+            cout << endl;
+            cout << "Ingrese el codigo de la calificacion que desea comentar: " << endl;
+            int numero;
+            cin >> numero;
+            notificacionController->elegirComentario(numero);
+            cout << "Ingrese el comentario que desea darle a la calificacion: " << endl;
+            string comentario;
+            cin >> comentario;
+            notificacionController->enviarComentario(comentario);
+            cout << "Comentario enviado" << endl;
+        } else cout << "No hay calificaciones disponibles para comentar" << endl;
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 
 void consultaUsuario() {
-    ControllerFactory *factory = ControllerFactory::getInstance();
-    IUsuarioController *usuarioController = factory->getUsuarioController();
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        IUsuarioController *usuarioController = factory->getUsuarioController();
 
-    list<DtUsuario> usuarios = usuarioController->mostrarUsuarios();
-    cout << "Los usuarios registrados son: " << endl;
-    for (const auto &usuario: usuarios)
+        list<DtUsuario> usuarios = usuarioController->mostrarUsuarios();
+        cout << "Los usuarios registrados son: " << endl;
+        for (const auto &usuario: usuarios)
+            cout << usuario << endl;
+
+        cout << "Ingrese el mail del usuario que desea consultar: " << endl;
+        string email;
+        cin >> email;
+        DtUsuario usuario = usuarioController->mostrarInformacionUsuario(email);
+        cout << "La informacion del usuario es: " << endl;
         cout << usuario << endl;
 
-    cout << "Ingrese el mail del usuario que desea consultar: " << endl;
-    string email;
-    cin >> email;
-    DtUsuario usuario = usuarioController->mostrarInformacionUsuario(email);
-    cout << "La informacion del usuario es: " << endl;
-    cout << usuario << endl;
-
-    cout << "Operacion finalizada" << endl;
+        cout << "Operacion finalizada" << endl;
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
+    }
 }
 
 void consultaHostal() {

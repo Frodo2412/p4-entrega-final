@@ -3,7 +3,9 @@
 
 Reloj *Reloj::instancia = nullptr;
 
-Reloj::Reloj() = default;
+Reloj::Reloj() {
+    fechaActual = DtFecha(0, 1, 1, 1901);
+};
 
 DtFecha Reloj::getFechaActual() {
     return this->fechaActual;
