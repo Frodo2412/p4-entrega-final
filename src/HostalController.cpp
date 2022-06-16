@@ -1,10 +1,6 @@
-//
-// Created by unzip on 09/06/22.
-//
 
 #include <algorithm>
 #include "HostalController.h"
-#include "NotificacionController.h"
 
 using namespace std;
 typedef std::pair<std::string, Hostal *> hostalesPair;
@@ -25,24 +21,20 @@ list<Hostal *> HostalController::getHostales() {
 }
 
 list<DtHostal> HostalController::mostrarHostales() {
-    map<string, Hostal *>::iterator itr;
-    list<DtHostal> lista;
-    for (itr = hostales.begin(); itr != hostales.end(); itr++) {
-        lista.push_back(itr->second->getDatos());
-    }
-    return lista;
+    list<DtHostal> infoHostales;
+    for (auto &itr: hostales)
+        infoHostales.push_back(itr.second->getDatos());
+    return infoHostales;
 
 }
 
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    if (hostales[nombre] != nullptr)
-        return hostales[nombre]->getDatosReseniasDeHostal();
-    else
-        throw std::invalid_argument("no se encontro un hostal con ese nombre");
+    if (hostales.find(nombre) != hostales.end()) return hostales[nombre]->getDatosReseniasDeHostal();
+    else throw std::invalid_argument("no se encontro un hostal con ese nombre");
 }
 
 list<DtEmpleado> HostalController::mostrarDesempleados() {
-    IUsuarioController *usuarioController = UsuarioController::getInstance();
+    UsuarioController *usuarioController = UsuarioController::getInstance();
     return usuarioController->getEmpleadosDesemplados(hostalAux);
 }
 
@@ -52,18 +44,17 @@ void HostalController::cancelarContratoEmpleado() {
 }
 
 void HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
-    IUsuarioController *usuarioController = UsuarioController::getInstance();
+    UsuarioController *usuarioController = UsuarioController::getInstance();
     empleadoAux = usuarioController->getEmpleado(email);
     cargoAux = cargo;
 }
 
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
-    if (hostales[nombre] == nullptr) {
+    if (hostales.find(nombre) == hostales.end()) {
         hostalAux = new Hostal(nombre, direccion, telefono);
         hostales.insert({nombre, hostalAux});
-    } else {
-        cout << "ya existe un hostal con ese nombre" << endl;
-    }
+        cout << "Inserte el hostal";
+    } else throw invalid_argument("Ya existe un hostal con ese nombre");
 }
 
 Hostal *HostalController::findHostal(Empleado *empleado) {
@@ -88,7 +79,8 @@ Hostal *HostalController::findHostal(Empleado *empleado) {
 }
 
 void HostalController::elegirHostal(string nombre) {
-    hostalAux = hostales[nombre];
+    if (hostales.find(nombre) != hostales.end()) hostalAux = hostales[nombre];
+    else throw invalid_argument("No existe un hostal con ese nombre");
 }
 
 HostalController *HostalController::getInstance() {
@@ -105,7 +97,15 @@ void HostalController::confirmarContratoEmpleado() {
 
 HostalController *HostalController::instancia = nullptr;
 
-HostalController::HostalController() = default;
+HostalController::HostalController() {
+    hostales = {};
+    empleadoAux = nullptr;
+    hostalAux = nullptr;
+    num = 0;
+    precio = 0;
+    capacidad = 0;
+    cargoAux = DtCargo(0);
+}
 
 list<DtHostal> HostalController::mostrarTop3Hostales() {
     vector<hostalesPair> vec;
@@ -131,10 +131,10 @@ DtHostalExt HostalController::informacionHostal() {
     return hostalAux->getDatosExt();
 }
 
-void HostalController::ingresarDatosHabitacion(int num, int precio, int capacidad) {
-    this->num = num;
-    this->precio = precio;
-    this->capacidad = capacidad;
+void HostalController::ingresarDatosHabitacion(int numero, int precioPorNoche, int capacidadMaxima) {
+    this->num = numero;
+    this->precio = precioPorNoche;
+    this->capacidad = capacidadMaxima;
 }
 
 void HostalController::cancelarAltaHabitacion() {}
@@ -146,9 +146,8 @@ void HostalController::confirmarAltaHabitacion() {
 }
 
 HostalController::~HostalController() {
-    map<string, Hostal *>::iterator itr;
-    for (itr = hostales.begin(); itr != hostales.end(); itr++)
-        delete itr->second;
+    for (auto &itr: hostales)
+        delete itr.second;
     delete hostalAux;
     delete empleadoAux;
     delete instancia;

@@ -40,7 +40,7 @@ list<DtResenia> Habitacion::getReseniasSinResponder() {
     map<int, Reserva *>::iterator itr;
     list<DtResenia> resenias;
     for (itr = reservas.begin(); itr != reservas.end(); itr++) {
-        if(itr->second->hasReseniaSinResponder()) {
+        if (itr->second->hasReseniaSinResponder()) {
             resenias.push_back(itr->second->getReseniaSinResponder());
         }
     }
@@ -54,22 +54,22 @@ int Habitacion::getPrecioPorNoche() const {
 int Habitacion::getNumero() const {
     return numero;
 }
+
 list<DtResenia> Habitacion::getResenias() {
-    map<int, Reserva *>::iterator itr;
-    list<DtResenia> resenias;
-    for (itr = reservas.begin(); itr != reservas.end(); itr++) {
-        if(itr->second->hasResenia()) {
-            resenias.push_back(itr->second->getResenia()->getDatos());
-        }
-    }
-    return resenias;
+    list<DtResenia> infoResenias;
+    for (auto &itr: reservas)
+        if (itr.second->hasResenia())
+            infoResenias.push_back(itr.second->getResenia()->getDatos());
+    return infoResenias;
 }
+
 int Habitacion::getCalificacionPromedio() {
     list<DtResenia> resenias = getResenias();
-    int calificacion = 0;
-    for(const DtResenia& resenia : resenias) {
-        calificacion += resenia.getCalificacion();
+    if (resenias.empty()) return 0;
+    else {
+        int calificacion = 0;
+        for (const auto &resenia: resenias)
+            calificacion += resenia.getCalificacion();
+        return floor(calificacion / resenias.size());
     }
-    return floor(calificacion / resenias.size());
-
 }

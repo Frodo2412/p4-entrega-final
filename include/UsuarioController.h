@@ -14,7 +14,7 @@ private:
     map<string, Huesped *> huespedes;
     Empleado *empleadoAux;
     Huesped *huespedAux;
-    DtCargo *cargoAux;
+    DtCargo cargoAux;
     string nombreAux;
     string emailAux;
     string passwordAux;

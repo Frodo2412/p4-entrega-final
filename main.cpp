@@ -10,12 +10,6 @@
 #include "DtHuesped.h"
 #include "DtNotificacion.h"
 #include "DtReserva.h"
-#include "DtReservaGrupal.h"
-#include "DtReservaIndividual.h"
-#include "Empleado.h"
-#include "Habitacion.h"
-#include "Huesped.h"
-#include "ReservaIndividual.h"
 
 #include <iostream>
 
@@ -50,7 +44,7 @@ DtCargo cargoDialog() {
             cargo = DtCargo(4);
             break;
         default:
-            break;
+            cargo = DtCargo::PlaceHolder;
     }
     return cargo;
 }
@@ -102,9 +96,8 @@ void printHostalExt(DtHostalExt &hostal) {
 }
 
 void printHostales(list<DtHostal> &hostales) {
-    for (auto hostal: hostales) {
+    for (auto hostal: hostales)
         printHostal(hostal);
-    }
 }
 
 void printNotificacion(DtNotificacion &notificacion) {
@@ -116,8 +109,8 @@ void printNotificacion(DtNotificacion &notificacion) {
     cout << "Autor: " << notificacion.getAutor() << endl;
 }
 
-void printNotificaciones(list<DtNotificacion> &notifaciones) {
-    for (auto notificacion: notifaciones) {
+void printNotificaciones(list<DtNotificacion> &notificaciones) {
+    for (auto notificacion: notificaciones) {
         printNotificacion(notificacion);
     }
 }
@@ -141,8 +134,14 @@ void mostrarElegirHostal_HostalController() {
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
     string nombre;
-    cin >> nombre;
-    hostalController->elegirHostal(nombre);
+    cin.ignore();
+    getline(cin, nombre);
+    try {
+        hostalController->elegirHostal(nombre);
+    } catch (invalid_argument &ex) {
+        cout << ex.what();
+        mostrarElegirHostal_HostalController();
+    }
 }
 
 void mostrarElegirHostal_ReservaController() {
@@ -197,7 +196,7 @@ void altaUsuario() {
     usuarioController->comenzarAltaUsuario(nombre, mail, contrasena);
 
     //Eleccion de tipo de usuario
-    cout << "Eliga que tipo de usurio desea registrar: " << endl;
+    cout << "Elija que tipo de usuario desea registrar: " << endl;
     cout << "1. Huesped" << endl;
     cout << "2. Empleado" << endl;
     int opcion;
@@ -246,14 +245,19 @@ void altaHostal() {
     IHostalController *hostalController = factory->getHostalController();
     cout << "Ingrese nombre del Hostal: ";
     string nombre;
-    cin >> nombre;
+    cin.ignore();
+    getline(cin, nombre);
     cout << "Ingrese direccion del Hostal: ";
     string direccion;
-    cin >> direccion;
+    getline(cin, direccion);
     cout << "Ingrese telefono del Hostal: ";
     int telefono;
     cin >> telefono;
-    hostalController->altaHostal(nombre, direccion, telefono);
+    try {
+        hostalController->altaHostal(nombre, direccion, telefono);
+    } catch (invalid_argument &ex) {
+        cout << "Ya existe un hostal con ese nombre";
+    }
 }
 
 void altaHabitacion() {
@@ -269,7 +273,7 @@ void altaHabitacion() {
     cout << "Ingrese precio por noche: ";
     int precio;
     cin >> precio;
-    hostalController->ingresarDatosHabitacion(numero, cantidad, precio);
+    hostalController->ingresarDatosHabitacion(numero, precio, cantidad);
 
     //Confirmacion de la operacion
     cout << "Todo esta correcto, desea confirmar el alta? (De lo contrario la cancelara)" << endl;
@@ -364,15 +368,15 @@ void realizarReserva() {
     cin >> email;
     reservaController->elegirHuespedReservante(email);
     if (esGrupal) {
-        int hayNuevosHuepedes = 0;
-        while (hayNuevosHuepedes != 2) {
+        int hayNuevosHuespedes = 0;
+        while (hayNuevosHuespedes != 2) {
             cout << "Desea agregar otro huesped? (1. Si, 2. No)" << endl;
-            cin >> hayNuevosHuepedes;
-            while (hayNuevosHuepedes != 1 && hayNuevosHuepedes != 2) {
+            cin >> hayNuevosHuespedes;
+            while (hayNuevosHuespedes != 1 && hayNuevosHuespedes != 2) {
                 cout << "Opcion invalida, ingrese nuevamente: ";
-                cin >> hayNuevosHuepedes;
+                cin >> hayNuevosHuespedes;
             }
-            if (hayNuevosHuepedes == 1) {
+            if (hayNuevosHuespedes == 1) {
                 cout << "Ingrese el email del huesped que desea agregar: ";
                 cin >> email;
                 reservaController->elegirHuesped(email);
@@ -555,9 +559,8 @@ void consultaUsuario() {
 
     list<DtUsuario> usuarios = usuarioController->mostrarUsuarios();
     cout << "Los usuarios registrados son: " << endl;
-    for (const auto &usuario: usuarios) {
+    for (const auto &usuario: usuarios)
         cout << usuario << endl;
-    }
 
     cout << "Ingrese el mail del usuario que desea consultar: " << endl;
     string email;

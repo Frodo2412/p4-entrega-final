@@ -10,7 +10,6 @@
 
 #include <list>
 #include <map>
-//No deberian faltar includes a menos de Dts
 
 class Habitacion;
 
@@ -25,6 +24,7 @@ private:
     int telefono;
     map<int, Habitacion *> habitaciones;
     map<string, Empleado *> empleados;
+
 public:
 
     list<DtResenia> getDatosReseniasDeHostal();
@@ -51,17 +51,11 @@ public:
 
     DtHostalExt getDatosExt();
 
-    bool habitacionPerteneceAHostal(Habitacion *habitacion);
-
-    int getTelefono();
-
-    string getDireccion();
-
     string getNombre();
 
-    list<DtReserva *> getReservasNoCanceladas(string email);
+    list<DtReserva *> getReservasNoCanceladas(const string &email);
 
-    list<DtResenia> getResenias();
+
 };
 
 

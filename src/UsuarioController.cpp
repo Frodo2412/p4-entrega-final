@@ -1,6 +1,3 @@
-//
-// Created by unzip on 09/06/22.
-//
 
 #include "UsuarioController.h"
 
@@ -78,7 +75,7 @@ void UsuarioController::especificarEsFinger(bool esFinger) {
 }
 
 void UsuarioController::especificarCargo(DtCargo cargo) {
-    cargoAux = &cargo;
+    cargoAux = cargo;
 }
 
 void UsuarioController::comenzarAltaUsuario(string nombre, string email, string password) {
@@ -88,21 +85,21 @@ void UsuarioController::comenzarAltaUsuario(string nombre, string email, string 
 }
 
 void UsuarioController::confirmarAltaUsuario() {
-    if (cargoAux != nullptr) {
-        empleadoAux = new Empleado(nombreAux, emailAux, passwordAux, *cargoAux);
-        empleados.insert(pair<string, Empleado *>(emailAux, empleadoAux));
-        usuarios.insert(pair<string, Usuario *>(emailAux, empleadoAux));
+    if (cargoAux != DtCargo::PlaceHolder) {
+        empleadoAux = new Empleado(nombreAux, emailAux, passwordAux, cargoAux);
+        empleados.insert({emailAux, empleadoAux});
+        usuarios.insert({emailAux, empleadoAux});
     } else {
         huespedAux = new Huesped(nombreAux, emailAux, passwordAux, esFingerAux);
-        huespedes.insert(pair<string, Huesped *>(emailAux, huespedAux));
-        usuarios.insert(pair<string, Usuario *>(emailAux, huespedAux));
+        huespedes.insert({emailAux, huespedAux});
+        usuarios.insert({emailAux, huespedAux});
     }
 }
 
 void UsuarioController::cancelarAltaUsuario() {
     delete empleadoAux;
     delete huespedAux;
-    cargoAux = nullptr;
+    cargoAux = DtCargo::PlaceHolder;
     nombreAux = "";
     emailAux = "";
     passwordAux = "";
@@ -139,12 +136,12 @@ UsuarioController::UsuarioController() {
     huespedes = {};
     empleadoAux = nullptr;
     huespedAux = nullptr;
-    cargoAux = nullptr;
+    cargoAux = DtCargo::PlaceHolder;
     nombreAux = "";
     emailAux = "";
     passwordAux = "";
     esFingerAux = false;
-};
+}
 
 
 list<DtEmpleado> UsuarioController::getEmpleados() {
