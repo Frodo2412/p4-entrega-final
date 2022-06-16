@@ -43,10 +43,10 @@ bool Hostal::trabajaEmpleadoEnHostal(Empleado *e) {
 
 
 list<DtHabitacion> Hostal::getInfoDeHabitaciones() {
-    map<int, Habitacion *>::iterator itr;
+    if (habitaciones.empty()) throw invalid_argument(nombre + " no tiene habitaciones disponibles.");
     list<DtHabitacion> lista;
-    for (itr = habitaciones.begin(); itr != habitaciones.end(); itr++)
-        lista.push_back(itr->second->getDatos());
+    for (auto &itr: habitaciones)
+        lista.push_back(itr.second->getDatos());
     return lista;
 }
 

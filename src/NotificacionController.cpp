@@ -89,20 +89,18 @@ void NotificacionController::enviarComentario(string comentario) {
 
 void NotificacionController::ingresarCalificacion(int calificacion, string comentario) {
     UsuarioController *uc = UsuarioController::getInstance();
-    Huesped *h = uc->findHuesped(mailAux);
+    Huesped *huesped = uc->findHuesped(mailAux);
 
     Reloj *clock = Reloj::getInstance();
-    DtFecha fActual = clock->getFechaActual();
+    DtFecha fechaActual = clock->getFechaActual();
 
-    auto c = new Resenia(calificacion, fActual, comentario, estadiaAux);
-    c->setAutor(h);
-    DtNotificacion dt = c->getNotificacion();
-    estadiaAux->setResenia(c);
-    resenias.push_back(c);
+    auto resenia = new Resenia(calificacion, fechaActual, comentario, estadiaAux);
+    resenia->setAutor(huesped);
+    DtNotificacion notificacion = resenia->getNotificacion();
+    estadiaAux->setResenia(resenia);
+    resenias.push_back(resenia);
 
-    for (auto &observer: observers) {
-        observer->notify(dt);
-    }
+    notifyObservers(notificacion);
 }
 
 
@@ -115,8 +113,8 @@ void NotificacionController::eliminarObserver(Observer *observer) {
     observers.remove(observer);
 }
 
-void NotificacionController::notifyObservers(DtNotificacion notif) {
-    for (auto e: observers) e->notify(notif);
+void NotificacionController::notifyObservers(DtNotificacion notificacion) {
+    for (auto observer: observers) observer->notify(notificacion);
 }
 
 NotificacionController *NotificacionController::instancia = nullptr;
@@ -127,7 +125,17 @@ NotificacionController *NotificacionController::getInstance() {
     }
     return instancia;
 }
+
 void NotificacionController::seleccionarEstadia(int codigoReserva) {
     ReservaController *rc = ReservaController::getInstance();
     estadiaAux = rc->findEstadia(codigoReserva);
+}
+
+list<DtHuesped> NotificacionController::mostrarHuespedes() {
+    UsuarioController *uc = UsuarioController::getInstance();
+    return uc->getHuespedes();
+}
+
+void NotificacionController::setMail(string email) {
+    mailAux = email;
 }

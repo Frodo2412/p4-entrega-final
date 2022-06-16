@@ -123,7 +123,6 @@ void mostrarElegirHostal_HostalController() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
     list<DtHostal> hostales = hostalController->mostrarHostales();
-    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles");
     cout << "Los Hostales disponibles son: " << endl;
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
@@ -141,7 +140,6 @@ void mostrarElegirHostal_ReservaController() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
     list<DtHostal> hostales = reservaController->mostrarHostales();
-    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles");
     cout << "Los Hostales disponibles son: " << endl;
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
@@ -159,7 +157,8 @@ void mostrarElegirHostal_NotificacionController() {
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
     string nombre;
-    cin >> nombre;
+    cin.ignore();
+    getline(cin, nombre);
     notificacionController->elegirHostal(nombre);
 }
 
@@ -167,7 +166,6 @@ void mostrarElegirHabitacion() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
     list<DtHabitacion> habitaciones = reservaController->mostrarHabitaciones();
-    if (habitaciones.empty()) throw invalid_argument("No hay habitaciones disponibles en el hostal");
     cout << "Las Habitaciones disponibles son: " << endl;
     printHabitaciones(habitaciones);
     cout << "Ingrese el numero de La Habitacion que se desee: ";
@@ -295,7 +293,6 @@ void asignarEmpleadoAHostal() {
 
         //Mostrar desempleados
         list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
-        if (desempleados.empty()) throw invalid_argument("No hay empleados disponibles");
         cout << "Los empleados disponibles son: " << endl;
         for (const auto &empleado: desempleados)
             cout << empleado << endl;
@@ -364,7 +361,6 @@ void realizarReserva() {
         bool esGrupal = tipoReservaDialog();
         mostrarElegirHabitacion();
         list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
-        if (huespedes.empty()) throw invalid_argument("No hay huespedes disponibles");
         cout << "Los Huespedes disponibles son: " << endl;
         for (const auto &huesped: huespedes)
             cout << huesped << endl;
@@ -411,7 +407,6 @@ void bajaReserva() {
         mostrarElegirHostal_ReservaController();
 
         list<DtReserva *> reservas = reservaController->informacionReservas();
-        if (reservas.empty()) throw invalid_argument("No existen reservas en el hostal seleccionado.");
         cout << "Las reservas disponibles son: " << endl;
         for (const auto &reserva: reservas) {
             cout << reserva << endl;
@@ -469,7 +464,6 @@ void registrarEstadia() {
         mostrarElegirHostal_ReservaController();
 
         list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
-        if (huespedes.empty()) throw invalid_argument("No hay huespedes disponibles");
         cout << "Los Huespedes disponibles son: " << endl;
         for (const auto &huesped: huespedes)
             cout << huesped << endl;
@@ -506,7 +500,6 @@ void finalizarEstadia() {
         mostrarElegirHostal_ReservaController();
 
         list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
-        if (huespedes.empty()) throw invalid_argument("No hay huespedes disponibles");
         cout << "Los Huespedes disponibles son: " << endl;
         for (const auto &huesped: huespedes)
             cout << huesped << endl;
@@ -529,30 +522,43 @@ void printEstadias(list<DtEstadia> &estadias) {
 }
 
 void calificarEstadia() {
-    ControllerFactory *factory = ControllerFactory::getInstance();
-    INotificacionController *notificacionController = factory->getNotificacionController();
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        INotificacionController *notificacionController = factory->getNotificacionController();
 
-    mostrarElegirHostal_NotificacionController();
+        mostrarElegirHostal_NotificacionController();
 
-    cout << "Ingrese el mail del huesped que desea calificar alguna de sus estadias: " << endl;
-    string email;
-    cin >> email;
-    list<DtEstadia> estadias = notificacionController->mostrarEstadiasFinalizadas(email);
-    cout << "Las estadias disponibles para calificar son: " << endl;
-    printEstadias(estadias);
+        list<DtHuesped> huespedes = notificacionController->mostrarHuespedes();
+        cout << "Los Huespedes disponibles son: " << endl;
+        for (const auto &huesped: huespedes)
+            cout << huesped << endl;
 
-    cout << "Ingrese el codigo de la estadia que desea calificar: " << endl;
-    int numero;
-    cin >> numero;
-    notificacionController->seleccionarEstadia(numero);
+        cout << "Ingrese el mail del huesped que desea calificar alguna de sus estadias: " << endl;
+        string email;
+        cin >> email;
+        notificacionController->setMail(email);
 
-    cout << "Ingrese la calificacion: " << endl;
-    int calificacion;
-    cin >> calificacion;
-    cout << "Ingrese la resenia: " << endl;
-    string resenia;
-    cin >> resenia;
-    notificacionController->ingresarCalificacion(calificacion, resenia);
+        list<DtEstadia> estadias = notificacionController->mostrarEstadiasFinalizadas(email);
+        cout << "Las estadias disponibles para calificar son: " << endl;
+        printEstadias(estadias);
+
+        cout << "Ingrese el codigo de la estadia que desea calificar: " << endl;
+        int numero;
+        cin >> numero;
+        notificacionController->seleccionarEstadia(numero);
+
+        cout << "Ingrese la calificacion: " << endl;
+        int calificacion;
+        cin >> calificacion;
+        cout << "Ingrese la resenia: " << endl;
+        string resenia;
+        cin.ignore();
+        getline(cin, resenia);
+        notificacionController->ingresarCalificacion(calificacion, resenia);
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
+    }
 }
 
 void comentarCalificacion() {

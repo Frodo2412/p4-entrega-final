@@ -24,23 +24,14 @@ private:
     Comentario *maybeComentario;
     Estadia *maybeEstadia;
     Huesped *autor;
-    Estadia *estadia;
 public:
     Resenia();
 
-    Resenia(int calificacion, DtFecha fecha, string comentario, Estadia* estadia);
+    Resenia(int calificacion, DtFecha fecha, string comentario, Estadia *estadia);
 
     ~Resenia();
 
     DtResenia getDatos();
-
-    int getCalificacion() const;
-
-    void setEstadia(Estadia* estadia);
-
-    DtFecha getFecha();
-
-    string getComentario();
 
     void destruirAsociaciones();
 
@@ -50,9 +41,7 @@ public:
 
     bool isComentada();
 
-    void setAutor(Huesped *aut);
-
-//    bool isFrom(Hostal hostal);
+    void setAutor(Huesped *pAutor);
 
     DtNotificacion getNotificacion();
 };

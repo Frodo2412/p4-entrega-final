@@ -13,15 +13,15 @@ list<DtEmpleado> UsuarioController::getEmpleadosDesemplados(Hostal *hostal) {
     for (auto &itr: empleados)
         if (!hostal->trabajaEmpleadoEnHostal(itr.second))
             infoEmpleados.push_back(itr.second->getDatosEmpleado());
+    if (infoEmpleados.empty()) throw invalid_argument("No existen empleados que no trabajen en " + hostal->getNombre());
     return infoEmpleados;
 }
 
 list<DtHuesped> UsuarioController::getHuespedes() {
-    map<string, Huesped *>::iterator itr;
+    if (huespedes.empty()) throw invalid_argument("No existen huespedes en el sistema.");
     list<DtHuesped> lista;
-    for (itr = huespedes.begin(); itr != huespedes.end(); itr++) {
-        lista.push_back(itr->second->getDatosHuesped());
-    }
+    for (auto &itr: huespedes)
+        lista.push_back(itr.second->getDatosHuesped());
     return lista;
 }
 

@@ -1,7 +1,7 @@
 
 #include "Reloj.h"
 
-Reloj * Reloj::instancia = nullptr;
+Reloj *Reloj::instancia = nullptr;
 
 Reloj::Reloj() = default;
 
@@ -14,8 +14,6 @@ void Reloj::modificarFechaDeSistema(int anio, int mes, int dia, int hora) {
 }
 
 Reloj *Reloj::getInstance() {
-    if (instancia == nullptr) {
-        instancia = new Reloj();
-    }
+    if (instancia == nullptr) instancia = new Reloj();
     return instancia;
 }

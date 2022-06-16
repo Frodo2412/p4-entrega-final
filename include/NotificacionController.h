@@ -11,7 +11,7 @@
 class NotificacionController : public INotificacionController {
 private:
     //El "Key" de la lista es el mail del empleado
-    list<Observer*> observers;
+    list<Observer *> observers;
     Resenia *reseniaAux;
     Estadia *estadiaAux;
     Hostal *hostalAux;
@@ -24,6 +24,7 @@ public:
     void seleccionarEstadia(int codigoReserva) override;
 
     list<DtEmpleado> mostrarEmpleados() override;
+
     void suscribirANotificaciones(string email) override;
 
     list<DtNotificacion> consultaDeNotificaciones(
@@ -31,18 +32,35 @@ public:
     void eliminarSubscripcion(string email) override;
 
     void notificar(DtNotificacion notif) override;
+
     Resenia *getResenia() override;
+
     Estadia *getEstadia() override;
+
     list<DtEstadia> mostrarEstadiasFinalizadas(string email) override;
+
     list<DtHostal> mostrarHostales() override;
+
     list<DtResenia> mostrarComentariosSinResponder(string email) override;
+
     void elegirComentario(int idReserva) override;
+
     void elegirHostal(string nombre) override;
+
     void enviarComentario(string comentario) override;
+
     void ingresarCalificacion(int calificacion, string comentario) override;
+
     void agregarObserver(Observer *observer) override;
+
     void eliminarObserver(Observer *observer) override;
-    void notifyObservers(DtNotificacion notif) override;
+
+    void notifyObservers(DtNotificacion notificacion) override;
+
+    list<DtHuesped> mostrarHuespedes() override;
+
+    void setMail(string email) override;
+
     static NotificacionController *getInstance();
 };
 

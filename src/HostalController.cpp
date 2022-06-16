@@ -21,9 +21,11 @@ list<Hostal *> HostalController::getHostales() {
 }
 
 list<DtHostal> HostalController::mostrarHostales() {
+    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles.");
     list<DtHostal> infoHostales;
-    for (auto &itr: hostales)
+    for (auto &itr: hostales) {
         infoHostales.push_back(itr.second->getDatos());
+    }
     return infoHostales;
 
 }

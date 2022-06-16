@@ -107,6 +107,7 @@ list<DtEstadia> ReservaController::mostrarEstadiasFinalizadas(string email) {
     for (auto &it: estadias)
         if (it.second->getReserva()->getReservante()->getMail() == email)
             infoEstadias.push_back(it.second->getDatos());
+    if (infoEstadias.empty()) throw invalid_argument("No existen estadias finalizadas para este huesped.");
     return infoEstadias;
 }
 
@@ -173,6 +174,7 @@ list<DtReserva *> ReservaController::informacionReservas() {
     for (auto &it: reservas)
         if (it.second->checkIfSameHostal(h))
             infoReservas.push_back(it.second->getDatos());
+    if (infoReservas.empty()) throw invalid_argument(h->getNombre() + " no tiene reservas.");
     return infoReservas;
 }
 
@@ -191,6 +193,8 @@ void ReservaController::confirmarBajaReserva() {
 }
 
 Estadia *ReservaController::findEstadia(int idReserva) {
+    if (estadias.find(idReserva) == estadias.end())
+        throw invalid_argument("No existe una reserva con codigo " + to_string(idReserva));
     return estadias[idReserva];
 }
 
