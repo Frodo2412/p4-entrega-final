@@ -4,21 +4,16 @@
 Empleado *UsuarioController::getEmpleado(string email) {
     Empleado *empleado;
     if (empleados.find(email) != empleados.end())
-        empleado = empleados[email];
-    else
-        empleado = nullptr;
-    return empleado;
+        return empleados[email];
+    else throw invalid_argument("No existe un empleado con ese mail");
 }
 
 list<DtEmpleado> UsuarioController::getEmpleadosDesemplados(Hostal *hostal) {
-    map<string, Empleado *>::iterator itr;
-    list<DtEmpleado> lista;
-    for (itr = empleados.begin(); itr != empleados.end(); itr++) {
-        if (!hostal->trabajaEmpleadoEnHostal(itr->second)) {
-            lista.push_back(itr->second->getDatosEmpleado());
-        }
-    }
-    return lista;
+    list<DtEmpleado> infoEmpleados;
+    for (auto &itr: empleados)
+        if (!hostal->trabajaEmpleadoEnHostal(itr.second))
+            infoEmpleados.push_back(itr.second->getDatosEmpleado());
+    return infoEmpleados;
 }
 
 list<DtHuesped> UsuarioController::getHuespedes() {

@@ -32,19 +32,20 @@ DtCargo cargoDialog() {
     }
     switch (opcion) {
         case 1:
-            cargo = DtCargo(1);
+            cargo = DtCargo::Administracion;
             break;
         case 2:
-            cargo = DtCargo(2);
+            cargo = DtCargo::Limpieza;
             break;
         case 3:
-            cargo = DtCargo(3);
+            cargo = DtCargo::Recepcion;
             break;
         case 4:
-            cargo = DtCargo(4);
+            cargo = DtCargo::Infraestructura;
             break;
         default:
             cargo = DtCargo::PlaceHolder;
+            break;
     }
     return cargo;
 }
@@ -147,6 +148,7 @@ void mostrarElegirHostal_ReservaController() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
     list<DtHostal> hostales = reservaController->mostrarHostales();
+    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles");
     cout << "Los Hostales disponibles son: " << endl;
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
@@ -293,30 +295,34 @@ void altaHabitacion() {
 void asignarEmpleadoAHostal() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
+    try {
+        mostrarElegirHostal_HostalController();
 
-    mostrarElegirHostal_HostalController();
+        //Mostrar desempleados
+        list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
+        if (desempleados.empty()) throw invalid_argument("No hay empleados disponibles");
+        cout << "Los empleados disponibles son: " << endl;
+        for (const auto &empleado: desempleados)
+            cout << empleado << endl;
 
-    //Mostrar desempleados
-    list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
-    cout << "Los empleados disponibles son: " << endl;
-    for (const auto &empleado: desempleados) {
-        cout << empleado << endl;
-    }
+        cout << "Ingrese el email del empleado que se desee: ";
+        string email;
+        cin >> email;
+        DtCargo cargo = cargoDialog();
+        hostalController->seleccionarEmpleado(email, cargo);
 
-    cout << "Ingrese el email del empleado que se desee: ";
-    string email;
-    cin >> email;
-    DtCargo cargo = cargoDialog();
-    hostalController->seleccionarEmpleado(email, cargo);
-
-    //Confirmacion de la operacion
-    cout << "Todo esta correcto, desea confirmar la asignacion? (De lo contrario la cancelara)" << endl;
-    bool isConfirmada = siNoDialog();
-    if (isConfirmada) {
-        hostalController->confirmarContratoEmpleado();
-    } else {
-        cout << "Asignacion cancelada" << endl;
-        hostalController->cancelarContratoEmpleado();
+        //Confirmacion de la operacion
+        cout << "Todo esta correcto, desea confirmar la asignacion? (De lo contrario la cancelara)" << endl;
+        bool isConfirmada = siNoDialog();
+        if (isConfirmada) {
+            hostalController->confirmarContratoEmpleado();
+        } else {
+            cout << "Asignacion cancelada" << endl;
+            hostalController->cancelarContratoEmpleado();
+        }
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 
@@ -351,50 +357,55 @@ void realizarReserva() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
 
-    mostrarElegirHostal_ReservaController();
+    try {
+        mostrarElegirHostal_ReservaController();
 
-    cout << "Ingrese fecha de inicio: ";
-    fechaDialog();
-    DtFecha inicio = fechaDialog();
-    cout << "Ingrese fecha de fin: ";
-    DtFecha fin = fechaDialog();
-    reservaController->especificarFechas(inicio, fin);
+        cout << "Ingrese fecha de inicio: ";
+        fechaDialog();
+        DtFecha inicio = fechaDialog();
+        cout << "Ingrese fecha de fin: ";
+        DtFecha fin = fechaDialog();
+        reservaController->especificarFechas(inicio, fin);
 
-    bool esGrupal = tipoReservaDialog();
-    mostrarElegirHabitacion();
-    list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
-    cout << "Los Huespedes disponibles son: " << endl;
-    for (const auto &huesped: huespedes) {
-        cout << huesped << endl;
-    }
-    cout << "Ingrese el email del huesped que esta realizando la Reserva: ";
-    string email;
-    cin >> email;
-    reservaController->elegirHuespedReservante(email);
-    if (esGrupal) {
-        int hayNuevosHuespedes = 0;
-        while (hayNuevosHuespedes != 2) {
-            cout << "Desea agregar otro huesped? (1. Si, 2. No)" << endl;
-            cin >> hayNuevosHuespedes;
-            while (hayNuevosHuespedes != 1 && hayNuevosHuespedes != 2) {
-                cout << "Opcion invalida, ingrese nuevamente: ";
+        bool esGrupal = tipoReservaDialog();
+        mostrarElegirHabitacion();
+        list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
+        cout << "Los Huespedes disponibles son: " << endl;
+        for (const auto &huesped: huespedes) {
+            cout << huesped << endl;
+        }
+        cout << "Ingrese el email del huesped que esta realizando la Reserva: ";
+        string email;
+        cin >> email;
+        reservaController->elegirHuespedReservante(email);
+        if (esGrupal) {
+            int hayNuevosHuespedes = 0;
+            while (hayNuevosHuespedes != 2) {
+                cout << "Desea agregar otro huesped? (1. Si, 2. No)" << endl;
                 cin >> hayNuevosHuespedes;
-            }
-            if (hayNuevosHuespedes == 1) {
-                cout << "Ingrese el email del huesped que desea agregar: ";
-                cin >> email;
-                reservaController->elegirHuesped(email);
+                while (hayNuevosHuespedes != 1 && hayNuevosHuespedes != 2) {
+                    cout << "Opcion invalida, ingrese nuevamente: ";
+                    cin >> hayNuevosHuespedes;
+                }
+                if (hayNuevosHuespedes == 1) {
+                    cout << "Ingrese el email del huesped que desea agregar: ";
+                    cin >> email;
+                    reservaController->elegirHuesped(email);
+                }
             }
         }
-    }
-    //Confirmacion de la operacion
-    cout << "Todo esta correcto, desea confirmar la reserva? (De lo contrario la cancelara)" << endl;
-    bool isConfirmada = siNoDialog();
-    if (isConfirmada) {
-        reservaController->confirmarReserva();
-    } else {
-        cout << "Reserva cancelada" << endl;
-        reservaController->cancelarReserva();
+        //Confirmacion de la operacion
+        cout << "Todo esta correcto, desea confirmar la reserva? (De lo contrario la cancelara)" << endl;
+        bool isConfirmada = siNoDialog();
+        if (isConfirmada) {
+            reservaController->confirmarReserva();
+        } else {
+            cout << "Reserva cancelada" << endl;
+            reservaController->cancelarReserva();
+        }
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 
