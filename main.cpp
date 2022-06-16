@@ -139,8 +139,7 @@ void mostrarElegirHostal_HostalController() {
     try {
         hostalController->elegirHostal(nombre);
     } catch (invalid_argument &ex) {
-        cout << ex.what();
-        mostrarElegirHostal_HostalController();
+        throw ex;
     }
 }
 
@@ -263,26 +262,31 @@ void altaHostal() {
 void altaHabitacion() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
-    mostrarElegirHostal_HostalController();
-    cout << "Ingrese numero de habitacion: ";
-    int numero;
-    cin >> numero;
-    cout << "Ingrese cantidad de camas: ";
-    int cantidad;
-    cin >> cantidad;
-    cout << "Ingrese precio por noche: ";
-    int precio;
-    cin >> precio;
-    hostalController->ingresarDatosHabitacion(numero, precio, cantidad);
+    try {
+        mostrarElegirHostal_HostalController();
+        cout << "Ingrese numero de habitacion: ";
+        int numero;
+        cin >> numero;
+        cout << "Ingrese cantidad de camas: ";
+        int cantidad;
+        cin >> cantidad;
+        cout << "Ingrese precio por noche: ";
+        int precio;
+        cin >> precio;
+        hostalController->ingresarDatosHabitacion(numero, precio, cantidad);
 
-    //Confirmacion de la operacion
-    cout << "Todo esta correcto, desea confirmar el alta? (De lo contrario la cancelara)" << endl;
-    bool isConfirmada = siNoDialog();
-    if (isConfirmada) {
-        hostalController->confirmarAltaHabitacion();
-    } else {
-        cout << "Alta cancelada" << endl;
-        hostalController->cancelarAltaHabitacion();
+        //Confirmacion de la operacion
+        cout << "Todo esta correcto, desea confirmar el alta? (De lo contrario la cancelara)" << endl;
+        bool isConfirmada = siNoDialog();
+        if (isConfirmada) {
+            hostalController->confirmarAltaHabitacion();
+        } else {
+            cout << "Alta cancelada" << endl;
+            hostalController->cancelarAltaHabitacion();
+        }
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 

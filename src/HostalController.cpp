@@ -140,9 +140,13 @@ void HostalController::ingresarDatosHabitacion(int numero, int precioPorNoche, i
 void HostalController::cancelarAltaHabitacion() {}
 
 void HostalController::confirmarAltaHabitacion() {
-    auto *habitacion = new Habitacion(num, precio, capacidad);
-    habitacion->setHostal(hostalAux);
-    hostalAux->agregarHabitacionAHostal(habitacion);
+    if (hostalAux->yaExisteHabitacion(num))
+        throw invalid_argument("Ya existe una habitacion con ese numero en este hostal");
+    else {
+        auto *habitacion = new Habitacion(num, precio, capacidad);
+        habitacion->setHostal(hostalAux);
+        hostalAux->agregarHabitacionAHostal(habitacion);
+    }
 }
 
 HostalController::~HostalController() {

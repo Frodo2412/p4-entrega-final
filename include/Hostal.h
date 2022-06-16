@@ -55,6 +55,7 @@ public:
 
     list<DtReserva *> getReservasNoCanceladas(const string &email);
 
+    bool yaExisteHabitacion(int numero);
 
 };
 

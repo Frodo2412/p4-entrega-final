@@ -95,3 +95,7 @@ list<DtResenia> Hostal::getDatosReseniasDeHostal() {
     }
     return lista;
 }
+
+bool Hostal::yaExisteHabitacion(int numero) {
+    return habitaciones.find(numero) != habitaciones.end();
+}
