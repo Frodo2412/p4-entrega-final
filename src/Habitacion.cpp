@@ -22,13 +22,10 @@ DtHabitacion Habitacion::getDatos() const {
 }
 
 list<DtReserva *> Habitacion::getReservasAsociadas(const string &email) {
-    map<int, Reserva *>::iterator itr;
     list<DtReserva *> reservasAsociadas;
-    for (itr = reservas.begin(); itr != reservas.end(); itr++) {
-        if (itr->second->isReservaCancelada() && itr->second->tieneHuespedAsociado(email)) {
-            reservasAsociadas.push_back(itr->second->getDatos());
-        }
-    }
+    for (auto itr: reservas)
+        if ((!itr.second->isReservaCancelada()) && itr.second->tieneHuespedAsociado(email))
+            reservasAsociadas.push_back(itr.second->getDatos());
     return reservasAsociadas;
 }
 
@@ -72,4 +69,8 @@ int Habitacion::getCalificacionPromedio() {
             calificacion += resenia.getCalificacion();
         return floor(calificacion / resenias.size());
     }
+}
+
+void Habitacion::addReserva(Reserva *pReserva) {
+    reservas.insert({pReserva->getCodigo(), pReserva});
 }

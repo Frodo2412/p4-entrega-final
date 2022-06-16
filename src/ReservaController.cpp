@@ -136,6 +136,7 @@ void ReservaController::confirmarReserva() {
 
     reserva->configReserva(reservante);
     reservante->agregarReserva(reserva);
+    habitacion->addReserva(reserva);
     reservas.insert(pair<int, Reserva *>(reserva->getCodigo(), reserva));
 }
 

@@ -25,6 +25,7 @@ private:
 public:
 
     ReservaController();
+
     ~ReservaController();
 
     Habitacion *getHabitacion() override;
@@ -72,8 +73,6 @@ public:
     void confirmarReserva() override;
 
     list<DtEstadia> listarEstadias() override;
-
-//    list<DtReserva *> verCalificaciones() override;
 
     DtReserva *verReserva() override;
 

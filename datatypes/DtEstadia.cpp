@@ -37,6 +37,16 @@ DtFecha DtEstadia::getCheckOut() {
 string DtEstadia::getPromo() {
     return promo;
 }
+
 int DtEstadia::getCodigo() const {
     return codigo;
+}
+
+ostream &operator<<(ostream &os, DtEstadia estadia) {
+    cout << "Estadia " << estadia.getCodigo() << ":" << endl;
+    cout << "-Email del huesped: " << estadia.getHuesped() << endl;
+    cout << "-Numero de Habitacion: " << estadia.getHabitacion() << endl;
+    cout << "-Fecha de inicio: " << estadia.getCheckIn() << endl;
+    cout << "-Fecha de fin: " << estadia.getCheckOut() << endl;
+    return os;
 }

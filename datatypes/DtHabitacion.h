@@ -21,7 +21,7 @@ public:
 
     int getPrecio() const;
 
-    friend ostream &operator<<(ostream &os, DtHabitacion empleado);
+    friend ostream &operator<<(ostream &os, DtHabitacion habitacion);
 };
 
 

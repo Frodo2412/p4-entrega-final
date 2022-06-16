@@ -35,6 +35,8 @@ public:
 
     string getPromo();
 
+    friend ostream &operator<<(ostream &os, DtEstadia estadia);
+
 };
 
 

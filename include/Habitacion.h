@@ -48,6 +48,8 @@ public:
     bool checkIfCoincideHostal(Hostal *hostal);
 
     int getNumero() const;
+
+    void addReserva(Reserva *pReserva);
 };
 
 

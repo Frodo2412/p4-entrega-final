@@ -56,12 +56,11 @@ Habitacion *Hostal::getHabitacion(int numero) {
 }
 
 list<DtReserva *> Hostal::getReservasNoCanceladas(const string &email) {
-    map<int, Habitacion *>::iterator itr;
-    list<DtReserva *> lista;
-    for (itr = habitaciones.begin(); itr != habitaciones.end(); itr++) {
-        lista.splice(lista.end(), itr->second->getReservasAsociadas(email));
-    }
-    return lista;
+    list<DtReserva *> infoReservas;
+    for (auto &itr: habitaciones)
+        infoReservas.splice(infoReservas.end(), itr.second->getReservasAsociadas(email));
+    if (infoReservas.empty()) throw invalid_argument("Este huesped no tiene reservas en el hostal.");
+    return infoReservas;
 }
 
 
