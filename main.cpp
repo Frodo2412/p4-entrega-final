@@ -117,20 +117,15 @@ void printNotificaciones(list<DtNotificacion> &notificaciones) {
 }
 
 void printHabitaciones(list<DtHabitacion> &habitaciones) {
-    for (auto habitacion: habitaciones) {
-        cout << " - "
-             << "Numero: " << habitacion.getNumero() << endl;
-        cout << " - "
-             << "Capacidad: " << habitacion.getCapacidad() << endl;
-        cout << " - "
-             << "Precio: " << habitacion.getPrecio() << endl;
-    }
+    for (auto habitacion: habitaciones)
+        cout << habitacion;
 }
 
 void mostrarElegirHostal_HostalController() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
     list<DtHostal> hostales = hostalController->mostrarHostales();
+    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles");
     cout << "Los Hostales disponibles son: " << endl;
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
@@ -153,7 +148,8 @@ void mostrarElegirHostal_ReservaController() {
     printHostales(hostales);
     cout << "Ingrese el nombre del Hostal que se desee: ";
     string nombre;
-    cin >> nombre;
+    cin.ignore();
+    getline(cin, nombre);
     reservaController->elegirHostal(nombre);
 }
 
@@ -173,6 +169,7 @@ void mostrarElegirHabitacion() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
     list<DtHabitacion> habitaciones = reservaController->mostrarHabitaciones();
+    if (habitaciones.empty()) throw invalid_argument("No hay habitaciones disponibles en el hostal");
     cout << "Las Habitaciones disponibles son: " << endl;
     printHabitaciones(habitaciones);
     cout << "Ingrese el numero de La Habitacion que se desee: ";
@@ -327,16 +324,16 @@ void asignarEmpleadoAHostal() {
 }
 
 DtFecha fechaDialog() {
+    cout << "Formato DD MM YYYY HH" << endl;
     int dia, mes, anio, hora;
-    cout << "Ingrese dia: ";
-    cin >> dia;
-    cout << "Ingrese mes: ";
-    cin >> mes;
-    cout << "Ingrese anio: ";
-    cin >> anio;
-    cout << "Ingrese hora: ";
-    cin >> hora;
-    return {hora, dia, mes, anio};
+    cin >> dia >> mes >> anio >> hora;
+    try {
+        return {hora, dia, mes, anio};
+    } catch (invalid_argument &e) {
+        cout << e.what() << endl;
+        cout << "Intente nuevamente" << endl;
+        return fechaDialog();
+    }
 }
 
 bool tipoReservaDialog() {
@@ -361,7 +358,6 @@ void realizarReserva() {
         mostrarElegirHostal_ReservaController();
 
         cout << "Ingrese fecha de inicio: ";
-        fechaDialog();
         DtFecha inicio = fechaDialog();
         cout << "Ingrese fecha de fin: ";
         DtFecha fin = fechaDialog();
@@ -370,10 +366,10 @@ void realizarReserva() {
         bool esGrupal = tipoReservaDialog();
         mostrarElegirHabitacion();
         list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
+        if (huespedes.empty()) throw invalid_argument("No hay huespedes disponibles");
         cout << "Los Huespedes disponibles son: " << endl;
-        for (const auto &huesped: huespedes) {
+        for (const auto &huesped: huespedes)
             cout << huesped << endl;
-        }
         cout << "Ingrese el email del huesped que esta realizando la Reserva: ";
         string email;
         cin >> email;

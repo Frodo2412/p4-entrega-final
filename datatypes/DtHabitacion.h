@@ -2,6 +2,9 @@
 #ifndef P4_ENTREGA_FINAL_DTHABITACION_H
 #define P4_ENTREGA_FINAL_DTHABITACION_H
 
+#include <iostream>
+
+using namespace std;
 
 class DtHabitacion {
 private:
@@ -17,6 +20,8 @@ public:
     int getCapacidad() const;
 
     int getPrecio() const;
+
+    friend ostream &operator<<(ostream &os, DtHabitacion empleado);
 };
 
 

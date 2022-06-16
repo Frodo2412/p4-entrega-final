@@ -51,7 +51,8 @@ list<DtHabitacion> Hostal::getInfoDeHabitaciones() {
 }
 
 Habitacion *Hostal::getHabitacion(int numero) {
-    return habitaciones[numero];
+    if (habitaciones.find(numero) != habitaciones.end()) return habitaciones[numero];
+    else throw invalid_argument("No existe la habitacion indicada en este hostal.");
 }
 
 list<DtReserva *> Hostal::getReservasNoCanceladas(const string &email) {

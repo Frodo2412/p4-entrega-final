@@ -26,12 +26,8 @@ list<DtHuesped> UsuarioController::getHuespedes() {
 }
 
 Huesped *UsuarioController::findHuesped(string email) {
-    Huesped *huesped;
-    if (huespedes.find(email) != huespedes.end())
-        huesped = huespedes[email];
-    else
-        huesped = nullptr;
-    return huesped;
+    if (huespedes.find(email) != huespedes.end()) return huespedes[email];
+    else throw invalid_argument("No existe un huesped con el mail ingresado.");
 }
 
 list<DtUsuario> UsuarioController::mostrarUsuarios() {

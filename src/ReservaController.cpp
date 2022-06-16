@@ -111,10 +111,10 @@ list<DtEstadia> ReservaController::mostrarEstadiasFinalizadas(string email) {
 }
 
 void ReservaController::cancelarReserva() {
-    for (auto &it: invitadosAux) invitadosAux.erase(it.first);
+    invitadosAux = {};
     huespedReservanteAux = nullptr;
     estadiaAux = nullptr;
-    tipoReservaAux = nullptr;
+    tipoReservaAux = "";
     checkInAux = {};
     checkOutAux = {};
     hostalAux = nullptr;
@@ -145,12 +145,6 @@ list<DtEstadia> ReservaController::listarEstadias() {
         infoEstadias.push_back(it.second->getDatos());
     return infoEstadias;
 }
-
-// La dejo comentada porque no se usa en ningun diagrama de comunicacion
-// Aparte el header de la funcion no tiene sentido (en todo caso DtResenia)
-//list<DtReserva *> ReservaController::verCalificaciones() {
-//    return {};
-//}
 
 DtReserva *ReservaController::verReserva() {
     return getEstadia()->getDatosReserva();
@@ -230,4 +224,18 @@ ReservaController::~ReservaController() {
 
 Reserva *ReservaController::getReserva() {
     return reservaAux;
+}
+
+ReservaController::ReservaController() {
+    reservas = {};
+    estadias = {};
+    invitadosAux = {};
+    habitacionAux = nullptr;
+    huespedReservanteAux = nullptr;
+    reservaAux = nullptr;
+    estadiaAux = nullptr;
+    hostalAux = nullptr;
+    tipoReservaAux = "";
+    checkInAux = {};
+    checkOutAux = {};
 }

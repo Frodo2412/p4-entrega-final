@@ -3,9 +3,6 @@
 #define P4_ENTREGA_FINAL_DTHUESPED_H
 
 #include "DtUsuario.h"
-#include <string>
-
-using std::string;
 
 class DtHuesped : public DtUsuario {
 private:

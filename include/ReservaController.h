@@ -24,6 +24,7 @@ private:
     int currentIdReserva = 0;
 public:
 
+    ReservaController();
     ~ReservaController();
 
     Habitacion *getHabitacion() override;
