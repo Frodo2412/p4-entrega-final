@@ -13,8 +13,6 @@
 
 #include <iostream>
 
-void printEstadias(list<DtEstadia> &estadias);
-
 using namespace std;
 
 DtCargo cargoDialog() {
@@ -406,30 +404,37 @@ void realizarReserva() {
 }
 
 void bajaReserva() {
-    ControllerFactory *factory = ControllerFactory::getInstance();
-    IReservaController *reservaController = factory->getReservaController();
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        IReservaController *reservaController = factory->getReservaController();
 
-    mostrarElegirHostal_ReservaController();
+        mostrarElegirHostal_ReservaController();
 
-    list<DtReserva *> reservas = reservaController->informacionReservas();
-    cout << "Las reservas disponibles son: " << endl;
-    for (const auto &reserva: reservas) {
-        cout << reserva << endl;
-    }
+        list<DtReserva *> reservas = reservaController->informacionReservas();
+        if (reservas.empty()) throw invalid_argument("No existen reservas en el hostal seleccionado.");
+        cout << "Las reservas disponibles son: " << endl;
+        for (const auto &reserva: reservas) {
+            cout << reserva << endl;
+            delete reserva;
+        }
 
-    cout << "Ingrese el codigo de la reserva que desea dar de baja: ";
-    int numero;
-    cin >> numero;
-    reservaController->eliminarReserva(numero);
+        cout << "Ingrese el codigo de la reserva que desea dar de baja: ";
+        int numero;
+        cin >> numero;
+        reservaController->eliminarReserva(numero);
 
-    //Confirmacion de la operacion
-    cout << "Todo esta correcto, desea confirmar la baja? (De lo contrario la cancelara)" << endl;
-    bool isConfirmada = siNoDialog();
-    if (isConfirmada) {
-        reservaController->confirmarBajaReserva();
-    } else {
-        cout << "Baja cancelada" << endl;
-        reservaController->cancelarBajaReserva();
+        //Confirmacion de la operacion
+        cout << "Todo esta correcto, desea confirmar la baja? (De lo contrario la cancelara)" << endl;
+        bool isConfirmada = siNoDialog();
+        if (isConfirmada) {
+            reservaController->confirmarBajaReserva();
+        } else {
+            cout << "Baja cancelada" << endl;
+            reservaController->cancelarBajaReserva();
+        }
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 
@@ -475,8 +480,10 @@ void registrarEstadia() {
 
         list<DtReserva *> reservas = reservaController->mostrarReservasNoCanceladas(email);
         cout << "Para el Huesped indicado, las reservas disponibles para registra estadia son: " << endl;
-        for (const auto &reserva: reservas)
+        for (const auto &reserva: reservas) {
             cout << reserva << endl;
+            delete reserva;
+        }
 
         cout << "Ingrese el codigo de la reserva que desea registrar: " << endl;
         int numero;
