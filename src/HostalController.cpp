@@ -45,15 +45,18 @@ void HostalController::cancelarContratoEmpleado() {
 
 void HostalController::seleccionarEmpleado(string email, DtCargo cargo) {
     UsuarioController *usuarioController = UsuarioController::getInstance();
-    empleadoAux = usuarioController->getEmpleado(email);
-    cargoAux = cargo;
+    try {
+        empleadoAux = usuarioController->getEmpleado(email);
+        cargoAux = cargo;
+    } catch (invalid_argument &ex) {
+        throw ex;
+    }
 }
 
 void HostalController::altaHostal(string nombre, string direccion, int telefono) {
     if (hostales.find(nombre) == hostales.end()) {
         hostalAux = new Hostal(nombre, direccion, telefono);
         hostales.insert({nombre, hostalAux});
-        cout << "Inserte el hostal";
     } else throw invalid_argument("Ya existe un hostal con ese nombre");
 }
 

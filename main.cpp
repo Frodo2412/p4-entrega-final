@@ -293,30 +293,34 @@ void altaHabitacion() {
 void asignarEmpleadoAHostal() {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
+    try {
+        mostrarElegirHostal_HostalController();
 
-    mostrarElegirHostal_HostalController();
+        //Mostrar desempleados
+        list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
+        if (desempleados.empty()) throw invalid_argument("No hay empleados disponibles");
+        cout << "Los empleados disponibles son: " << endl;
+        for (const auto &empleado: desempleados)
+            cout << empleado << endl;
 
-    //Mostrar desempleados
-    list<DtEmpleado> desempleados = hostalController->mostrarDesempleados();
-    cout << "Los empleados disponibles son: " << endl;
-    for (const auto &empleado: desempleados) {
-        cout << empleado << endl;
-    }
+        cout << "Ingrese el email del empleado que se desee: ";
+        string email;
+        cin >> email;
+        DtCargo cargo = cargoDialog();
+        hostalController->seleccionarEmpleado(email, cargo);
 
-    cout << "Ingrese el email del empleado que se desee: ";
-    string email;
-    cin >> email;
-    DtCargo cargo = cargoDialog();
-    hostalController->seleccionarEmpleado(email, cargo);
-
-    //Confirmacion de la operacion
-    cout << "Todo esta correcto, desea confirmar la asignacion? (De lo contrario la cancelara)" << endl;
-    bool isConfirmada = siNoDialog();
-    if (isConfirmada) {
-        hostalController->confirmarContratoEmpleado();
-    } else {
-        cout << "Asignacion cancelada" << endl;
-        hostalController->cancelarContratoEmpleado();
+        //Confirmacion de la operacion
+        cout << "Todo esta correcto, desea confirmar la asignacion? (De lo contrario la cancelara)" << endl;
+        bool isConfirmada = siNoDialog();
+        if (isConfirmada) {
+            hostalController->confirmarContratoEmpleado();
+        } else {
+            cout << "Asignacion cancelada" << endl;
+            hostalController->cancelarContratoEmpleado();
+        }
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
     }
 }
 

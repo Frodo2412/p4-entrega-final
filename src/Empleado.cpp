@@ -18,6 +18,7 @@ void Empleado::setCargo(DtCargo cargo) {
 DtCargo Empleado::getCargo() {
     return this->cargo;
 }
+
 DtEmpleado Empleado::getDatosEmpleado() {
     return {this->nombre, this->mail, this->cargo};
 }
