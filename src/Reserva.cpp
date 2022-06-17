@@ -63,9 +63,9 @@ Reserva::Reserva(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante, 
     this->checkOut = checkOut;
     this->huespedReservante = huespedReservante;
     this->habitacion = habitacion;
-    setCodigoGenerado();
     this->maybeEstadia = nullptr;
     this->estado = DtEstado::Abierta;
+    this->codigo = 0;
 }
 
 bool Reserva::hasResenia() {

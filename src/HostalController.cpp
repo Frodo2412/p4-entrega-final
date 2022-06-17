@@ -154,4 +154,9 @@ HostalController::~HostalController() {
     delete empleadoAux;
     delete instancia;
 }
+
+Hostal *HostalController::findHostal(string nombre) {
+    if (hostales.find(nombre) == hostales.end()) throw invalid_argument("No se ha encontrado el hostal " + nombre);
+    return hostales[nombre];
+}
 //TODO: se libera memoria como dice el diagrama?

@@ -77,6 +77,7 @@ void UsuarioController::confirmarAltaUsuario() {
         empleadoAux = new Empleado(nombreAux, emailAux, passwordAux, cargoAux);
         empleados.insert({emailAux, empleadoAux});
         usuarios.insert({emailAux, empleadoAux});
+        cargoAux = DtCargo::PlaceHolder;
     } else {
         huespedAux = new Huesped(nombreAux, emailAux, passwordAux, esFingerAux);
         huespedes.insert({emailAux, huespedAux});
@@ -133,10 +134,9 @@ UsuarioController::UsuarioController() {
 
 
 list<DtEmpleado> UsuarioController::getEmpleados() {
-    map<string, Empleado *>::iterator itr;
+    if (empleados.empty()) throw invalid_argument("No hay empleados disponibles.");
     list<DtEmpleado> lista;
-    for (itr = empleados.begin(); itr != empleados.end(); itr++) {
-        lista.push_back(itr->second->getDatosEmpleado());
-    }
+    for (auto &itr: empleados)
+        lista.push_back(itr.second->getDatosEmpleado());
     return lista;
 }

@@ -42,6 +42,8 @@ public:
 
     Hostal *findHostal(Empleado *empleado) override;
 
+    Hostal *findHostal(string nombre) override;
+
     void elegirHostal(string nombre) override;
 
     list <DtHostal> mostrarTop3Hostales() override;

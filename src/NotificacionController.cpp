@@ -1,6 +1,7 @@
 
 #include "../include/NotificacionController.h"
 #include <list>
+#include <algorithm>
 
 list<DtEmpleado> NotificacionController::mostrarEmpleados() {
     UsuarioController *uc = UsuarioController::getInstance();
@@ -14,30 +15,19 @@ void NotificacionController::suscribirANotificaciones(string email) {
 }
 
 list<DtNotificacion> NotificacionController::consultaDeNotificaciones(string email) {    //Cambio de tipo (no es void)
-    /*
-    auto it = observers.begin();
-
-    while(it != observers.end() && it->first != email)
-        it++;
-    if(it != observers.end()){
-        Empleado* e = it->second;   //getNotificaciones se implementa en Empleado, pero no puedo tratar al observer como empleado
-        return e->getNotificaciones();
-    }
-    return {};
-     */
     UsuarioController *uc = UsuarioController::getInstance();
     Empleado *e = uc->findEmpleado(email);
+    if (std::find(observers.begin(), observers.end(), e) == observers.end())
+        throw invalid_argument("El empleado ingresado no tiene suscripciones activas.");
     return e->getNotificaciones();
 }
 
 void NotificacionController::eliminarSubscripcion(string email) {
     UsuarioController *uc = UsuarioController::getInstance();
-    try {
-        Empleado *e = uc->findEmpleado(email);
-        eliminarObserver(e);
-    } catch (invalid_argument &ex) {
-        throw ex;
-    }
+    Empleado *e = uc->findEmpleado(email);
+    if (std::find(observers.begin(), observers.end(), e) == observers.end())
+        throw invalid_argument("El empleado ingresado no tiene suscripciones activas.");
+    eliminarObserver(e);
 }
 
 void NotificacionController::notificar(DtNotificacion notif) {

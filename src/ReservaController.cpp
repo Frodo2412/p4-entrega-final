@@ -64,7 +64,7 @@ list<DtHuesped> ReservaController::mostrarHuespedes() {
 }
 
 DtEstadia ReservaController::mostrarInformacionEstadia() {
-    if(getEstadia() != nullptr)
+    if (getEstadia() != nullptr)
         return getEstadia()->getDatos();
     else throw invalid_argument("La estadia seleccionada no existe");
 }
@@ -85,6 +85,8 @@ list<DtHabitacion> ReservaController::mostrarHabitaciones() {
 }
 
 void ReservaController::registrarEstadia(int idReserva) {
+    if (reservas.find(idReserva) == reservas.end())
+        throw invalid_argument("No existen reservas con el codigo ingresado.");
     Reloj *reloj = Reloj::getInstance();
     DtFecha fechaActual = reloj->getFechaActual();
     Reserva *reserva = reservas.find(idReserva)->second;
@@ -211,7 +213,7 @@ int ReservaController::getNextCodigoReserva() {
 }
 
 void ReservaController::seleccionarEstadia(int codigoReserva) {
-    if(reservas.find(codigoReserva) != reservas.end())
+    if (reservas.find(codigoReserva) != reservas.end())
         estadiaAux = reservas[codigoReserva]->getEstadia();
     else
         throw invalid_argument("La reserva con el codigo seleccionado no existe.");
