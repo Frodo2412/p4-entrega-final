@@ -29,4 +29,5 @@ ReservaGrupal::ReservaGrupal(DtFecha checkIn, DtFecha checkOut, Huesped *huesped
                              map<string, Huesped *> invitados) : Reserva(checkIn, checkOut, huespedReservante,
                                                                          habitacion) {
     huespedes = std::move(invitados);
+    estado = Abierta;
 }

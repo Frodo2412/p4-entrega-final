@@ -117,9 +117,10 @@ list<DtHostal> HostalController::mostrarTop3Hostales() {
               });
     list<DtHostal> top3;
     int it = 0;
-    while (it < 3 && vec[it].second != nullptr) {
+    while (it < 3 && !vec.empty()){//vec[it].second != nullptr) {
         auto top = DtHostal(vec[it].second->getDatos());
         top3.push_back(top);
+        vec.pop_back();
         it++;
     }
     return top3;
