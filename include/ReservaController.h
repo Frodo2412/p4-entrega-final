@@ -3,6 +3,9 @@
 #define P4_ENTREGA_FINAL_RESERVACONTROLLER_H
 
 #include "../infrastructure/IReservaController.h"
+#include "../include/HostalController.h"
+#include "../include/UsuarioController.h"
+
 
 #include <list>
 #include <map>

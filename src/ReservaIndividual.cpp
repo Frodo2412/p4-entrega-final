@@ -1,5 +1,5 @@
 
-#include "ReservaIndividual.h"
+#include "../include/ReservaIndividual.h"
 
 bool ReservaIndividual::tieneHuespedAsociado(string email) {
     return huespedReservante->isMail(email);

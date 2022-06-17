@@ -3,16 +3,15 @@
 #define P4_ENTREGA_FINAL_IRESERVACONTROLLER_H
 
 
-#include "DtEstadia.h"
-#include "DtHabitacion.h"
-#include "Estadia.h"
-#include "Hostal.h"
-#include "HostalController.h"
-#include "Huesped.h"
-#include "Reloj.h"
-#include "Resenia.h"
-#include "Reserva.h"
-#include "UsuarioController.h"
+#include "../datatypes/DtEstadia.h"
+#include "../datatypes/DtHabitacion.h"
+#include "../include/Estadia.h"
+#include "../include/Hostal.h"
+#include "../include/Huesped.h"
+#include "../include/Reloj.h"
+#include "../include/Resenia.h"
+#include "../include/Reserva.h"
+
 
 #include <list>
 

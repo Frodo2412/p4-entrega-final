@@ -1,5 +1,5 @@
 
-#include "Reloj.h"
+#include "../include/Reloj.h"
 
 Reloj *Reloj::instancia = nullptr;
 

@@ -3,6 +3,7 @@
 #define P4_ENTREGA_FINAL_USUARIOCONTROLLER_H
 
 #include "../infrastructure/IUsuarioController.h"
+#include "../include/HostalController.h"
 
 #include <map>
 

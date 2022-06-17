@@ -5,9 +5,9 @@
 #ifndef P4_ENTREGA_FINAL_IUSUARIOCONTROLLER_H
 #define P4_ENTREGA_FINAL_IUSUARIOCONTROLLER_H
 
-#include "Huesped.h"
-#include "Empleado.h"
-#include "HostalController.h"
+#include "../include/Huesped.h"
+#include "../include/Empleado.h"
+
 
 #include <list>
 

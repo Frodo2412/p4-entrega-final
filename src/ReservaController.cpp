@@ -1,8 +1,8 @@
 
-#include "ReservaController.h"
-#include "DtReservaIndividual.h"
-#include "ReservaGrupal.h"
-#include "ReservaIndividual.h"
+#include "../datatypes/DtReservaIndividual.h"
+#include "../include/ReservaController.h"
+#include "../include/ReservaGrupal.h"
+#include "../include/ReservaIndividual.h"
 
 ReservaController *ReservaController::instance = nullptr;
 

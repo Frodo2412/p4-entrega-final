@@ -6,7 +6,7 @@
 #define P4_ENTREGA_FINAL_RELOJ_H
 
 
-#include "DtFecha.h"
+#include "../datatypes/DtFecha.h"
 
 class Reloj {
 private:

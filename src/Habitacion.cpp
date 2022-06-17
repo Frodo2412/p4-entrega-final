@@ -1,5 +1,5 @@
 
-#include "Habitacion.h"
+#include "../include/Habitacion.h"
 #include <cmath>
 
 Habitacion::Habitacion(int numero, int precioPorNoche, int capacidad) {

@@ -1,5 +1,5 @@
 
-#include "Estadia.h"
+#include "../include/Estadia.h"
 #include <utility>
 
 void Estadia::finalizarActiva() {

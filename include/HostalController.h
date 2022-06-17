@@ -3,6 +3,8 @@
 #define P4_ENTREGA_FINAL_HOSTALCONTROLLER_H
 
 #include "../infrastructure/IHostalController.h"
+#include "../include/ReservaController.h"
+#include "../include/UsuarioController.h"
 
 class HostalController : public IHostalController {
 private:
