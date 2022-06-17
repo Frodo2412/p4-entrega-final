@@ -718,12 +718,18 @@ void consultarNotificaciones() {
     cout << "Ingrese el mail del empleado que desea consultar: " << endl;
     string email;
     cin >> email;
-    list<DtNotificacion> notificaciones = notificacionController->consultaDeNotificaciones(email);
-    cout << "Las notificaciones del empleado son: " << endl;
-    printNotificaciones(notificaciones);
 
-    cout << endl;
-    cout << "Operacion finalizada" << endl;
+    try {
+        list<DtNotificacion> notificaciones = notificacionController->consultaDeNotificaciones(email);
+        cout << "Las notificaciones del empleado son: " << endl;
+        printNotificaciones(notificaciones);
+
+        cout << endl;
+        cout << "Operacion finalizada" << endl;
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Esto puede deberse, por otro lado, a que el empleado no este subscripto." << endl;
+    }
 }
 
 
