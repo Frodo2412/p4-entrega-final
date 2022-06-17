@@ -64,7 +64,9 @@ list<DtHuesped> ReservaController::mostrarHuespedes() {
 }
 
 DtEstadia ReservaController::mostrarInformacionEstadia() {
-    return getEstadia()->getDatos();
+    if(getEstadia() != nullptr)
+        return getEstadia()->getDatos();
+    else throw invalid_argument("La estadia seleccionada no existe");
 }
 
 list<DtReserva *> ReservaController::mostrarReservas() {
@@ -209,7 +211,10 @@ int ReservaController::getNextCodigoReserva() {
 }
 
 void ReservaController::seleccionarEstadia(int codigoReserva) {
-    estadiaAux = reservas[codigoReserva]->getEstadia();
+    if(reservas.find(codigoReserva) != reservas.end())
+        estadiaAux = reservas[codigoReserva]->getEstadia();
+    else
+        throw invalid_argument("La reserva con el codigo seleccionado no existe.");
 }
 
 DtResenia ReservaController::verCalificacion() {
