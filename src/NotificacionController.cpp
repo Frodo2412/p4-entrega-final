@@ -60,13 +60,13 @@ list<DtHostal> NotificacionController::mostrarHostales() {
 }
 
 list<DtResenia> NotificacionController::mostrarComentariosSinResponder(string email) {
-    UsuarioController *uc = UsuarioController::getInstance();
-    Empleado *e = uc->getEmpleado(email);
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    Empleado *empleados = usuarioController->getEmpleado(email);
 
-    HostalController *ch = HostalController::getInstance();
-    Hostal *h = ch->findHostal(e);  //Cambiar tipo de la op findHostal (no es void)
+    HostalController *hostalController = HostalController::getInstance();
+    Hostal *hostal = hostalController->findHostal(empleados);  //Cambiar tipo de la op findHostal (no es void)
 
-    return h->getReseniasSinResponder();
+    return hostal->getReseniasSinResponder();
 }
 
 

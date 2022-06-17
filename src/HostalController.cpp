@@ -63,24 +63,17 @@ void HostalController::altaHostal(string nombre, string direccion, int telefono)
 }
 
 Hostal *HostalController::findHostal(Empleado *empleado) {
-//TODO: en el diagrama aparece que tengo que ver si existe un
-// empleado con ese nombre pero hostalController no tiene lista
-// de empleados y en el miro no hay ningun getinstance a usuariocontroller
+    UsuarioController *usuarioController = UsuarioController::getInstance();
+    usuarioController->findEmpleado(
+            empleado->getMail()); // La llamo nomas para verificar que exista, si no existe va a tirar una exception
     map<string, Hostal *>::iterator it;
     it = hostales.begin();
-    bool found = false;
-    Hostal *hostal;
-    while (it != hostales.end() && !found) {
-        if (it->second->trabajaEmpleadoEnHostal(empleado)) {
-            hostal = it->second;
-            found = true;
-        }
+    while (it != hostales.end()) {
+        if (it->second->trabajaEmpleadoEnHostal(empleado))
+            return it->second;
         it++;
     }
-    if (found)
-        return hostal;
-    else
-        return nullptr;
+    throw invalid_argument("El empleado elegido no tiene hostal.");
 }
 
 void HostalController::elegirHostal(string nombre) {

@@ -45,12 +45,8 @@ DtUsuario UsuarioController::mostrarInformacionUsuario(string email) {
 }
 
 Empleado *UsuarioController::findEmpleado(string email) {
-    Empleado *empleado;
-    if (empleados.find(email) != empleados.end())
-        empleado = empleados[email];
-    else
-        empleado = nullptr;
-    return empleado;
+    if (empleados.find(email) != empleados.end()) return empleados[email];
+    else throw invalid_argument("No existe un empleado con el mail ingresado.");
 }
 
 Usuario *UsuarioController::findUsuario(string email) {
