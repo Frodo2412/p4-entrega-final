@@ -740,10 +740,15 @@ void eliminarSubscripcion() {
     cout << "Ingrese el mail del empleado que desea eliminar su subscripcion: " << endl;
     string email;
     cin >> email;
-    notificacionController->eliminarSubscripcion(email);
 
-    cout << endl;
-    cout << "El empleado no esta mas suscrito" << endl;
+    try {
+        notificacionController->eliminarSubscripcion(email);
+        cout << endl;
+        cout << "El empleado no esta mas suscrito" << endl;
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Esto puede deberse, por otro lado, a que el empleado no este subscripto." << endl;
+    }
 }
 
 void modificarFechaDelSistema() {

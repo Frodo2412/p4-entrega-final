@@ -32,8 +32,12 @@ list<DtNotificacion> NotificacionController::consultaDeNotificaciones(string ema
 
 void NotificacionController::eliminarSubscripcion(string email) {
     UsuarioController *uc = UsuarioController::getInstance();
-    Empleado *e = uc->findEmpleado(email);
-    eliminarObserver(e);
+    try {
+        Empleado *e = uc->findEmpleado(email);
+        eliminarObserver(e);
+    } catch (invalid_argument &ex) {
+        throw ex;
+    }
 }
 
 void NotificacionController::notificar(DtNotificacion notif) {
