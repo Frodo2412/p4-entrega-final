@@ -1,6 +1,5 @@
 
-#include "Resenia.h"
-#include "DtNotificacion.h"
+#include "../include/Resenia.h"
 
 #include <utility>
 

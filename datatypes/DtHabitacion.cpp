@@ -20,7 +20,6 @@ int DtHabitacion::getPrecio() const {
 }
 
 ostream &operator<<(ostream &os, DtHabitacion habitacion) {
-    cout << "Habitacion " << habitacion.getNumero() << ":" << endl;
-    cout << "-Capacidad: " << habitacion.getCapacidad() << endl;
-    cout << "-Costo por noche: " << habitacion.getPrecio() << endl;
+    os << "Habitacion " << habitacion.getNumero() << ":" << endl << "-Capacidad: " << habitacion.getCapacidad() << endl << "-Costo por noche: " << habitacion.getPrecio() << endl;
+    return os;
 }

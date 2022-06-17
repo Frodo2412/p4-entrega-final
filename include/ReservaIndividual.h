@@ -3,8 +3,8 @@
 #define P4_ENTREGA_FINAL_RESERVAINDIVIDUAL_H
 
 
+#include "../datatypes/DtReservaIndividual.h"
 #include "Reserva.h"
-#include "DtReservaIndividual.h"
 
 class ReservaIndividual : public Reserva {
 public:

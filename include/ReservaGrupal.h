@@ -3,9 +3,9 @@
 #define P4_ENTREGA_FINAL_RESERVAGRUPAL_H
 
 
+#include "../datatypes/DtReservaGrupal.h"
 #include "Reserva.h"
 #include "Huesped.h"
-#include "DtReservaGrupal.h"
 
 class ReservaGrupal : public Reserva {
 private:

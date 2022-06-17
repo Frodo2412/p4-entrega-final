@@ -6,6 +6,9 @@
 #define P4_ENTREGA_FINAL_NOTIFICACIONCONTROLLER_H
 
 #include "../infrastructure/INotificacionController.h"
+#include "../include/HostalController.h"
+#include "../include/ReservaController.h"
+#include "../include/UsuarioController.h"
 
 
 class NotificacionController : public INotificacionController {

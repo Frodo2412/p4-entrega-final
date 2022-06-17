@@ -3,10 +3,10 @@
 #define P4_ENTREGA_FINAL_RESENIA_H
 
 
+#include "../datatypes/DtFecha.h"
+#include "../datatypes/DtResenia.h"
+#include "../datatypes/DtNotificacion.h"
 #include "Comentario.h"
-#include "DtFecha.h"
-#include "DtResenia.h"
-#include "DtNotificacion.h"
 #include "Huesped.h"
 #include "Hostal.h"
 

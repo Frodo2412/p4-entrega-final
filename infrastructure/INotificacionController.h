@@ -5,14 +5,11 @@
 #ifndef P4_ENTREGA_FINAL_INOTIFICACIONCONTROLLER_H
 #define P4_ENTREGA_FINAL_INOTIFICACIONCONTROLLER_H
 
-#include "DtNotificacion.h"
-#include "Estadia.h"
-#include "HostalController.h"
-#include "Observer.h"
-#include "Reloj.h"
-#include "Resenia.h"
-#include "ReservaController.h"
-#include "UsuarioController.h"
+#include "../datatypes/DtNotificacion.h"
+#include "../include/Estadia.h"
+#include "../include/Observer.h"
+#include "../include/Reloj.h"
+#include "../include/Resenia.h"
 
 #include <list>
 

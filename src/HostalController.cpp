@@ -1,6 +1,6 @@
 
 #include <algorithm>
-#include "HostalController.h"
+#include "../include/HostalController.h"
 
 using namespace std;
 typedef std::pair<std::string, Hostal *> hostalesPair;

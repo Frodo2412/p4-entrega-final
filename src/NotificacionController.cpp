@@ -1,5 +1,5 @@
 
-#include "NotificacionController.h"
+#include "../include/NotificacionController.h"
 #include <list>
 
 list<DtEmpleado> NotificacionController::mostrarEmpleados() {

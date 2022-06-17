@@ -5,7 +5,6 @@
 #include "../datatypes/DtHuesped.h"
 #include "Reserva.h"
 #include "Usuario.h"
-//Deberian estar los imports a mneos de los DT
 
 #include <list>
 #include <map>

@@ -1,5 +1,5 @@
 
-#include "ReservaGrupal.h"
+#include "../include/ReservaGrupal.h"
 #include <cmath>
 #include <utility>
 

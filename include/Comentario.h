@@ -5,7 +5,7 @@
 
 #include <string>
 #include "Resenia.h"
-#include "DtComentario.h"
+#include "../datatypes/DtComentario.h"
 //En teoria no deberia haber mas include excepto los DtTypes necessarios
 //No agregamos lo de puntero a reseña porque nunca lo usamos
 

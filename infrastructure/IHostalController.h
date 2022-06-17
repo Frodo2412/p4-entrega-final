@@ -5,13 +5,12 @@
 #ifndef P4_ENTREGA_FINAL_IHOSTALCONTROLLER_H
 #define P4_ENTREGA_FINAL_IHOSTALCONTROLLER_H
 
-#include "DtEmpleado.h"
-#include "Empleado.h"
-#include "Hostal.h"
-#include "Huesped.h"
-#include "Resenia.h"
-#include "ReservaController.h"
-#include "UsuarioController.h"
+#include "../datatypes/DtEmpleado.h"
+#include "../include/Empleado.h"
+#include "../include/Hostal.h"
+#include "../include/Huesped.h"
+#include "../include/Resenia.h"
+
 
 #include <list>
 #include <vector>
