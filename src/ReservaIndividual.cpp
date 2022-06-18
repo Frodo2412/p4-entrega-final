@@ -7,7 +7,9 @@ bool ReservaIndividual::tieneHuespedAsociado(string email) {
 
 ReservaIndividual::ReservaIndividual(DtFecha checkIn, DtFecha checkOut, Huesped *huespedReservante,
                                      Habitacion *habitacion) : Reserva(checkIn, checkOut, huespedReservante,
-                                                                       habitacion) {}
+                                                                       habitacion) {
+    estado = Abierta;
+}
 
 DtReservaIndividual *ReservaIndividual::getDatos() {
     return new DtReservaIndividual(codigo, checkIn, checkOut, estado, getCosto());

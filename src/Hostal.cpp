@@ -69,10 +69,10 @@ bool Hostal::checkIfSameHostal(Hostal *otroHostal) {
 }
 
 list<DtResenia> Hostal::getReseniasSinResponder() {
-    map<int, Habitacion *>::iterator itrMap;
-    list<DtResenia> lista;
-    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
-        lista.splice(lista.end(), itrMap->second->getReseniasSinResponder());
+    list<DtResenia> lista = list<DtResenia>();
+    for (auto const &habitacion: habitaciones) {
+        list<DtResenia> ofHabitacion = habitacion.second->getReseniasSinResponder();
+        lista.insert(lista.end(), ofHabitacion.begin(), ofHabitacion.end());
     }
     return lista;
 }

@@ -23,8 +23,9 @@ bool Huesped::isMail(const string &mail) {
 
 void Huesped::finalizarReservaActiva() {
     map<int, Reserva *>::iterator it;
-    for (it = reservas.begin(); it != reservas.end(); it++)
-        it->second->getEstadia()->finalizarActiva();
+    for (auto it: reservas)
+        if (it.second->getEstadia() != nullptr)
+            it.second->getEstadia()->finalizarActiva();
 }
 
 Huesped::~Huesped() {

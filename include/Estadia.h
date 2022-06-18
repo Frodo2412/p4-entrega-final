@@ -44,7 +44,7 @@ public:
 
     bool hasReseniaSinResponder();
 
-    bool isAbierta();
+    bool isCerrada();
 
     void setCheckOut(DtFecha fecha);
 

@@ -3,7 +3,7 @@
 #include <utility>
 
 void Estadia::finalizarActiva() {
-    if (isAbierta()) {
+    if (isCerrada()) {
         Reloj *r = Reloj::getInstance();
         setCheckOut(r->getFechaActual());
     }
@@ -28,8 +28,8 @@ void Estadia::setReserva(Reserva *res) {
     this->reserva = res;
 }
 
-bool Estadia::isAbierta() {
-    return reserva->getEstado() == Abierta;
+bool Estadia::isCerrada() {
+    return reserva->getEstado() == Cerrada;
 }
 
 void Estadia::setCheckOut(DtFecha fechaSalida) {

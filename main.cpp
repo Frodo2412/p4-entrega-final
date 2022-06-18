@@ -428,21 +428,28 @@ void consultarTop3Hostales() {
     IHostalController *hostalController = factory->getHostalController();
 
     list<DtHostal> hostales = hostalController->mostrarTop3Hostales();
-    cout << "Los Top 3 hostales con mejor puntacion son: " << endl;
-    printHostales(hostales);
-
-    cout << "Desea ver las calificaciones de uno de los hostales? (1. Si, 2. No)" << endl;
-    bool quieraInfo = siNoDialog();
-    while (quieraInfo) {
-        cout << "Ingrese el nombre del hostal: ";
-        string nombre;
-        cin >> nombre;
-        list<DtResenia> resenias = hostalController->masInformacionSobreHostal(nombre);
-        cout << "Las resenias del hostal " << nombre << " son: " << endl;
-        printResenias(resenias);
-        cout << endl;
-        cout << "Desea ver las calificaciones de otro hostal? (1. Si, 2. No)" << endl;
-        quieraInfo = siNoDialog();
+    if (hostales.empty()) {
+        cout << "No hay ningun hostal ingresado en el sistema " << endl;
+    } else {
+        cout << "Los Top 3 hostales con mejor puntacion son: " << endl;
+        printHostales(hostales);
+        cout << "Desea ver las calificaciones de uno de los hostales? (1. Si, 2. No)" << endl;
+        bool quieraInfo = siNoDialog();
+        while (quieraInfo) {
+            cout << "Ingrese el nombre del hostal: ";
+            string nombre;
+            cin >> nombre;
+            list<DtResenia> resenias = hostalController->masInformacionSobreHostal(nombre);
+            if (resenias.empty()) {
+                cout << "no hay calificaciones para este hostal" << endl;
+            } else {
+                cout << "Las resenias del hostal " << nombre << " son: " << endl;
+                printResenias(resenias);
+                cout << endl;
+            }
+            cout << "Desea ver las calificaciones de otro hostal? (1. Si, 2. No)" << endl;
+            quieraInfo = siNoDialog();
+        }
     }
 }
 
@@ -778,7 +785,7 @@ void ingresarEmpleado(string nombre, string email, string contrasenia, DtCargo c
     cout << "Se ingreso correctamente el empleado " << email << endl;
 }
 
-void ingresarHuesped(string nombre, const string& email, string contrasenia, bool esFinger) {
+void ingresarHuesped(string nombre, const string &email, string contrasenia, bool esFinger) {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IUsuarioController *usuarioController = factory->getUsuarioController();
     usuarioController->comenzarAltaUsuario(std::move(nombre), email, std::move(contrasenia));
@@ -788,7 +795,7 @@ void ingresarHuesped(string nombre, const string& email, string contrasenia, boo
     cout << "Se ingreso correctamente el huesped " << email << endl;
 }
 
-void ingresarHostal(const string& nombre, string direccion, int telefono) {
+void ingresarHostal(const string &nombre, string direccion, int telefono) {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IHostalController *hostalController = factory->getHostalController();
     hostalController->altaHostal(nombre, std::move(direccion), telefono);
@@ -814,16 +821,18 @@ void asignarEmpleadoAHostal(string hostal, string mailEmpleado, DtCargo cargo) {
     hostalController->confirmarContratoEmpleado();
 }
 
-void ingresarReserva(string hostal, DtFecha checkIn, DtFecha checkOut, int habitacion, string huespedReservante,
+void ingresarReserva(string hostal, DtFecha checkIn, DtFecha checkOut, string huespedReservante, int habitacion,
                      const list<string> &invitados) {
     ControllerFactory *factory = ControllerFactory::getInstance();
     IReservaController *reservaController = factory->getReservaController();
     reservaController->elegirHostal(std::move(hostal));
     reservaController->especificarFechas(checkIn, checkOut);
+    reservaController->elegirTipoReserva("Grupal");
     reservaController->elegirHabitacion(habitacion);
-    list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
     reservaController->elegirHuespedReservante(std::move(huespedReservante));
-    if (!invitados.empty()) for (const auto &invitado: invitados) reservaController->elegirHuesped(invitado);
+    if (!invitados.empty()) {
+        for (const auto &invitado: invitados) reservaController->elegirHuesped(invitado);
+    }
     reservaController->confirmarReserva();
 }
 
@@ -835,6 +844,53 @@ void ingresarEstadia(string hostal, int codigoReserva, DtFecha checkIn) {
     reservaController->elegirHostal(std::move(hostal));
     list<DtHuesped> huespedes = reservaController->mostrarHuespedes();
     reservaController->registrarEstadia(codigoReserva);
+}
+
+void finalizarEstadiaPrueba(string mail, string hostal) {
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        IReservaController *reservaController = factory->getReservaController();
+        reservaController->elegirHostal(hostal);
+        reservaController->finalizarReservasActivasDeUsuario(mail);
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "fallo finalizando estadias de prueba" << endl;
+    }
+}
+
+
+void calificarEstadiaPrueba(string mail, string hostal, int nroEstadia, int calificacion, string resenia) {
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        INotificacionController *notificacionController = factory->getNotificacionController();
+
+        notificacionController->elegirHostal(hostal);
+
+        notificacionController->setMail(mail);
+
+        notificacionController->seleccionarEstadia(nroEstadia);
+
+        notificacionController->ingresarCalificacion(calificacion, resenia);
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "error ingresando calificar estradia en datos de prueba" << endl;
+    }
+}
+
+
+void comentarCalificacionPrueba(string mailEmpleado, int codigoCalificacion, string comentario) {
+    try {
+        ControllerFactory *factory = ControllerFactory::getInstance();
+        INotificacionController *notificacionController = factory->getNotificacionController();
+
+        list<DtResenia> resenias = notificacionController->mostrarComentariosSinResponder(mailEmpleado);
+
+        notificacionController->elegirComentario(codigoCalificacion);
+        notificacionController->enviarComentario(comentario);
+    } catch (invalid_argument &ex) {
+        cout << ex.what() << endl;
+        cout << "Intente nuevamente" << endl;
+    }
 }
 
 void ingresarDatosDePrueba() {
@@ -867,20 +923,40 @@ void ingresarDatosDePrueba() {
     asignarEmpleadoAHostal("La posada del finger", "emilia@mail.com", DtCargo::Recepcion);
     asignarEmpleadoAHostal("Mochileros", "leo@mail.com", DtCargo::Recepcion);
     asignarEmpleadoAHostal("Mochileros", "alina@mail.com", DtCargo::Administracion);
-    asignarEmpleadoAHostal("La posada del finger", "barli@mail.com", DtCargo::Recepcion);
+    asignarEmpleadoAHostal("El Pony Pisador", "barli@mail.com", DtCargo::Recepcion);
     // Reservas
-    ingresarReserva("La posada del finger", DtFecha(14, 1, 4, 2022), DtFecha(10, 10, 5, 2022), 1, "sofia@mail.com", {});
-    ingresarReserva("El Pony Pisador", DtFecha(20, 4, 1, 2001), DtFecha(2, 5, 1, 2001), 1, "frodo@mail.com",
+    ingresarReserva("La posada del finger", DtFecha(14, 1, 4, 2022), DtFecha(10, 10, 5, 2022), "sofia@mail.com", 1, {});
+    ingresarReserva("El Pony Pisador", DtFecha(20, 4, 1, 2001), DtFecha(2, 5, 1, 2001), "frodo@mail.com", 1,
                     {"sam@mail.com", "merry@mail.com", "pippin@mail.com"});
-    ingresarReserva("La posada del finger", DtFecha(14, 7, 6, 2022), DtFecha(11, 30, 6, 2022), 3, "sofia@mail.com", {});
-    ingresarReserva("Caverna Lujosa", DtFecha(14, 10, 6, 2022), DtFecha(11, 30, 6, 2022), 1, "seba@mail.com", {});
+    ingresarReserva("La posada del finger", DtFecha(14, 7, 6, 2022), DtFecha(11, 30, 6, 2022), "sofia@mail.com", 3, {});
+    ingresarReserva("Caverna Lujosa", DtFecha(14, 10, 6, 2022), DtFecha(11, 30, 6, 2022), "seba@mail.com", 1, {});
     // Estadias
     ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
-    ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
-    ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
-    ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
-    ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
-    ingresarEstadia("La posada del finger", 1, DtFecha(18, 1, 5, 2022));
+    ingresarEstadia("El Pony Pisador", 2, DtFecha(9, 4, 1, 2001));
+//    ingresarEstadia("Mochileros", 2, DtFecha(9, 4, 1, 2001));
+//    ingresarEstadia("Altos de Fing", 2, DtFecha(9, 4, 1, 2001));
+//    ingresarEstadia("Caverna Lujosa", 2, DtFecha(9, 4, 1, 2001));
+    ingresarEstadia("Caverna Lujosa", 4, DtFecha(18, 7, 6, 2022));
+    // Finalizacion de estadias
+    finalizarEstadiaPrueba("sofia@mail.com", "La posada del finger");
+    finalizarEstadiaPrueba("frodo@mail.com", "El Pony Pisador");
+    finalizarEstadiaPrueba("seba@mail.com", "Caverna Lujosa");
+    // Calificar Estadia
+    calificarEstadiaPrueba("sofia@mail.com", "La posada del finger", 1, 3, "Un poco caro para lo que ofrecen."
+                                                                           "El famoso gimnasio era una"
+                                                                           "caminadora (que hacía tremendo"
+                                                                           "ruido) y 2 pesas, la piscina parecía"
+                                                                           "el lago del Parque Rodó y el"
+                                                                           "desayuno eran 2 tostadas con"
+                                                                           "mermelada. Internet se pasaba"
+                                                                           "cayendo. No vuelvo.");
+    calificarEstadiaPrueba("frodo@mail.com", "El Pony Pisador", 2, 2, "Se pone peligroso de noche, no"
+                                                                      "recomiendo. Además no hay caja"
+                                                                      "fuerte para guardar anillos.");
+    calificarEstadiaPrueba("seba@mail.com", "Caverna Lujosa", 4, 1, "Había pulgas en la habitación."
+                                                                    "Que lugar más mamarracho!!");
+    // Comentar Calificacion
+    comentarCalificacionPrueba("barli@mail.com", 2, "Desapareció y se fue sin pagar.");
 }
 
 void printOpciones() {
