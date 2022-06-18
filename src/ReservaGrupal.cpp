@@ -4,11 +4,11 @@
 #include <utility>
 
 bool ReservaGrupal::tieneHuespedAsociado(string email) {
-    return (huespedes[email] != nullptr || huespedReservante->getMail() == email);
+    return huespedes[email] != nullptr;
 }
 
 DtReservaGrupal *ReservaGrupal::getDatos() {
-    return new DtReservaGrupal(codigo, checkIn, checkOut, estado, getCosto(), int(huespedes.size()) + 1);
+    return new DtReservaGrupal(codigo, checkIn, checkOut, estado, getCosto(), int(huespedes.size()));
 }
 
 int ReservaGrupal::getCosto() {
@@ -29,5 +29,6 @@ ReservaGrupal::ReservaGrupal(DtFecha checkIn, DtFecha checkOut, Huesped *huesped
                              map<string, Huesped *> invitados) : Reserva(checkIn, checkOut, huespedReservante,
                                                                          habitacion) {
     huespedes = std::move(invitados);
+    huespedes.insert({huespedReservante->getMail(), huespedReservante});
     estado = Abierta;
 }
