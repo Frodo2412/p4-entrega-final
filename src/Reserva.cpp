@@ -80,4 +80,8 @@ DtEstado Reserva::getEstado() {
     return estado;
 }
 
+//DtReserva *Reserva::getDatos() {
+//    return new DtReserva(codigo, checkIn, checkOut, estado, getCosto());
+//}
+
 Reserva::~Reserva() = default;

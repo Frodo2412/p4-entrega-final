@@ -109,8 +109,10 @@ void ReservaController::finalizarReservasActivasDeUsuario(string email) {
 list<DtEstadia> ReservaController::mostrarEstadiasFinalizadas(string email) {
     list<DtEstadia> infoEstadias;
     for (auto &it: estadias)
-        if (it.second->getReserva()->getReservante()->getMail() == email)
-            infoEstadias.push_back(it.second->getDatos());
+        if (!it.second->hasResenia()) {
+            if (it.second->getReserva()->getReservante()->getMail() == email)
+                infoEstadias.push_back(it.second->getDatos());
+        }
     if (infoEstadias.empty()) throw invalid_argument("No existen estadias finalizadas para este huesped.");
     return infoEstadias;
 }
@@ -250,4 +252,12 @@ ReservaController::ReservaController() {
     tipoReservaAux = "";
     checkInAux = {};
     checkOutAux = {};
+}
+
+list<DtEstadia> ReservaController::listarEstadiasOfHostal() {
+    list<DtEstadia> infoEstadias;
+    for (auto &it: estadias)
+        if (it.second->getDatos().getHostal() == hostalAux->getNombre())
+            infoEstadias.push_back(it.second->getDatos());
+    return infoEstadias;
 }

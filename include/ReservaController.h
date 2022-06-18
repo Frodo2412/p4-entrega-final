@@ -77,6 +77,8 @@ public:
 
     list<DtEstadia> listarEstadias() override;
 
+    list<DtEstadia> listarEstadiasOfHostal() override;
+
     DtReserva *verReserva() override;
 
     void especificarFechas(DtFecha checkIn, DtFecha checkOut) override;

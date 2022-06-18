@@ -21,7 +21,6 @@ list<Hostal *> HostalController::getHostales() {
 }
 
 list<DtHostal> HostalController::mostrarHostales() {
-    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles.");
     list<DtHostal> infoHostales;
     for (auto &itr: hostales) {
         infoHostales.push_back(itr.second->getDatos());
@@ -31,7 +30,7 @@ list<DtHostal> HostalController::mostrarHostales() {
 }
 
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    if (hostales.find(nombre) != hostales.end()) return hostales[nombre]->getDatosReseniasDeHostal();
+    if (hostales[nombre] != nullptr) return hostales[nombre]->getDatosReseniasDeHostal();
     else throw std::invalid_argument("no se encontro un hostal con ese nombre");
 }
 
@@ -111,7 +110,7 @@ list<DtHostal> HostalController::mostrarTop3Hostales() {
     std::sort(vec.begin(), vec.end(),
               [](const hostalesPair &l, const hostalesPair &r) {
                   if (l.second->getCalificacionPromedio() > r.second->getCalificacionPromedio()) {
-                      return l.second > r.second;
+                      return l > r;
                   }
                   return l < r;
               });

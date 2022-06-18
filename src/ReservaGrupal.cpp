@@ -4,11 +4,11 @@
 #include <utility>
 
 bool ReservaGrupal::tieneHuespedAsociado(string email) {
-    return huespedes.find(email) != huespedes.end();
+    return (huespedes[email] != nullptr || huespedReservante->getMail() == email);
 }
 
 DtReservaGrupal *ReservaGrupal::getDatos() {
-    return new DtReservaGrupal(codigo, checkIn, checkOut, Abierta, getCosto(), int(huespedes.size()));
+    return new DtReservaGrupal(codigo, checkIn, checkOut, estado, getCosto(), int(huespedes.size()) + 1);
 }
 
 int ReservaGrupal::getCosto() {

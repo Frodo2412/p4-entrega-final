@@ -45,6 +45,8 @@ public:
 
     int getCalificacionPromedio();
 
+    bool hasResenias();
+
     bool checkIfCoincideHostal(Hostal *hostal);
 
     int getNumero() const;
