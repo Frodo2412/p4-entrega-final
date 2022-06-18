@@ -13,7 +13,13 @@ Resenia::Resenia(int calificacion, DtFecha fecha, string comentario, Estadia *es
 }
 
 DtResenia Resenia::getDatos() {
-    return {calificacion, comentario, maybeComentario->getTexto(), fecha, maybeEstadia->getReserva()->getCodigo()};
+//    return {calificacion, comentario, maybeComentario->getTexto(), fecha, maybeEstadia->getReserva()->getCodigo()};
+    if (maybeComentario == nullptr)
+        return DtResenia(calificacion, comentario, fecha,
+                         maybeEstadia->getReserva()->getCodigo());
+    else
+        return DtResenia(calificacion, comentario, maybeComentario->getTexto(), fecha,
+                         maybeEstadia->getReserva()->getCodigo());
 }
 
 void Resenia::destruirAsociaciones() {

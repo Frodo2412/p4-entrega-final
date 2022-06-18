@@ -11,6 +11,13 @@ DtResenia::DtResenia(int calificacion, string resenia, string comentario, DtFech
     this->codigo = codigo;
 }
 
+DtResenia::DtResenia(int calificacion, string resenia, DtFecha fecha, int codigo) {
+    this->calificacion = calificacion;
+    this->resenia = std::move(resenia);
+    this->fecha = fecha;
+    this->codigo = codigo;
+}
+
 
 int DtResenia::getCalificacion() const {
     return calificacion;

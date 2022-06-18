@@ -17,6 +17,7 @@ private:
 
 public:
     DtResenia(int calificacion, string resenia, string comentario, DtFecha fecha, int codigo);
+    DtResenia(int calificacion, string resenia, DtFecha fecha, int codigo);
 
     int getCalificacion() const;
 
