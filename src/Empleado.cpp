@@ -31,5 +31,6 @@ list<DtNotificacion> Empleado::getNotificaciones() {
     list<DtNotificacion> notisLeidas;
     notisLeidas.splice(notisLeidas.end(), notificaciones);
     if (notisLeidas.empty()) throw invalid_argument("El empleado no tiene notificaciones sin leer.");
+    notificaciones.clear();
     return notisLeidas;
 }
