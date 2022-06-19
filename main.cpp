@@ -378,8 +378,10 @@ void realizarReserva() {
             mostrarElegirHabitacion();
             list<DtHuesped *> huespedes = reservaController->mostrarHuespedes();
             cout << "Los Huespedes disponibles son: " << endl;
-            for (const auto &huesped: huespedes)
+            for (const auto &huesped: huespedes) {
                 cout << huesped << endl;
+                delete huesped;
+            }
             cout << "Ingrese el email del huesped que esta realizando la Reserva: ";
             string email;
             cin >> email;
@@ -494,9 +496,10 @@ void registrarEstadia() {
         if (hayHostales) {
             list<DtHuesped *> huespedes = reservaController->mostrarHuespedes();
             cout << "Los Huespedes disponibles son: " << endl;
-            for (const auto &huesped: huespedes)
+            for (const auto &huesped: huespedes) {
                 cout << huesped << endl;
-
+                delete huesped;
+            }
             cout << "Ingrese el mail del huesped que desea registrar su estadia: " << endl;
             string email;
             cin >> email;
@@ -530,8 +533,10 @@ void finalizarEstadia() {
         if (hayHostales) {
             list<DtHuesped *> huespedes = reservaController->mostrarHuespedes();
             cout << "Los Huespedes disponibles son: " << endl;
-            for (const auto &huesped: huespedes)
+            for (const auto &huesped: huespedes) {
                 cout << huesped << endl;
+                delete huesped;
+            }
 
             cout << "Ingrese el mail del huesped que desea finalizar su estadia: " << endl;
             string email;
@@ -696,6 +701,7 @@ void consultaReserva() {
             cout << "Las reservas disponibles son: " << endl;
             for (const auto &reserva: reservas) {
                 cout << reserva << endl;
+                delete reserva;
             }
 
             cout << endl;
@@ -742,6 +748,7 @@ void consultaEstadia() {
                 DtReserva *reserva = reservaController->verReserva();
                 cout << "La reserva de la estadia es: " << endl;
                 cout << reserva << endl;
+                delete reserva;
             }
             cout << endl;
             cout << "Operacion finalizada" << endl;
