@@ -3,7 +3,7 @@
 #include <list>
 #include <algorithm>
 
-list<DtEmpleado> NotificacionController::mostrarEmpleados() {
+list<DtEmpleado *> NotificacionController::mostrarEmpleados() {
     UsuarioController *uc = UsuarioController::getInstance();
     return uc->getEmpleados();
 }
@@ -125,7 +125,7 @@ void NotificacionController::seleccionarEstadia(int codigoReserva) {
     estadiaAux = rc->findEstadia(codigoReserva);
 }
 
-list<DtHuesped> NotificacionController::mostrarHuespedes() {
+list<DtHuesped *> NotificacionController::mostrarHuespedes() {
     UsuarioController *uc = UsuarioController::getInstance();
     return uc->getHuespedes();
 }

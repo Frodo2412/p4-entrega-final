@@ -15,7 +15,7 @@
 
 class INotificacionController {
 public:
-    virtual list<DtEmpleado> mostrarEmpleados() = 0;
+    virtual list<DtEmpleado *> mostrarEmpleados() = 0;
 
     virtual void suscribirANotificaciones(string email) = 0;
 
@@ -50,7 +50,7 @@ public:
 
     virtual void seleccionarEstadia(int codigoReserva) = 0;
 
-    virtual list<DtHuesped> mostrarHuespedes() = 0;
+    virtual list<DtHuesped *> mostrarHuespedes() = 0;
 
     virtual void setMail(string basicString) = 0;
 };

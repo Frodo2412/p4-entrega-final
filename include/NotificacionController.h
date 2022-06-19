@@ -26,7 +26,7 @@ private:
 public:
     void seleccionarEstadia(int codigoReserva) override;
 
-    list<DtEmpleado> mostrarEmpleados() override;
+    list<DtEmpleado *> mostrarEmpleados() override;
 
     void suscribirANotificaciones(string email) override;
 
@@ -60,7 +60,7 @@ public:
 
     void notifyObservers(DtNotificacion notificacion) override;
 
-    list<DtHuesped> mostrarHuespedes() override;
+    list<DtHuesped *> mostrarHuespedes() override;
 
     void setMail(string email) override;
 

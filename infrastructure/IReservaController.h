@@ -42,7 +42,7 @@ public:
 
     virtual void elegirTipoReserva(string reserva) = 0;
 
-    virtual list<DtHuesped> mostrarHuespedes() = 0;
+    virtual list<DtHuesped*> mostrarHuespedes() = 0;
 
     virtual DtEstadia mostrarInformacionEstadia() = 0;
 

@@ -12,9 +12,9 @@ bool DtHuesped::getEsFinger() const {
     return esFinger;
 }
 
-std::ostream &operator<<(std::ostream &os, const DtHuesped huesped) {
-    os << "nombre: " << huesped.getNombre() << ", mail: " << huesped.getEmail();
-    if (huesped.esFinger) {
+std::ostream &operator<<(std::ostream &os, const DtHuesped *huesped) {
+    os << "nombre: " << huesped->getNombre() << ", mail: " << huesped->getEmail();
+    if (huesped->getEsFinger()) {
         os << ", Es Finger";
     } else {
         os << ", No Es Finger";

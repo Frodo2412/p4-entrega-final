@@ -13,7 +13,8 @@ public:
 
     bool getEsFinger() const;
 
-    friend ostream &operator<<(ostream &os, DtHuesped empleado);
+    friend ostream &operator<<(ostream &os, const DtHuesped *huesped);
+
 };
 
 

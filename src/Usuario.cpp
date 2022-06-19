@@ -8,12 +8,19 @@ Usuario::Usuario(string nombre, string mail, string password) {
     this->mail = std::move(mail);
     this->password = std::move(password);
 }
+
 string Usuario::getNombre() {
     return nombre;
 }
+
 string Usuario::getMail() {
     return mail;
 }
+
 string Usuario::getPassword() {
     return password;
+}
+
+DtUsuario *Usuario::getDatos() {
+    return new DtUsuario(nombre, mail);
 }

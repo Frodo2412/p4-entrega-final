@@ -27,19 +27,19 @@ private:
 public:
     Usuario *findUsuario(string email);
 
-    list<DtEmpleado> getEmpleados();
+    list<DtEmpleado *> getEmpleados();
 
     Empleado *getEmpleado(string email);
 
-    list<DtEmpleado> getEmpleadosDesemplados(Hostal *hostal);
+    list<DtEmpleado *> getEmpleadosDesemplados(Hostal *hostal);
 
-    list<DtHuesped> getHuespedes();
+    list<DtHuesped *> getHuespedes();
 
     Huesped *findHuesped(string email);
 
-    list<DtUsuario> mostrarUsuarios();
+    list<DtUsuario *> mostrarUsuarios();
 
-    DtUsuario mostrarInformacionUsuario(string email);
+    DtUsuario *mostrarInformacionUsuario(string email);
 
     Empleado *findEmpleado(string email);
 

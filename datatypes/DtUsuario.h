@@ -15,9 +15,12 @@ private:
 public:
     DtUsuario(string nombre, string mail);
 
-    string getNombre() const;
+    virtual string getNombre() const;
+
     string getEmail() const;
-    friend ostream &operator<<(ostream &os, DtUsuario usuario);
+
+    friend ostream &operator<<(ostream &os, const DtUsuario *usuario);
+
 };
 
 #endif //P4_ENTREGA_FINAL_DTUSUARIO_H

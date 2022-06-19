@@ -12,9 +12,9 @@ DtCargo DtEmpleado::getCargo() const {
     return cargo;
 }
 
-std::ostream &operator<<(std::ostream &os, const DtEmpleado empleado) {
-    os << "nombre: " << empleado.getNombre() << ", mail: " << empleado.getEmail() << ", cargo: "
-       << empleado.cargoToString();
+ostream &operator<<(ostream &os, const DtEmpleado *empleado) {
+    os << "nombre: " << empleado->getNombre() << ", mail: " << empleado->getEmail() << ", cargo: "
+       << empleado->cargoToString();
     return os;
 }
 

@@ -23,6 +23,7 @@ Estadia *ReservaController::getEstadia() {
 }
 
 Resenia *ReservaController::getResenia(int idReserva) {
+
     return estadias[idReserva]->getResenia();
 }
 
@@ -58,7 +59,7 @@ void ReservaController::elegirTipoReserva(string reserva) {
     tipoReservaAux = reserva;
 }
 
-list<DtHuesped> ReservaController::mostrarHuespedes() {
+list<DtHuesped*> ReservaController::mostrarHuespedes() {
     UsuarioController *uc = UsuarioController::getInstance();
     return uc->getHuespedes();
 }
@@ -75,6 +76,7 @@ list<DtReserva *> ReservaController::mostrarReservas() {
     for (auto &it: reservas)
         if (it.second->checkIfSameHostal(h))
             infoReservas.push_back(it.second->getDatos());
+    if (infoReservas.empty()) throw invalid_argument("No existen reservas en ese hostal.");
     return infoReservas;
 
 }

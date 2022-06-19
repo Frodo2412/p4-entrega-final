@@ -17,7 +17,7 @@ public:
 
     DtCargo getCargo() const;
 
-    friend ostream &operator<<(ostream &os, DtEmpleado empleado);
+    friend ostream &operator<<(ostream &os, const DtEmpleado *empleado);
 
     string cargoToString() const;
 };

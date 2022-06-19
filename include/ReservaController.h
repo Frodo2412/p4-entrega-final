@@ -55,7 +55,7 @@ public:
 
     void elegirTipoReserva(string reserva) override;
 
-    list<DtHuesped> mostrarHuespedes() override;
+    list<DtHuesped*> mostrarHuespedes() override;
 
     DtEstadia mostrarInformacionEstadia() override;
 
