@@ -57,8 +57,10 @@ Habitacion *Hostal::getHabitacion(int numero) {
 
 list<DtReserva *> Hostal::getReservasNoCanceladas(const string &email) {
     list<DtReserva *> infoReservas;
-    for (auto &itr: habitaciones)
-        infoReservas.splice(infoReservas.end(), itr.second->getReservasAsociadas(email));
+    for (auto &itr: habitaciones) {
+        list<DtReserva *> reservasDeUsuario = itr.second->getReservasAsociadas(email);
+        infoReservas.insert(infoReservas.end(), reservasDeUsuario.begin(), reservasDeUsuario.end());
+    }
     if (infoReservas.empty()) throw invalid_argument("Este huesped no tiene reservas en el hostal.");
     return infoReservas;
 }
@@ -81,17 +83,23 @@ int Hostal::getCalificacionPromedio() {
     if (habitaciones.empty()) return 0;
     else {
         int calificacionPromedio = 0;
-        for (auto &it: habitaciones)
-            calificacionPromedio += it.second->getCalificacionPromedio();
-        return floor(calificacionPromedio / habitaciones.size());
+        int habitacionesConResenia = 0;
+        for (auto &it: habitaciones) {
+            if (it.second->hasResenias()) {
+                habitacionesConResenia++;
+                calificacionPromedio += it.second->getCalificacionPromedio();
+            }
+        }
+        if (habitacionesConResenia > 0) return calificacionPromedio / habitacionesConResenia;
+        else return 0;
     }
 }
 
 list<DtResenia> Hostal::getDatosReseniasDeHostal() {
-    map<int, Habitacion *>::iterator itrMap;
     list<DtResenia> lista;
-    for (itrMap = habitaciones.begin(); itrMap != habitaciones.end(); itrMap++) {
-        lista.splice(lista.end(), itrMap->second->getResenias());
+    for (auto const &habitacion: habitaciones) {
+        auto resenias = habitacion.second->getResenias();
+        lista.insert(lista.end(), resenias.begin(), resenias.end());
     }
     return lista;
 }

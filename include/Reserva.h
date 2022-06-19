@@ -53,7 +53,7 @@ public:
 
     void configReserva(Huesped *huespedReservante);
 
-    virtual DtReserva *getDatos() = 0;
+    virtual DtReserva* getDatos() = 0;
 
     void finalizarReservaActiva();
 

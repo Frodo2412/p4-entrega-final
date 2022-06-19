@@ -67,10 +67,14 @@ int Habitacion::getCalificacionPromedio() {
         int calificacion = 0;
         for (const auto &resenia: resenias)
             calificacion += resenia.getCalificacion();
-        return floor(calificacion / resenias.size());
+        return calificacion / resenias.size();
     }
 }
 
 void Habitacion::addReserva(Reserva *pReserva) {
     reservas.insert({pReserva->getCodigo(), pReserva});
+}
+
+bool Habitacion::hasResenias() {
+    return !getResenias().empty();
 }

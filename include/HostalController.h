@@ -30,7 +30,7 @@ public:
 
     list <DtResenia> masInformacionSobreHostal(string nombre) override;
 
-    list <DtEmpleado> mostrarDesempleados() override;
+    list<DtEmpleado *> mostrarDesempleados() override;
 
     void cancelarContratoEmpleado() override;
 

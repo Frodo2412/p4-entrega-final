@@ -8,20 +8,20 @@ Empleado *UsuarioController::getEmpleado(string email) {
     else throw invalid_argument("No existe un empleado con ese mail");
 }
 
-list<DtEmpleado> UsuarioController::getEmpleadosDesemplados(Hostal *hostal) {
-    list<DtEmpleado> infoEmpleados;
+list<DtEmpleado *> UsuarioController::getEmpleadosDesemplados(Hostal *hostal) {
+    list<DtEmpleado *> infoEmpleados;
     for (auto &itr: empleados)
         if (!hostal->trabajaEmpleadoEnHostal(itr.second))
-            infoEmpleados.push_back(itr.second->getDatosEmpleado());
+            infoEmpleados.push_back(itr.second->getDatos());
     if (infoEmpleados.empty()) throw invalid_argument("No existen empleados que no trabajen en " + hostal->getNombre());
     return infoEmpleados;
 }
 
-list<DtHuesped> UsuarioController::getHuespedes() {
+list<DtHuesped *> UsuarioController::getHuespedes() {
     if (huespedes.empty()) throw invalid_argument("No existen huespedes en el sistema.");
-    list<DtHuesped> lista;
+    list<DtHuesped *> lista;
     for (auto &itr: huespedes)
-        lista.push_back(itr.second->getDatosHuesped());
+        lista.push_back(itr.second->getDatos());
     return lista;
 }
 
@@ -30,16 +30,16 @@ Huesped *UsuarioController::findHuesped(string email) {
     else throw invalid_argument("No existe un huesped con el mail ingresado.");
 }
 
-list<DtUsuario> UsuarioController::mostrarUsuarios() {
+list<DtUsuario *> UsuarioController::mostrarUsuarios() {
     map<string, Usuario *>::iterator itr;
-    list<DtUsuario> lista;
+    list<DtUsuario *> lista;
     for (itr = usuarios.begin(); itr != usuarios.end(); itr++) {
         lista.push_back(itr->second->getDatos());
     }
     return lista;
 }
 
-DtUsuario UsuarioController::mostrarInformacionUsuario(string email) {
+DtUsuario *UsuarioController::mostrarInformacionUsuario(string email) {
     if (usuarios.find(email) == usuarios.end()) throw invalid_argument("No existe un usuario con ese mail.");
     return usuarios[email]->getDatos();
 }
@@ -133,10 +133,10 @@ UsuarioController::UsuarioController() {
 }
 
 
-list<DtEmpleado> UsuarioController::getEmpleados() {
+list<DtEmpleado *> UsuarioController::getEmpleados() {
     if (empleados.empty()) throw invalid_argument("No hay empleados disponibles.");
-    list<DtEmpleado> lista;
+    list<DtEmpleado *> lista;
     for (auto &itr: empleados)
-        lista.push_back(itr.second->getDatosEmpleado());
+        lista.push_back(itr.second->getDatos());
     return lista;
 }

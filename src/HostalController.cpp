@@ -21,7 +21,6 @@ list<Hostal *> HostalController::getHostales() {
 }
 
 list<DtHostal> HostalController::mostrarHostales() {
-    if (hostales.empty()) throw invalid_argument("No hay hostales disponibles.");
     list<DtHostal> infoHostales;
     for (auto &itr: hostales) {
         infoHostales.push_back(itr.second->getDatos());
@@ -31,11 +30,11 @@ list<DtHostal> HostalController::mostrarHostales() {
 }
 
 list<DtResenia> HostalController::masInformacionSobreHostal(string nombre) {
-    if (hostales.find(nombre) != hostales.end()) return hostales[nombre]->getDatosReseniasDeHostal();
+    if (hostales[nombre] != nullptr) return hostales[nombre]->getDatosReseniasDeHostal();
     else throw std::invalid_argument("no se encontro un hostal con ese nombre");
 }
 
-list<DtEmpleado> HostalController::mostrarDesempleados() {
+list<DtEmpleado *> HostalController::mostrarDesempleados() {
     UsuarioController *usuarioController = UsuarioController::getInstance();
     return usuarioController->getEmpleadosDesemplados(hostalAux);
 }
@@ -106,22 +105,22 @@ HostalController::HostalController() {
 }
 
 list<DtHostal> HostalController::mostrarTop3Hostales() {
-    vector<hostalesPair> vec;
-    std::copy(hostales.begin(), hostales.end(), std::back_inserter<std::vector<hostalesPair>>(vec));
-    std::sort(vec.begin(), vec.end(),
-              [](const hostalesPair &l, const hostalesPair &r) {
-                  if (l.second->getCalificacionPromedio() > r.second->getCalificacionPromedio()) {
-                      return l.second > r.second;
-                  }
-                  return l < r;
-              });
+    map<string, Hostal *>::iterator itr;
+    list<DtHostal> topOrdenado;
+    for (itr = hostales.begin(); itr != hostales.end(); itr++) {
+        topOrdenado.push_back(itr->second->getDatos());
+    }
+    topOrdenado.sort([](const DtHostal &a, const DtHostal &b) {
+        return a.getCalificacionProm() > b.getCalificacionProm();
+    });
     list<DtHostal> top3;
-    int it = 0;
-    while (it < 3 && !vec.empty()){//vec[it].second != nullptr) {
-        auto top = DtHostal(vec[it].second->getDatos());
-        top3.push_back(top);
-        vec.pop_back();
-        it++;
+    int tope = 3;
+    if (topOrdenado.size() < 3) {
+        tope = int(topOrdenado.size());
+    }
+    for (int i = 0; i < tope; i++) {
+        top3.push_back(topOrdenado.front());
+        topOrdenado.pop_front();
     }
     return top3;
 }

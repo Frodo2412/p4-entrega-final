@@ -18,7 +18,7 @@ public:
 
     void setCargo(DtCargo cargo);
 
-    DtUsuario getDatos() override;
+    DtEmpleado *getDatos() override;
 
     DtEmpleado getDatosEmpleado();
 

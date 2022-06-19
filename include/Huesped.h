@@ -16,14 +16,14 @@ class Reserva;
 class Huesped : public Usuario {
 private:
     bool esFinger;
-    map<int ,Reserva *> reservas;
+    map<int, Reserva *> reservas;
 
 public:
     Huesped(string nombre, string email, string password, bool esFinger);
 
     ~Huesped();
 
-    DtUsuario getDatos() override;
+    DtHuesped *getDatos() override;
 
     DtHuesped getDatosHuesped();
 

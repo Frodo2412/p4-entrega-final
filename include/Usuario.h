@@ -19,7 +19,7 @@ public:
 
     string getPassword();
 
-    virtual DtUsuario getDatos() = 0;
+    virtual DtUsuario *getDatos();
 };
 
 
