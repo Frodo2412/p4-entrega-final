@@ -46,8 +46,12 @@ void ReservaController::elegirHuesped(string email) {
 }
 
 void ReservaController::elegirHuespedReservante(string email) {
-    UsuarioController *uc = UsuarioController::getInstance();
-    huespedReservanteAux = uc->findHuesped(email);
+    try {
+        UsuarioController *uc = UsuarioController::getInstance();
+        huespedReservanteAux = uc->findHuesped(email);
+    } catch (std::invalid_argument ex) {
+        throw ex;
+    }
 }
 
 void ReservaController::elegirHabitacion(int numero) {
