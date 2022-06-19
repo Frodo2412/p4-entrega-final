@@ -21,6 +21,8 @@ public:
 
     friend ostream &operator<<(ostream &os, const DtUsuario *usuario);
 
+    virtual ~DtUsuario();
+
 };
 
 #endif //P4_ENTREGA_FINAL_DTUSUARIO_H

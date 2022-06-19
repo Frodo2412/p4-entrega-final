@@ -32,3 +32,4 @@ string DtEmpleado::cargoToString() const {
             return "Cargo Invalido";
     }
 }
+DtEmpleado::~DtEmpleado() = default;

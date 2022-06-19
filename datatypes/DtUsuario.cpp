@@ -20,3 +20,4 @@ std::ostream &operator<<(std::ostream &os, const DtUsuario *usuario) {
     os << "nombre: " << usuario->getNombre() << ", mail: " << usuario->getEmail();
     return os;
 }
+DtUsuario::~DtUsuario() = default;

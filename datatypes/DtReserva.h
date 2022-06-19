@@ -31,6 +31,8 @@ public:
     friend ostream &operator<<(ostream &os, DtReserva* reserva);
 
     virtual string getTipoReserva() = 0;
+
+    virtual ~DtReserva();
 };
 
 #endif //P4_ENTREGA_FINAL_DTRESERVA_H

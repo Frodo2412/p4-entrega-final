@@ -15,6 +15,7 @@ public:
 
     friend ostream &operator<<(ostream &os, const DtHuesped *huesped);
 
+    ~DtHuesped() override;
 };
 
 
