@@ -21,3 +21,4 @@ std::ostream &operator<<(std::ostream &os, const DtHuesped *huesped) {
     }
     return os;
 }
+DtHuesped::~DtHuesped() = default;

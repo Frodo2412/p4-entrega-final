@@ -20,6 +20,8 @@ public:
     friend ostream &operator<<(ostream &os, const DtEmpleado *empleado);
 
     string cargoToString() const;
+
+    ~DtEmpleado() override;
 };
 
 #endif //P4_ENTREGA_FINAL_DTEMPLEADO_H

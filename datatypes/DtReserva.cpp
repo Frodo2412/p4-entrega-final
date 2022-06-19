@@ -52,3 +52,4 @@ string DtReserva::getEstadoToString() const {
             return "Estado Invalido";
     }
 }
+DtReserva::~DtReserva() = default;
